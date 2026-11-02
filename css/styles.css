@@ -1,0 +1,1740 @@
+/* ===== Reset & base ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #0d1117;
+  --bg-elev: #161b22;
+  --bg-card: #1c2330;
+  --bg-hover: #243044;
+  --border: #30363d;
+  --text: #e6edf3;
+  --text-muted: #8b949e;
+  --gold: #f0c14b;
+  --gold-dim: #c9a227;
+  --accent: #3fb950;
+  --danger: #f85149;
+  --hv: #a371f7;
+  --st: #58a6ff;
+  --radius: 12px;
+  --tap: 44px;
+  --font: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang TC",
+          "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+}
+
+html {
+  font-size: clamp(14px, 3.8vw, 16px);
+  -webkit-text-size-adjust: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100dvh;
+  line-height: 1.45;
+  overflow-x: hidden;
+  width: 100%;
+}
+
+#app {
+  width: 100%;
+  max-width: 430px;
+  margin: 0 auto;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(180deg, #0d1117 0%, #111822 100%);
+  overflow-x: hidden;
+}
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0,0,0,0); border: 0;
+}
+
+/* ===== Header ===== */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: rgba(13, 17, 23, 0.92);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+  padding: 12px 12px;
+  padding-top: max(12px, env(safe-area-inset-top));
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.btn-back {
+  flex-shrink: 0;
+  width: var(--tap);
+  height: var(--tap);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--bg-elev);
+  color: var(--text);
+  font-size: 1.25rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.btn-back:active { background: var(--bg-hover); }
+
+.header-titles {
+  min-width: 0;
+  flex: 1;
+}
+.header-titles h1 {
+  font-size: clamp(0.85rem, 4.2vw, 1.15rem);
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  color: var(--gold);
+  line-height: 1.3;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+.subtitle {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+.subtitle-profit {
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.78rem;
+}
+.subtitle:empty,
+.subtitle[hidden] { display: none !important; }
+
+/* ===== Main ===== */
+#main {
+  flex: 1;
+  padding: 12px 10px 24px;
+  width: 100%;
+  min-width: 0;
+  overflow-x: hidden;
+}
+
+.view[hidden] { display: none !important; }
+
+/* ===== Filters ===== */
+.filters {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.venue-tabs {
+  display: flex;
+  gap: 8px;
+}
+
+.tab {
+  flex: 1;
+  min-height: var(--tap);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--bg-elev);
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+.tab.active {
+  background: var(--gold-dim);
+  color: #0d1117;
+  border-color: var(--gold);
+}
+.tab:active { opacity: 0.85; }
+
+.month-wrap {
+  display: block;
+  position: relative;
+}
+#month-filter {
+  width: 100%;
+  min-height: var(--tap);
+  padding: 0 40px 0 14px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--bg-elev);
+  color: var(--text);
+  font: inherit;
+  font-size: 1rem;
+  outline: none;
+  cursor: pointer;
+}
+#month-filter:focus { border-color: var(--gold-dim); }
+#month-filter option {
+  background: var(--bg-elev);
+  color: var(--text);
+}
+
+/* ===== Meeting list ===== */
+.meeting-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.meeting-card {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 14px 14px;
+  min-height: 64px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg-card);
+  color: var(--text);
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+  text-decoration: none;
+  font: inherit;
+}
+.meeting-card:active,
+.meeting-card:hover {
+  background: var(--bg-hover);
+  border-color: var(--gold-dim);
+}
+
+.meeting-card .row1 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+.meeting-card .date {
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+.meeting-card .row1-main {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 6px;
+  min-width: 0;
+}
+.meeting-card .badge {
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 999px;
+  letter-spacing: 0.04em;
+}
+.badge-demo {
+  background: rgba(240, 193, 75, 0.2);
+  color: var(--gold);
+  border: 1px solid var(--gold-dim);
+}
+.badge-st {
+  background: rgba(88, 166, 255, 0.15);
+  color: var(--st);
+}
+.badge-hv {
+  background: rgba(163, 113, 247, 0.15);
+  color: var(--hv);
+}
+
+.meeting-card .row2 {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+.meeting-card .row2-meta {
+  flex: 1;
+  min-width: 0;
+  line-height: 1.35;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+.meeting-card .banker-part {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  opacity: 0.92;
+}
+.meeting-card .chevron {
+  margin-left: auto;
+  flex-shrink: 0;
+  color: var(--gold-dim);
+  font-size: 1.1rem;
+  line-height: 1.35;
+}
+
+.empty {
+  text-align: center;
+  color: var(--text-muted);
+  padding: 32px 16px;
+  font-size: 0.95rem;
+}
+
+/* ===== Detail ===== */
+#detail-meta { display: none !important; }
+
+.panel {
+  margin-bottom: 14px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  width: 100%;
+  max-width: 100%;
+}
+.panel-title {
+  font-size: clamp(0.8rem, 3.6vw, 0.95rem);
+  font-weight: 700;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--border);
+  background: rgba(240, 193, 75, 0.08);
+  color: var(--gold);
+}
+
+/* Tips table — fit viewport, no H-scroll */
+.table-scroll {
+  overflow-x: hidden;
+  width: 100%;
+}
+
+.tips-table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+  font-size: clamp(0.58rem, 2.7vw, 0.7rem);
+}
+.tips-table th {
+  background: var(--bg-elev);
+  color: var(--text-muted);
+  font-weight: 600;
+  padding: 5px 1px;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+  font-size: clamp(0.58rem, 2.6vw, 0.68rem);
+}
+.tips-table th:first-child { width: 16%; }
+.tips-table th:nth-child(2),
+.tips-table th:nth-child(3),
+.tips-table th:nth-child(4),
+.tips-table th:nth-child(5) { width: 21%; }
+
+.tips-table td {
+  padding: 5px 1px;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+.tips-table tr:last-child td { border-bottom: none; }
+.tips-table tr.tips-alt td { background: rgba(255,255,255,0.02); }
+.tips-table tr.has-note td { border-bottom: none; padding-bottom: 1px; }
+.tips-table td.pattern-note-cell {
+  text-align: left;
+  padding: 0 2px 5px;
+  font-size: clamp(0.5rem, 2.2vw, 0.6rem);
+  line-height: 1.3;
+  font-weight: 600;
+}
+
+.tips-table .race-col {
+  padding-left: 2px;
+  padding-right: 2px;
+}
+.race-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+}
+.race-no-line {
+  font-weight: 700;
+  font-size: clamp(0.75rem, 3.2vw, 0.9rem);
+  color: var(--gold);
+}
+.race-meta-line {
+  font-size: clamp(0.5rem, 2.2vw, 0.58rem);
+  color: var(--text-muted);
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+}
+
+.cell-horse {
+  display: block;
+  text-align: center;
+  max-width: 100%;
+  font-size: clamp(0.62rem, 2.85vw, 0.76rem); /* ~1–2px bump vs table base */
+  line-height: 1.3;
+}
+.cell-horse .hn {
+  font-weight: 600;
+  color: var(--text);
+  font-size: inherit;
+  line-height: 1.3;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+.cell-horse .hline1 {
+  display: block;
+  line-height: 1.25;
+}
+.cell-horse .hline2 {
+  display: block;
+  margin-top: 1px;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+.cell-horse .hs {
+  display: inline;
+  font-size: 0.92em;
+  color: var(--text-muted);
+  font-weight: 500;
+  white-space: nowrap;
+}
+.cell-horse .ho {
+  display: inline;
+  font-size: 0.92em;
+  color: var(--gold-dim);
+  font-weight: 600;
+  white-space: nowrap;
+}
+.cell-horse .ho-empty { min-height: 0; }
+.cell-horse.col-first .hn { color: var(--accent); }
+.cell-horse.col-dark .hn { color: #ffa657; }
+
+/* Post-race place badges: 🏆🥈🥉4️⃣ */
+.place-badge {
+  display: inline-block;
+  margin-left: 2px;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  font-size: 0.95em;
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: 0;
+  vertical-align: baseline;
+  white-space: nowrap;
+}
+.place-badge.place-w,
+.place-badge.place-2,
+.place-badge.place-3,
+.place-badge.place-4 {
+  background: transparent;
+  color: inherit;
+  border: none;
+}
+
+.tips-result-note {
+  margin-top: 0;
+  padding-top: 8px;
+}
+
+/* 投注策略 — one gold frame at the bottom of the meeting page */
+#view-detail #bet-strategy-panel {
+  border: 2px solid var(--gold);
+  background: rgba(240, 193, 75, 0.07);
+  box-shadow: inset 0 0 0 1px rgba(240, 193, 75, 0.28);
+}
+#view-detail #bet-strategy-panel .panel-title {
+  background: rgba(240, 193, 75, 0.16);
+  border-bottom-color: rgba(240, 193, 75, 0.45);
+}
+#view-detail #bet-strategy-panel .bet-strategy-race {
+  padding: 6px 10px 7px;
+  border-top: 1px solid rgba(240, 193, 75, 0.22);
+}
+#view-detail #bet-strategy-panel .bet-strategy-race-title {
+  margin: 0 0 3px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--gold);
+}
+#view-detail #bet-strategy-panel .bet-strategy-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+#view-detail #bet-strategy-panel .bet-strategy-line {
+  font-size: 0.78rem;
+  line-height: 1.35;
+  font-weight: 500;
+  color: var(--text);
+  overflow-wrap: anywhere;
+}
+#view-detail #bet-strategy-panel .bet-strategy-note {
+  color: var(--text-muted);
+  font-weight: 500;
+  font-size: 0.92em;
+}
+#view-detail #bet-strategy-panel .bet-strategy-race-total {
+  margin: 4px 0 0;
+  font-size: 0.74rem;
+  font-weight: 700;
+  line-height: 1.35;
+  color: var(--gold);
+}
+#view-detail #bet-strategy-panel .bet-strategy-day-total {
+  margin: 0;
+  padding: 6px 10px 8px;
+  border-top: 1px solid rgba(240, 193, 75, 0.5);
+  font-size: 0.8rem;
+  font-weight: 700;
+  line-height: 1.35;
+  color: var(--gold);
+}
+
+/* Meeting page only: shorter gaps between panels, picks, and strategy blocks. */
+#view-detail .panel {
+  margin-bottom: 8px;
+}
+#view-detail .panel-title {
+  padding: 6px 12px;
+}
+#view-detail .panel-title .panel-updated {
+  white-space: nowrap;
+}
+#view-detail .tips-result-note {
+  padding-top: 4px;
+  padding-bottom: 6px;
+}
+#view-detail .pick-card {
+  padding: 7px 10px;
+}
+#view-detail .pick-card .pc-head {
+  gap: 6px;
+  margin-bottom: 2px;
+}
+#view-detail .pc-horse {
+  margin-bottom: 0;
+}
+#view-detail #attack-hot .panel-hint {
+  padding: 4px 10px 2px;
+}
+#view-detail #attack-hot .panel-hint:last-child {
+  padding-bottom: 6px;
+}
+#view-detail #meeting-flying .fly-meet-head {
+  gap: 2px;
+  padding: 6px 10px;
+}
+#view-detail #meeting-flying .fly-hit-line {
+  padding: 2px 10px 0;
+}
+#view-detail #meeting-flying .fly-meet-body {
+  gap: 4px;
+  padding: 4px 8px 6px;
+}
+#view-detail #meeting-flying .fly-horse {
+  padding: 5px 8px;
+}
+
+.pc-odds-inline {
+  font-size: 0.85em;
+  color: var(--gold-dim);
+  font-weight: 600;
+}
+
+.panel-hint {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  padding: 0 12px 8px;
+  margin-top: -4px;
+}
+.panel-title .panel-hint-inline,
+.panel-title .daily-picks-hint,
+.panel-title .panel-updated {
+  display: inline;
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  margin-left: 6px;
+  padding: 0;
+}
+
+/* Daily picks — 3 horses */
+.daily-picks {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.pick-card {
+  padding: 12px;
+  border-bottom: 1px solid var(--border);
+}
+.pick-card:last-child { border-bottom: none; }
+.pick-card.pick-top {
+  background: linear-gradient(135deg, rgba(240,193,75,0.12) 0%, rgba(240,193,75,0.03) 100%);
+}
+.pick-card .pc-head {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+.pick-card .pc-race {
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+.pick-card .pc-class {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+.pick-card .top-badge {
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: var(--gold);
+  color: #0d1117;
+}
+.pick-card .pc-odds {
+  font-size: 0.75rem;
+  color: var(--gold-dim);
+  font-weight: 600;
+  margin-top: 2px;
+}
+.pc-horse {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 4px;
+}
+.pick-card .pc-note {
+  font-size: 0.85rem;
+  color: var(--text);
+  line-height: 1.5;
+}
+#attack-hot .attack-count {
+  color: #fff;
+}
+#attack-hot .attack-horse {
+  color: #ff3b30;
+}
+#attack-hot .attack-horse-mid {
+  color: #ffe14a;
+}
+#attack-hot .panel-hint {
+  margin-top: 0;
+  padding-top: 8px;
+}
+#attack-hot .panel-hint:last-child {
+  padding-bottom: 10px;
+}
+#attack-hot .pc-note {
+  margin-top: 4px;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+#attack-hot .attack-horse-row {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  column-gap: 0;
+  align-items: start;
+}
+#attack-hot .attack-race {
+  display: block;
+  font-weight: 700;
+  font-size: 0.95rem;
+  white-space: pre;
+}
+#attack-hot .attack-race-cont {
+  visibility: hidden;
+}
+
+/* ===== 收風 dashboard ===== */
+.wind-entry {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--tap);
+  margin-bottom: 10px;
+  border: 1px solid var(--gold);
+  border-radius: 10px;
+  background: var(--bg-elev);
+  color: var(--gold);
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+.wind-entry:active { background: var(--bg-hover); }
+.wind-scroll {
+  overflow-x: auto;
+  width: 100%;
+  -webkit-overflow-scrolling: touch;
+}
+.wind-table {
+  border-collapse: collapse;
+  font-size: clamp(0.58rem, 2.7vw, 0.7rem);
+  white-space: nowrap;
+}
+.wind-table th,
+.wind-table td {
+  padding: 5px 6px;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+  line-height: 1.25;
+}
+.wind-table th {
+  background: var(--bg-elev);
+  color: var(--text-muted);
+  font-weight: 600;
+}
+.wind-table th.wind-group { color: var(--gold); }
+.wind-table .wind-rate-mid,
+.wind-pick .wind-rate-mid { color: #ffe14a; }
+.wind-pick {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: clamp(0.58rem, 2.7vw, 0.7rem);
+  white-space: nowrap;
+}
+.wind-pick th,
+.wind-pick td {
+  padding: 5px 6px;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+  line-height: 1.25;
+}
+.wind-pick th {
+  background: var(--bg-elev);
+  color: var(--text-muted);
+  font-weight: 600;
+}
+.wind-pick .wind-pick-name { text-align: left; }
+.wind-pick td.wind-pick-kind { color: var(--gold); }
+.wind-pick tbody tr:nth-child(even) td { background: rgba(255, 255, 255, 0.02); }
+.wind-pick tr.wind-pick-split td { border-top: 2px solid var(--border); }
+.wind-table thead tr:first-child th.wind-group,
+.wind-table thead tr:nth-child(2) th:nth-child(4n + 1),
+.wind-table tbody td:nth-child(4n + 5) {
+  border-left: 1px solid var(--border);
+}
+.wind-table .wind-name {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  text-align: left;
+  background: var(--bg-card);
+}
+.wind-table thead .wind-name {
+  z-index: 2;
+  background: var(--bg-elev);
+}
+.wind-table tbody tr:nth-child(even) td { background: rgba(255, 255, 255, 0.02); }
+.wind-table tbody tr:nth-child(even) td.wind-name { background: #1e2633; }
+/* 馬房累計 only. One group's 三甲%: ≥80 → blue, 65–79 → green. Four cells, not the row. */
+.wind-table tbody tr td.wind-group-hot {
+  background: #22c55e;
+  color: #06210a;
+}
+.wind-table tbody tr td.wind-group-hot .pl-pos { color: #06210a; }
+.wind-table tbody tr td.wind-group-hot-high {
+  background: #3b82f6;
+  color: #0b1220;
+}
+.wind-table tbody tr td.wind-group-hot-high .pl-pos { color: #0b1220; }
+
+/* ===== 賽日有飛馬 ===== */
+.fly-meet + .fly-meet { border-top: 1px solid var(--border); }
+.fly-meet-head {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  width: 100%;
+  padding: 10px 12px;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+}
+.fly-meet-title { font-weight: 700; color: var(--gold); }
+.fly-hit { font-size: 0.8rem; color: var(--text); }
+.fly-hit-line { padding: 8px 12px 0; }
+.fly-meet-body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 8px 10px 12px;
+  min-width: 0;
+}
+.fly-meet-body[hidden] { display: none; }
+.fly-race {
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--gold);
+  border-radius: 10px;
+  background: #141b26;
+}
+.fly-race-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  min-width: 0;
+  padding: 6px 10px 6px 8px;
+  background: linear-gradient(90deg, rgba(240, 193, 75, 0.2), rgba(240, 193, 75, 0.02) 78%);
+}
+.fly-race-chip {
+  display: inline-block;
+  padding: 1px 8px;
+  border: 1px solid var(--gold-dim);
+  border-radius: 999px;
+  background: rgba(240, 193, 75, 0.14);
+  color: var(--gold);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  line-height: 1.45;
+}
+.fly-race-count {
+  flex-shrink: 0;
+  color: var(--text-muted);
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+.fly-horse { padding: 7px 10px 8px; min-width: 0; }
+.fly-horse + .fly-horse { border-top: 1px solid var(--border); }
+.fly-horse-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  min-width: 0;
+}
+.fly-horse-name {
+  font-weight: 700;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.fly-mark {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+.fly-grade {
+  flex-shrink: 0;
+  min-width: 1.7em;
+  padding: 1px 6px;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  line-height: 1.4;
+  text-align: center;
+}
+.fly-score-big {
+  font-size: 1.45rem;
+  font-weight: 800;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+.fly-grade-a { color: #39ff14; }
+.fly-grade-b { color: #ffe14a; }
+.fly-grade-c { color: #ff9f0a; }
+.fly-grade-d { color: #8b949e; }
+.fly-advice {
+  margin-top: 2px;
+  font-size: 12px;
+  line-height: 1.35;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+.fly-advice .fly-meta {
+  margin: 0;
+  font-size: inherit;
+  font-weight: 400;
+  color: var(--text-muted);
+}
+.fly-pick-legend {
+  width: 100%;
+  max-width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  font-size: 12px;
+  line-height: 1.35;
+}
+.fly-pick-legend th,
+.fly-pick-legend td {
+  padding: 5px 8px;
+  text-align: left;
+  vertical-align: middle;
+  border-bottom: 1px solid var(--border);
+  overflow-wrap: anywhere;
+}
+.fly-pick-legend th {
+  color: var(--text-muted);
+  font-weight: 600;
+}
+.fly-pick-legend td:nth-child(2) { text-align: center; }
+.fly-note,
+.fly-result {
+  margin-top: 2px;
+  font-size: 0.78rem;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+  color: var(--text-muted);
+}
+.fly-note,
+.fly-result { color: var(--text); }
+.fly-result {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+.fly-pay { color: var(--text-muted); }
+.fly-seasons {
+  display: flex;
+  gap: 8px;
+  padding: 10px 12px 0;
+}
+.fly-legend {
+  padding: 8px 12px 6px;
+  font-size: 0.72rem;
+  line-height: 1.45;
+  color: var(--text-muted);
+}
+.fly-scroll {
+  overflow-x: auto;
+  width: 100%;
+  -webkit-overflow-scrolling: touch;
+}
+.fly-table {
+  table-layout: fixed;
+  border-collapse: collapse;
+  font-size: clamp(0.58rem, 2.7vw, 0.7rem);
+  white-space: nowrap;
+}
+.fly-table th,
+.fly-table td {
+  padding: 5px 6px;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+  line-height: 1.25;
+}
+.fly-table th {
+  background: var(--bg-elev);
+  color: var(--text-muted);
+  font-weight: 600;
+}
+.fly-table th.fly-band { color: var(--gold); }
+.fly-table .wind-rate-mid,
+.fly-legend .wind-rate-mid,
+.fly-hit .wind-rate-mid { color: #ffe14a; }
+.fly-muted { color: #8b949e; }
+.fly-table thead tr:first-child th.fly-band,
+.fly-table thead tr:nth-child(2) th.fly-band-start,
+.fly-table tbody td.fly-band-start,
+.fly-table .fly-split {
+  border-left: 1px solid var(--border);
+}
+.fly-table .fly-name {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  text-align: left;
+  background: var(--bg-card);
+  white-space: normal;
+  word-break: break-all;
+  overflow-wrap: anywhere;
+}
+.fly-table thead .fly-name {
+  z-index: 2;
+  background: var(--bg-elev);
+}
+.fly-table .fly-rank { color: var(--text-muted); }
+.fly-table tbody tr:nth-child(even) td { background: rgba(255, 255, 255, 0.02); }
+.fly-table tbody tr:nth-child(even) td.fly-name { background: #1e2633; }
+.fly-pair { line-height: 1.2; }
+
+/* ===== Footer ===== */
+.site-footer {
+  text-align: center;
+  padding: 14px 12px;
+  padding-bottom: max(14px, env(safe-area-inset-bottom));
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  border-top: 1px solid var(--border);
+  letter-spacing: 0.03em;
+}
+
+/* Wider screens: keep phone frame look */
+@media (min-width: 480px) {
+  body { background: #05070a; }
+  #app {
+    box-shadow: 0 0 40px rgba(0,0,0,0.5);
+    border-left: 1px solid var(--border);
+    border-right: 1px solid var(--border);
+  }
+}
+
+
+/* Home: 馬膽WP投注簿 — sits between month selector and meeting cards */
+.banker-wp-book {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.banker-wp-book .panel-title,
+.banker-wp-heading {
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+  margin-bottom: 0;
+}
+.banker-wp-heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px 8px;
+}
+.banker-wp-note {
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  line-height: 1.35;
+}
+.banker-wp-ledger {
+  margin-top: 0;
+  padding: 8px 12px 10px;
+}
+.banker-wp-summary {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-size: 0.72rem;
+  line-height: 1.55;
+  color: var(--text);
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+.banker-wp-title {
+  color: var(--text-muted);
+  margin-bottom: 4px;
+  white-space: normal;
+}
+.banker-wp-line {
+  letter-spacing: 0.01em;
+}
+.banker-wp-total {
+  margin-top: 2px;
+  color: var(--gold);
+  font-weight: 600;
+}
+.banker-wp-profit {
+  color: var(--gold);
+  font-weight: 700;
+  white-space: normal;
+  font-size: clamp(0.8rem, 3.6vw, 0.95rem); /* match 馬膽WP投注簿 .panel-title */
+}
+.banker-wp-profit-val {
+  color: #fff;
+}
+.pl-pos { color: #39ff14; }
+.pl-neg { color: #ff3b30; }
+.banker-wp-profit-val.pl-pos { color: #39ff14; }
+.banker-wp-profit-val.pl-neg { color: #ff3b30; }
+.banker-wp-empty {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin-top: 6px;
+}
+
+.banker-wp-foot {
+  margin: 6px 2px 14px;
+  padding: 0 2px;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  line-height: 1.35;
+}
+
+.pc-final-odds {
+  font-size: 0.78em;
+  color: var(--gold-dim);
+  font-weight: 600;
+  white-space: normal;
+}
+.pc-horse {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+/* ===== 練騎合作 (#/combo). Scoped so other pages stay unchanged. ===== */
+#view-combo .combo-modes {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+#view-combo .combo-note,
+#view-combo .combo-empty,
+#view-combo .combo-foot {
+  margin: 0;
+  padding: 8px 12px;
+  font-size: 0.72rem;
+  line-height: 1.45;
+  color: var(--text-muted);
+}
+#view-combo .combo-foot {
+  padding: 8px 2px 14px;
+}
+#view-combo .combo-card {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--border);
+}
+#view-combo .combo-card:last-child { border-bottom: none; }
+#view-combo .combo-pair {
+  font-weight: 700;
+  font-size: 0.95rem;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+#view-combo .combo-seq {
+  font-size: calc(1em - 1pt);
+  font-weight: 400;
+}
+#view-combo .combo-stats,
+#view-combo .combo-drop,
+#view-combo .combo-odds {
+  margin-top: 4px;
+  font-size: 0.8rem;
+  line-height: 1.45;
+  color: var(--text-muted);
+}
+#view-combo .combo-badge {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 1px 6px;
+  border-radius: 999px;
+  background: var(--gold);
+  color: #0d1117;
+  font-size: 0.72rem;
+  font-weight: 700;
+  vertical-align: 1px;
+}
+#view-combo .combo-badge-soft {
+  background: transparent;
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+  font-weight: 600;
+}
+#view-combo .combo-pos { color: #39ff14; }
+#view-combo .combo-mid { color: #ffe14a; }
+#view-combo .combo-neg { color: #ff3b30; }
+#view-combo .combo-tools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  padding: 8px 12px 4px;
+}
+#view-combo .combo-field {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-muted);
+  font-size: 0.75rem;
+}
+#view-combo .combo-tools input,
+#view-combo .combo-tools select {
+  font: inherit;
+  color: var(--text);
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 6px 8px;
+  min-height: 36px;
+}
+#view-combo .combo-tools input[type="search"] { min-width: 8.5rem; }
+#view-combo .combo-tools input[type="checkbox"] { min-height: 0; }
+#view-combo .combo-scroll {
+  overflow-x: auto;
+  width: 100%;
+  -webkit-overflow-scrolling: touch;
+}
+#view-combo .combo-table {
+  border-collapse: collapse;
+  font-size: clamp(0.62rem, 2.8vw, 0.75rem);
+  white-space: nowrap;
+}
+#view-combo .combo-table th,
+#view-combo .combo-table td {
+  padding: 6px 8px;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+  line-height: 1.3;
+}
+#view-combo .combo-table th:nth-child(5),
+#view-combo .combo-table td:nth-child(5) {
+  border-left: 1px solid var(--border);
+}
+#view-combo .combo-table th {
+  color: var(--text-muted);
+  font-weight: 600;
+}
+#view-combo .combo-name {
+  text-align: left;
+  font-weight: 700;
+}
+
+/* ===== 波盤推介 (#/football). Scoped so racing pages stay unchanged. ===== */
+#view-football {
+  overflow-x: hidden;
+}
+#view-football .fb-note,
+#view-football .fb-rule {
+  margin: 0 0 10px;
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  line-height: 1.45;
+}
+#view-football .fb-note {
+  margin: 0;
+  padding: 0 12px 12px;
+}
+#view-football .fb-rule {
+  margin: 0 2px 4px;
+  padding: 0 2px;
+}
+#view-football .fb-pad {
+  padding: 10px 12px 12px;
+}
+#view-football .fb-date {
+  display: block;
+}
+#view-football .fb-date select {
+  width: 100%;
+  min-height: var(--tap);
+  padding: 0 14px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--bg-elev);
+  color: var(--text);
+  font: inherit;
+  font-size: 1rem;
+  outline: none;
+}
+#view-football .fb-date select:focus { border-color: var(--gold-dim); }
+#view-football .fb-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  padding: 10px 12px 12px;
+}
+#view-football .fb-stat {
+  min-width: 0;
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 8px 10px;
+}
+#view-football .fb-stat-wide { grid-column: 1 / -1; }
+#view-football .fb-stat .fb-k {
+  display: block;
+  color: var(--text-muted);
+  font-size: 0.72rem;
+}
+#view-football .fb-stat .fb-n {
+  display: block;
+  margin-top: 2px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+#view-football .fb-day-lines {
+  list-style: none;
+  margin: 0;
+  padding: 0 12px 12px;
+}
+#view-football .fb-day-line {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 6px 0;
+  border-top: 1px solid var(--border);
+  font-size: 0.75rem;
+  line-height: 1.35;
+}
+#view-football .fb-day-name {
+  flex: 0 0 auto;
+  font-weight: 700;
+}
+#view-football .fb-day-amt {
+  min-width: 0;
+  text-align: right;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+#view-football {
+  --fb-star-1: #8b949e;
+  --fb-star-2: #ffffff;
+  --fb-star-3: #e6c35c;
+  --fb-star-4: #39ff14;
+  --fb-star-5: #58a6ff;
+}
+#view-football .fb-card {
+  padding: 12px;
+  border-bottom: 1px solid var(--border);
+}
+#view-football .fb-card:last-child { border-bottom: none; }
+#view-football .fb-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 8px;
+}
+#view-football .fb-ko {
+  min-width: 0;
+  color: var(--gold);
+  font-weight: 700;
+  font-size: 0.88rem;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+#view-football .fb-status {
+  flex-shrink: 0;
+  border-radius: 999px;
+  padding: 2px 8px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  line-height: 1.4;
+}
+#view-football .fb-status-ok {
+  background: var(--gold);
+  color: #0d1117;
+}
+#view-football .fb-status-wait {
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+}
+#view-football .fb-match {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 0 4px;
+  margin-top: 4px;
+  font-size: 1.02rem;
+  font-weight: 700;
+  line-height: 1.35;
+}
+#view-football .fb-match-name { overflow-wrap: anywhere; }
+#view-football .fb-sides {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 4px;
+  min-width: 0;
+  max-width: 100%;
+}
+#view-football .fb-side {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 0;
+}
+#view-football .fb-side-name { overflow-wrap: anywhere; }
+#view-football .fb-vs { line-height: 1.35; }
+#view-football .fb-euro-star,
+#view-football .fb-euro-foot {
+  color: #ff3b30;
+}
+#view-football .fb-euro-star {
+  margin-left: 3px;
+  font-weight: 700;
+}
+#view-football .fb-euro-foot {
+  display: block;
+  margin-top: 1px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+#view-football .fb-conf-line {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  white-space: nowrap;
+  max-width: 100%;
+}
+#view-football .fb-conf-sep,
+#view-football .fb-conf {
+  color: var(--text-muted);
+  font-weight: 500;
+  font-size: 0.82rem;
+  white-space: nowrap;
+}
+#view-football .fb-fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px 12px;
+  margin-top: 6px;
+}
+#view-football .fb-field { min-width: 0; font-size: 0.82rem; line-height: 1.4; }
+#view-football .fb-field-wide { grid-column: 1 / -1; }
+#view-football .fb-field .fb-k { color: var(--text-muted); margin-right: 4px; }
+#view-football .fb-field .fb-v { font-weight: 600; overflow-wrap: anywhere; }
+#view-football .fb-reason {
+  margin: 6px 0 0;
+  color: var(--text);
+  font-size: 0.78rem;
+  font-weight: 500;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+#view-football .fb-addendum {
+  margin: 4px 0 0;
+  color: var(--danger);
+  font-size: 0.74rem;
+  font-weight: 500;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+  border-left: 2px solid var(--danger);
+  padding-left: 8px;
+}
+#view-football .fb-pending {
+  margin: 8px 0 0;
+  color: var(--text-muted);
+  font-size: 0.78rem;
+}
+#view-football .fb-settled {
+  margin: 8px 0 0;
+  font-size: 0.85rem;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+#view-football .fb-dot { color: var(--text-muted); font-weight: 500; }
+#view-football .panel-title {
+  background: color-mix(in srgb, var(--gold) 80%, transparent);
+  color: #0d1117;
+  border-bottom-color: rgba(0, 0, 0, 0.12);
+}
+#view-football .panel-title .panel-updated {
+  color: #0d1117;
+}
+#view-football #football-day-summary .panel-title,
+#view-football #football-cumulative .panel-title {
+  background: color-mix(in srgb, #39ff14 80%, transparent);
+  color: #0d1117;
+}
+#view-football .fb-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+#view-football .fb-title-main {
+  min-width: 0;
+}
+#view-football .fb-hit {
+  flex: 0 0 auto;
+  margin-left: auto;
+  padding: 2px 8px;
+  border-radius: 999px;
+  border: 1px solid rgba(13, 17, 23, 0.45);
+  background: transparent;
+  font-size: 0.72rem;
+  font-weight: 700;
+  line-height: 1.3;
+  color: #0d1117;
+  white-space: nowrap;
+}
+#view-football .fb-pass-head {
+  margin: 2px 2px 8px;
+  color: var(--gold);
+  font-size: clamp(0.8rem, 3.6vw, 0.95rem);
+  font-weight: 700;
+  line-height: 1.35;
+}
+#view-football .fb-pass-head .panel-updated {
+  display: inline;
+  margin-left: 6px;
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+#view-football .fb-parlay-sub {
+  margin: 0;
+  padding: 10px 12px 0;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+#view-football .fb-parlay-list {
+  list-style: none;
+  margin: 0;
+  padding: 4px 12px 0;
+}
+#view-football .fb-parlay-leg {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.95rem;
+  font-weight: 700;
+  line-height: 1.4;
+}
+#view-football .fb-parlay-leg.fb-parlay-detail {
+  flex-direction: column;
+  align-items: stretch;
+}
+#view-football .fb-leg-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  width: 100%;
+}
+#view-football .fb-parlay-detail .fb-match {
+  margin-top: 4px;
+}
+#view-football .fb-parlay-detail .fb-reason {
+  margin-top: 4px;
+  font-weight: 500;
+}
+#view-football .fb-leg-main {
+  min-width: 0;
+  flex: 1 1 auto;
+  overflow-wrap: anywhere;
+}
+#view-football .fb-leg-ko {
+  margin-right: 6px;
+  color: var(--gold);
+  font-weight: 600;
+  font-size: 0.78em;
+  white-space: nowrap;
+}
+#view-football .fb-leg-result {
+  flex: 0 0 auto;
+  margin-left: auto;
+  font-size: 0.78rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+#view-football .fb-parlay-leg:last-child { border-bottom: none; }
+#view-football .fb-parlay-odds {
+  margin: 0;
+  padding: 4px 12px 12px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+#view-football .fb-pass-footers {
+  padding: 2px 12px 10px;
+}
+#view-football .fb-pass-footers .fb-parlay-odds {
+  padding: 0;
+  font-size: clamp(0.68rem, 3.15vw, 0.8rem);
+  line-height: 1.5;
+  white-space: normal;
+}
+#view-football .fb-pass-footers .fb-parlay-odds + .fb-parlay-odds {
+  margin-top: 2px;
+}
+#view-football .fb-five-note {
+  margin: 0;
+  padding: 4px 12px 0;
+  color: var(--text-muted);
+  font-size: 0.78rem;
+  line-height: 1.45;
+}
+#view-football .fb-five-leg .fb-leg-main {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+}
+#view-football .fb-five-match {
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+#view-football .fb-star-filter {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 8px;
+  padding: 8px 10px 2px;
+}
+#view-football .fb-star-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  min-width: 0;
+}
+#view-football .fb-star-chip {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  min-height: 36px;
+  padding: 4px 10px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 0.78rem;
+  font-weight: 700;
+  line-height: 1;
+  cursor: pointer;
+  user-select: none;
+}
+#view-football .fb-star-chip input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+  opacity: 0;
+}
+#view-football .fb-star-chip.fb-stars-1 { --fb-chip: var(--fb-star-1); }
+#view-football .fb-star-chip.fb-stars-2 { --fb-chip: var(--fb-star-2); }
+#view-football .fb-star-chip.fb-stars-3 { --fb-chip: var(--fb-star-3); }
+#view-football .fb-star-chip.fb-stars-4 { --fb-chip: var(--fb-star-4); }
+#view-football .fb-star-chip.fb-stars-5 { --fb-chip: var(--fb-star-5); }
+#view-football .fb-star-chip .fb-chip-star { color: var(--fb-chip); }
+#view-football .fb-star-chip:has(input:checked) {
+  color: var(--fb-chip);
+  border-color: var(--fb-chip);
+  background: color-mix(in srgb, var(--fb-chip) 16%, transparent);
+}
+#view-football .fb-star-chip:has(input:focus-visible) {
+  outline: 2px solid var(--fb-chip);
+  outline-offset: 2px;
+}
+#view-football .fb-star-count {
+  margin-left: auto;
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+#view-football .fb-all-list {
+  list-style: none;
+  margin: 0;
+  padding: 0 10px 6px;
+}
+#view-football .fb-all-row[hidden] { display: none !important; }
+#view-football .fb-all-row {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  column-gap: 8px;
+  row-gap: 2px;
+  align-items: baseline;
+  padding: 7px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.78rem;
+  line-height: 1.35;
+}
+#view-football .fb-all-row:last-child { border-bottom: none; }
+#view-football .fb-all-time {
+  grid-column: 1;
+  grid-row: 1;
+  min-width: 3.1em;
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+#view-football .fb-all-match {
+  grid-column: 2;
+  grid-row: 1;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+  min-width: 0;
+}
+#view-football .fb-all-bot {
+  grid-column: 2;
+  grid-row: 2;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 2px 6px;
+  min-width: 0;
+}
+#view-football .fb-all-row > .fb-addendum {
+  grid-column: 1 / -1;
+}
+#view-football .fb-all-team {
+  color: #39ff14;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+#view-football .fb-all-market {
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+#view-football .fb-all-odds,
+#view-football .fb-all-stake {
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+#view-football .fb-stars {
+  margin-left: auto;
+  letter-spacing: 0.5px;
+  font-size: 0.86rem;
+  line-height: 1;
+  white-space: nowrap;
+}
+#view-football .fb-star { color: rgba(139, 148, 158, 0.28); }
+#view-football .fb-stars-1 .fb-star.on { color: var(--fb-star-1, #8b949e); }
+#view-football .fb-stars-2 .fb-star.on { color: var(--fb-star-2, #ffffff); }
+#view-football .fb-stars-3 .fb-star.on { color: var(--fb-star-3, #e6c35c); }
+#view-football .fb-stars-4 .fb-star.on { color: var(--fb-star-4, #39ff14); }
+#view-football .fb-stars-5 .fb-star.on { color: var(--fb-star-5, #58a6ff); }
+#view-football .fb-match .fb-stars {
+  margin-left: 4px;
+  font-size: 0.82rem;
+}
+#view-football .fb-unrated {
+  margin-left: auto;
+  color: var(--text-muted);
+  font-size: 0.72rem;
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+}
+#view-football .fb-match .fb-unrated,
+#view-football .fb-leg-main .fb-unrated {
+  margin-left: 4px;
+}
+#view-football .fb-result-icon { margin-right: 4px; }
+#view-football .fb-all-icon {
+  grid-column: 1;
+  grid-row: 2;
+  justify-self: center;
+  font-size: 0.85rem;
+  line-height: 1;
+}
+#view-football .fb-all-score {
+  font-weight: 700;
+  white-space: nowrap;
+}
