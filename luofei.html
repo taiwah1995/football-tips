@@ -24,12 +24,12 @@
   h1{font-size:21px;margin:0}
   .updated{color:var(--muted);font-size:12.5px;margin:2px 2px 14px}
   .panel{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;
-    padding:14px 14px 10px;margin:0 0 18px}
+    padding:10px 10px 8px;margin:0 0 18px}
   .panel h2{font-size:16px;margin:0 0 10px;color:var(--gold)}
   .table-scroll{overflow-x:auto}
-  table{width:100%;border-collapse:collapse;font-size:13.5px;min-width:520px}
-  th,td{padding:7px 8px;border-bottom:1px solid var(--border);text-align:left;white-space:nowrap}
-  th{color:var(--muted);font-weight:600;font-size:12.5px}
+  table{width:100%;border-collapse:collapse;font-size:12.5px;min-width:470px}
+  th,td{padding:3px 5px;border-bottom:1px solid var(--border);text-align:left;white-space:nowrap}
+  th{color:var(--muted);font-weight:600;font-size:11.5px}
   tr:last-child td{border-bottom:none}
   tr.tot td{border-top:2px solid var(--border);font-weight:700}
   .num{text-align:right;font-variant-numeric:tabular-nums}
@@ -86,11 +86,12 @@
         <th class="num">輪數</th><th class="num">場數</th><th class="num">W</th><th class="num">L</th><th class="num">未</th>
         <th class="num">落飛命中率（主客和）</th>
         <th class="num">落飛命中率（讓球）</th>
+        <th class="num">對上週</th>
         <th class="num">讓球盈虧（注）</th>
       </tr></thead>
-      <tbody id="sum-body"><tr><td colspan="9" class="empty">載入中…</td></tr></tbody>
+      <tbody id="sum-body"><tr><td colspan="10" class="empty">載入中…</td></tr></tbody>
     </table></div>
-    <p class="note">落飛方向＝titan007「歐」（歐洲 1X2）頁三項入面，「下降」莊家數最多嗰一項（即最多莊家壓低賠率嗰邊）。主客和命中率：W＝落飛方向同賽果一致；L＝唔一致；未＝未完場。讓球命中率同盈虧見下面回測版塊嘅定義。</p>
+    <p class="note">落飛方向＝titan007「歐」（歐洲 1X2）頁三項入面，「下降」莊家數最多嗰一項（即最多莊家壓低賠率嗰邊）。主客和命中率：W＝落飛方向同賽果一致；L＝唔一致；未＝未完場。讓球命中率同盈虧見下面回測版塊嘅定義。本表按落飛命中率（讓球）由高至低排；「對上週」＝該聯賽最新一週嘅讓球命中率對比上一週：<span class="w">▲</span> 升、<span class="l">▼</span> 跌、— 即持平或得一週數據。</p>
   </div>
 
   <div class="panel" id="ah-panel" style="display:none">
@@ -153,28 +154,51 @@ function weekLabel(wk){
   function f(d){ return (d.getMonth()+1)+'/'+d.getDate(); }
   return f(mon)+'–'+f(sun);
 }
+function ahRateNum(t){ var d=t.W+t.WH+t.LH+t.L; return d>0? (t.W+t.WH)/d : null; }
 function sumRows(leagues){
   var byName={}, order=[];
   leagues.forEach(function(lg){
     var k=lg.league;
-    if(!byName[k]){ byName[k]={rounds:0,matches:[]}; order.push(k); }
+    if(!byName[k]){ byName[k]={rounds:0,matches:[],weeks:{}}; order.push(k); }
     byName[k].rounds++;
-    (lg.matches||[]).forEach(function(m){ byName[k].matches.push(m); });
+    var wk=lg.week||'';
+    if(!byName[k].weeks[wk]) byName[k].weeks[wk]=[];
+    (lg.matches||[]).forEach(function(m){ byName[k].matches.push(m); byName[k].weeks[wk].push(m); });
   });
-  var html='', allM=[];
+  var rows=[], allM=[];
   order.forEach(function(k){
     var g=byName[k], t=tally(g.matches), a=ahTally(g.matches);
     allM=allM.concat(g.matches);
-    html+='<tr><td>'+esc(k)+'</td><td class="num">'+g.rounds+'</td>'+
-      '<td class="num">'+t.n+'</td><td class="num w">'+t.w+'</td><td class="num l">'+t.l+'</td>'+
-      '<td class="num u">'+t.u+'</td><td class="num">'+rate(t)+'</td>'+
-      '<td class="num">'+ahRate(a)+'</td><td class="num '+pnlCls(a.pnl)+'">'+(a.n? fmtPnl(a.pnl):'—')+'</td></tr>';
+    var rates=[];
+    Object.keys(g.weeks).sort().forEach(function(wk){
+      var r=ahRateNum(ahTally(g.weeks[wk])); if(r!=null) rates.push(r);
+    });
+    var trend='<td class="num u">—</td>';
+    if(rates.length>=2){
+      var cur=rates[rates.length-1], prev=rates[rates.length-2];
+      if(cur>prev) trend='<td class="num w">▲</td>';
+      else if(cur<prev) trend='<td class="num l">▼</td>';
+    }
+    rows.push({k:k, rounds:g.rounds, t:t, a:a, r:ahRateNum(a), trend:trend});
+  });
+  rows.sort(function(x,y){
+    var rx=(x.r==null? -1:x.r), ry=(y.r==null? -1:y.r);
+    if(ry!==rx) return ry-rx;
+    return y.a.pnl-x.a.pnl;
+  });
+  var html='';
+  rows.forEach(function(x){
+    html+='<tr><td>'+esc(x.k)+'</td><td class="num">'+x.rounds+'</td>'+
+      '<td class="num">'+x.t.n+'</td><td class="num w">'+x.t.w+'</td><td class="num l">'+x.t.l+'</td>'+
+      '<td class="num u">'+x.t.u+'</td><td class="num">'+rate(x.t)+'</td>'+
+      '<td class="num">'+ahRate(x.a)+'</td>'+x.trend+
+      '<td class="num '+pnlCls(x.a.pnl)+'">'+(x.a.n? fmtPnl(x.a.pnl):'—')+'</td></tr>';
   });
   var tt=tally(allM), ta=ahTally(allM);
   html+='<tr class="tot"><td>總計</td><td class="num">'+leagues.length+'</td>'+
     '<td class="num">'+tt.n+'</td><td class="num w">'+tt.w+'</td><td class="num l">'+tt.l+'</td>'+
     '<td class="num u">'+tt.u+'</td><td class="num">'+rate(tt)+'</td>'+
-    '<td class="num">'+ahRate(ta)+'</td><td class="num '+pnlCls(ta.pnl)+'">'+(ta.n? fmtPnl(ta.pnl):'—')+'</td></tr>';
+    '<td class="num">'+ahRate(ta)+'</td><td class="num">—</td><td class="num '+pnlCls(ta.pnl)+'">'+(ta.n? fmtPnl(ta.pnl):'—')+'</td></tr>';
   return html;
 }
 function matchRow(m){
@@ -248,7 +272,7 @@ function ahPanel(leagues){
 fetch('data/football-luofei.json?ts='+Date.now()).then(function(r){return r.json();}).then(function(data){
   document.getElementById('updated').textContent='更新：'+(data.updated_at_hkt||'')+' HKT';
   var leagues=data.leagues||[];
-  document.getElementById('sum-body').innerHTML=leagues.length? sumRows(leagues) : '<tr><td colspan="9" class="empty">暫未有數據</td></tr>';
+  document.getElementById('sum-body').innerHTML=leagues.length? sumRows(leagues) : '<tr><td colspan="10" class="empty">暫未有數據</td></tr>';
   ahPanel(leagues);
   var byWeek={}, weeks=[];
   leagues.forEach(function(lg){
