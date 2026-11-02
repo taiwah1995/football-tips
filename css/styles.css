@@ -1741,3 +1741,9 @@ body {
 
 /* Football-only build: hide the back button (no racing home to return to). */
 .btn-back { display: none !important; }
+
+/* 聯賽落飛 page entry (football view) */
+.luofei-entry{display:block;margin:10px 0 4px;padding:11px 14px;background:var(--bg-card);
+  border:1px solid var(--border);border-radius:10px;color:var(--gold);
+  text-decoration:none;font-weight:700;font-size:14.5px}
+.luofei-entry:active{background:var(--bg-hover)}

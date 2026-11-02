@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#0d1117" />
+<meta http-equiv="Cache-Control" content="no-cache" />
+<title>聯賽落飛 · 波盤推介</title>
+<style>
+  :root{
+    --bg:#0d1117; --bg-elev:#161b22; --bg-card:#1c2330; --bg-hover:#243044;
+    --border:#30363d; --text:#e6edf3; --muted:#8b949e;
+    --gold:#f0c14b; --green:#3fb950; --red:#f85149; --blue:#58a6ff;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang HK","Microsoft JhengHei",sans-serif;
+    -webkit-font-smoothing:antialiased}
+  .wrap{max-width:860px;margin:0 auto;padding:16px 14px 40px}
+  header{display:flex;align-items:center;gap:10px;padding:10px 2px 4px}
+  .back{color:var(--muted);text-decoration:none;font-size:14px;border:1px solid var(--border);
+    padding:6px 10px;border-radius:8px;background:var(--bg-elev)}
+  .back:active{background:var(--bg-hover)}
+  h1{font-size:21px;margin:0}
+  .updated{color:var(--muted);font-size:12.5px;margin:2px 2px 14px}
+  .panel{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;
+    padding:14px 14px 10px;margin:0 0 18px}
+  .panel h2{font-size:16px;margin:0 0 10px;color:var(--gold)}
+  .table-scroll{overflow-x:auto}
+  table{width:100%;border-collapse:collapse;font-size:13.5px;min-width:520px}
+  th,td{padding:7px 8px;border-bottom:1px solid var(--border);text-align:left;white-space:nowrap}
+  th{color:var(--muted);font-weight:600;font-size:12.5px}
+  tr:last-child td{border-bottom:none}
+  .num{text-align:right;font-variant-numeric:tabular-nums}
+  .w{color:var(--green);font-weight:700}
+  .l{color:var(--red);font-weight:700}
+  .u{color:var(--muted);font-weight:700}
+  .chip{display:inline-block;min-width:26px;text-align:center;padding:1px 7px;border-radius:20px;
+    font-size:12px;font-weight:700;border:1px solid var(--border)}
+  .chip.w{background:rgba(63,185,80,.14);color:var(--green);border-color:rgba(63,185,80,.4)}
+  .chip.l{background:rgba(248,81,73,.12);color:var(--red);border-color:rgba(248,81,73,.4)}
+  .chip.u{background:var(--bg-elev);color:var(--muted)}
+  .dir{font-weight:700}
+  .down3{color:var(--muted);font-size:12.5px}
+  .note{color:var(--muted);font-size:12px;margin-top:8px;line-height:1.55}
+  .league-head{display:flex;flex-wrap:wrap;gap:8px;align-items:baseline;margin:0 0 4px}
+  .league-head .sum{color:var(--muted);font-size:13px}
+  .empty{color:var(--muted);padding:22px 4px;text-align:center}
+  footer{color:var(--muted);font-size:12px;text-align:center;margin-top:8px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <a class="back" href="index.html#/football">← 波盤推介</a>
+    <h1>📉 聯賽落飛</h1>
+  </header>
+  <p class="updated" id="updated">載入中…</p>
+
+  <div class="panel">
+    <h2>總覽（各聯賽今輪）</h2>
+    <div class="table-scroll"><table id="sum-table">
+      <thead><tr>
+        <th>聯賽</th><th>輪次</th>
+        <th class="num">場數</th><th class="num">W</th><th class="num">L</th><th class="num">未</th>
+        <th class="num">落飛命中率（完場）</th>
+      </tr></thead>
+      <tbody id="sum-body"><tr><td colspan="7" class="empty">載入中…</td></tr></tbody>
+    </table></div>
+    <p class="note">落飛方向＝titan007「歐」（歐洲 1X2）頁三項入面，「下降」莊家數最多嗰一項（即最多莊家壓低賠率嗰邊）。W＝落飛方向同賽果一致；L＝唔一致；未＝未完場。</p>
+  </div>
+
+  <div id="leagues"></div>
+
+  <footer>僅供參考 · 非投注建議</footer>
+</div>
+
+<script>
+function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+function tally(ms){
+  var w=0,l=0,u=0;
+  ms.forEach(function(m){ if(m.status==='W')w++; else if(m.status==='L')l++; else u++; });
+  return {n:ms.length,w:w,l:l,u:u};
+}
+function rate(t){ return (t.w+t.l)>0 ? Math.round(t.w/(t.w+t.l)*100)+'%' : '—'; }
+function sumRow(lg){
+  var t=tally(lg.matches||[]);
+  return '<tr><td>'+esc(lg.league)+'</td><td>'+esc(lg.round)+'</td>'+
+    '<td class="num">'+t.n+'</td><td class="num w">'+t.w+'</td><td class="num l">'+t.l+'</td>'+
+    '<td class="num u">'+t.u+'</td><td class="num">'+rate(t)+'</td></tr>';
+}
+function matchRow(m){
+  var when=esc(m.date? m.date.slice(5).replace('-','/') : '')+(m.time? ' '+esc(m.time):'');
+  var dir='—', force='—', down3='—';
+  if(m.dir){
+    dir='<span class="dir">'+esc(m.dir)+'勝</span>';
+    force='↓'+esc(m['down_'+(m.dir==='主'?'h':m.dir==='客'?'a':'d')])+'家（'+esc(m.dir_pct)+'%）';
+    down3='主'+esc(m.down_h)+'・平'+esc(m.down_d)+'・客'+esc(m.down_a);
+  }
+  var chip='<span class="chip '+(m.status==='W'?'w':m.status==='L'?'l':'u')+'">'+esc(m.status)+'</span>';
+  var note=m.note? ' <span class="down3">（'+esc(m.note)+'）</span>':'';
+  return '<tr><td>'+when+'</td><td>'+esc(m.home)+' vs '+esc(m.away)+note+'</td>'+
+    '<td>'+dir+'</td><td>'+force+'</td><td class="down3">'+down3+'</td>'+
+    '<td>'+esc(m.result||'—')+'</td><td>'+chip+'</td></tr>';
+}
+function leaguePanel(lg){
+  var t=tally(lg.matches||[]);
+  var rows=(lg.matches||[]).map(matchRow).join('');
+  return '<div class="panel"><div class="league-head"><h2 style="margin:0">'+esc(lg.league)+' '+esc(lg.round)+
+    '</h2><span class="sum">'+t.n+'（場）：<span class="w">'+t.w+'(W)</span> / <span class="l">'+t.l+'(L)</span> / <span class="u">'+t.u+'（未）</span>・命中率 '+rate(t)+'</span></div>'+
+    '<div class="table-scroll"><table><thead><tr><th>時間</th><th>賽事</th><th>落飛方向</th><th>落飛力度</th><th>三項下降（家）</th><th>賽果</th><th>判定</th></tr></thead>'+
+    '<tbody>'+rows+'</tbody></table></div></div>';
+}
+fetch('data/football-luofei.json?ts='+Date.now()).then(function(r){return r.json();}).then(function(data){
+  document.getElementById('updated').textContent='更新：'+(data.updated_at_hkt||'')+' HKT';
+  var leagues=data.leagues||[];
+  document.getElementById('sum-body').innerHTML=leagues.length? leagues.map(sumRow).join('') : '<tr><td colspan="7" class="empty">暫未有數據</td></tr>';
+  document.getElementById('leagues').innerHTML=leagues.map(leaguePanel).join('');
+}).catch(function(){
+  document.getElementById('updated').textContent='數據載入失敗，請重新整理。';
+});
+</script>
+</body>
+</html>
