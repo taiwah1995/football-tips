@@ -1738,3 +1738,6 @@ body {
   font-weight: 700;
   white-space: nowrap;
 }
+
+/* Football-only build: hide the back button (no racing home to return to). */
+.btn-back { display: none !important; }

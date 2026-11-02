@@ -6,7 +6,7 @@
   'use strict';
 
   const DATA_BASE = 'data';
-  const APP_DATA_VERSION = 'football116';
+  const APP_DATA_VERSION = 'football117';
   /** 馬膽 stake, same convention as the ledger heading: 獨贏 $100 · 位置 $300. */
   const STAKE_WIN = 100;
   const STAKE_PLACE = 300;
@@ -5514,11 +5514,13 @@
     const hash = location.hash || '#/';
     const footer = document.querySelector('.site-footer');
     if (footer) {
-      footer.textContent = /^#\/football(?:\/|$)/.test(hash)
+      footer.textContent = (/^#\/football(?:\/|$)/.test(hash) || hash === '#/')
         ? '足球投注有輸錢風險，以上只係分析。'
         : '僅供參考 · 非投注建議';
     }
-    const football = hash.match(/^#\/football(?:\/(\d{4}-\d{2}-\d{2}))?\/?$/);
+    // Football-only build: the root route is the football page.
+    const football = hash.match(/^#\/football(?:\/(\d{4}-\d{2}-\d{2}))?\/?$/)
+      || (hash === '#/' ? ['#/football', ''] : null);
     if (football) {
       try {
         await renderFootball(football[1] || '');
