@@ -6,7 +6,7 @@
   'use strict';
 
   const DATA_BASE = 'data';
-  const APP_DATA_VERSION = 'football119';
+  const APP_DATA_VERSION = 'football120';
   /** 馬膽 stake, same convention as the ledger heading: 獨贏 $100 · 位置 $300. */
   const STAKE_WIN = 100;
   const STAKE_PLACE = 300;
@@ -5311,7 +5311,8 @@
       .map((entry) => entry.item);
   }
 
-  /** Next-morning kickoffs read `10/19凌晨 03:00`. Same-day times stay as written. */
+  /** Next-morning kickoffs read `10/19凌晨 03:00`. From 06:00 on they read
+   * `10/19 07:00` with no 凌晨 (user rule, 2026-11-02). Same-day times stay as written. */
   function footballAllDayTimeLabel(row, dayIso) {
     const clock = footballAllDayClock(row);
     const raw = String(row && (row.time || row.ko) || '');
@@ -5319,7 +5320,10 @@
     const next = footballAddDays((row && row.date) || dayIso || '', 1);
     const parts = next.match(/-(\d{2})-(\d{2})$/);
     if (!parts) return clock.text;
-    return Number(parts[1]) + '/' + Number(parts[2]) + '凌晨 ' + clock.text;
+    const prefix = Number(parts[1]) + '/' + Number(parts[2]);
+    return clock.hour < 6
+      ? prefix + '凌晨 ' + clock.text
+      : prefix + ' ' + clock.text;
   }
 
   function footballAllDayHtml(allday, date, updated, tips) {
