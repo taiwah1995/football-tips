@@ -50,7 +50,7 @@
   .league-head{display:flex;flex-wrap:wrap;gap:8px;align-items:baseline;margin:0 0 4px}
   .league-head .sum{color:var(--muted);font-size:13px}
   .empty{color:var(--muted);padding:22px 4px;text-align:center}
-  .weekbar{display:flex;align-items:center;gap:10px;margin:0 0 16px}
+  .weekbar{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:0 0 16px}
   .weekbar label{color:var(--muted);font-size:13.5px}
   .weekbar select{background:var(--bg-elev);color:var(--text);border:1px solid var(--border);
     border-radius:8px;padding:8px 10px;font-size:14.5px;flex:1;max-width:340px}
@@ -74,6 +74,8 @@
   <div class="weekbar">
     <label for="week-select">揀週：</label>
     <select id="week-select"><option value="all">全部週數</option></select>
+    <label for="league-select">揀聯賽：</label>
+    <select id="league-select"><option value="all">全部聯賽</option></select>
   </div>
 
   <div class="panel">
@@ -199,7 +201,7 @@ function leaguePanel(lg){
   var a=ahTally(lg.matches||[]);
   var rows=(lg.matches||[]).map(matchRow).join('');
   var ahSum=a.n? '・讓球命中率 '+ahRate(a)+'・讓球 <span class="'+pnlCls(a.pnl)+'">'+fmtPnl(a.pnl)+' 注</span>' : '';
-  return '<div class="panel"><div class="league-head"><h2 style="margin:0">'+esc(lg.league)+' '+esc(lg.round)+
+  return '<div class="panel league-panel" data-league="'+esc(lg.league)+'"><div class="league-head"><h2 style="margin:0">'+esc(lg.league)+' '+esc(lg.round)+
     '</h2><span class="sum">'+t.n+'（場）：<span class="w">'+t.w+'(W)</span> / <span class="l">'+t.l+'(L)</span> / <span class="u">'+t.u+'（未）</span>・主客和命中率 '+rate(t)+ahSum+'</span></div>'+
     '<div class="table-scroll"><table><thead><tr><th>時間</th><th>賽事</th><th>落飛方向</th><th>落飛力度</th><th>三項下降（家）</th><th>賽果</th><th>判定</th><th>跟飛讓球</th><th>讓球判定</th></tr></thead>'+
     '<tbody>'+rows+'</tbody></table></div></div>';
@@ -262,15 +264,32 @@ fetch('data/football-luofei.json?ts='+Date.now()).then(function(r){return r.json
     o.value=wk; o.textContent=weekLabel(wk)+' 嗰週';
     sel.appendChild(o);
   });
-  sel.addEventListener('change', function(){
-    var v=sel.value;
-    var secs=document.querySelectorAll('.week-sec');
-    secs.forEach(function(s){ s.style.display=(v==='all'||s.getAttribute('data-week')===v)? '' : 'none'; });
-    if(v!=='all'){
-      var t=document.querySelector('.week-sec[data-week="'+v+'"]');
-      if(t) t.scrollIntoView({behavior:'smooth'});
-    }
+  var lsel=document.getElementById('league-select');
+  var seenL={};
+  leagues.forEach(function(lg){
+    if(seenL[lg.league]) return; seenL[lg.league]=1;
+    var o=document.createElement('option');
+    o.value=lg.league; o.textContent=lg.league;
+    lsel.appendChild(o);
   });
+  function applyFilter(scroll){
+    var wv=sel.value, lv=lsel.value;
+    document.querySelectorAll('.week-sec').forEach(function(s){
+      var wok=(wv==='all'||s.getAttribute('data-week')===wv);
+      var any=false;
+      s.querySelectorAll('.league-panel').forEach(function(p){
+        var ok=wok && (lv==='all'||p.getAttribute('data-league')===lv);
+        p.style.display=ok? '' : 'none';
+        if(ok) any=true;
+      });
+      s.style.display=any? '' : 'none';
+      if(scroll && any && wv!=='all' && s.getAttribute('data-week')===wv) s.scrollIntoView({behavior:'smooth'});
+    });
+  }
+  sel.addEventListener('change', function(){ applyFilter(true); });
+  lsel.addEventListener('change', function(){ applyFilter(false); });
+  if(weeks.length){ sel.value=weeks[0]; }
+  applyFilter(false);
 }).catch(function(){
   document.getElementById('updated').textContent='數據載入失敗，請重新整理。';
 });
