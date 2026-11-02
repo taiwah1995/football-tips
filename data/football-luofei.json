@@ -16,7 +16,10 @@
      "result": "2-5",
      "status": "W",
      "time": "",
-     "total": 264
+     "total": 264,
+     "ah_line": 0.5,
+     "ah_hw": 0.75,
+     "ah_aw": 0.95
     },
     {
      "away": "薩萊星座",
@@ -30,7 +33,10 @@
      "result": "2-1",
      "status": "W",
      "time": "",
-     "total": 232
+     "total": 232,
+     "ah_line": -0.75,
+     "ah_hw": 0.79,
+     "ah_aw": 0.91
     },
     {
      "away": "烏泰他尼",
@@ -44,7 +50,10 @@
      "result": "2-0",
      "status": "W",
      "time": "",
-     "total": 270
+     "total": 270,
+     "ah_line": -1.25,
+     "ah_hw": 0.96,
+     "ah_aw": 0.74
     },
     {
      "away": "阿尤塔亞聯",
@@ -58,7 +67,10 @@
      "result": "0-3",
      "status": "W",
      "time": "",
-     "total": 264
+     "total": 264,
+     "ah_line": -0.25,
+     "ah_hw": 0.94,
+     "ah_aw": 0.76
     },
     {
      "away": "南奔戰士",
@@ -72,7 +84,10 @@
      "result": "0-4",
      "status": "W",
      "time": "",
-     "total": 264
+     "total": 264,
+     "ah_line": 0.0,
+     "ah_hw": 0.75,
+     "ah_aw": 0.95
     },
     {
      "away": "巴吞聯",
@@ -141,7 +156,10 @@
      "dir": "客",
      "dir_pct": 84,
      "result": "4-1",
-     "status": "L"
+     "status": "L",
+     "ah_line": 0.5,
+     "ah_hw": 0.94,
+     "ah_aw": 0.9
     },
     {
      "date": "2026-10-31",
@@ -169,7 +187,10 @@
      "dir": "主",
      "dir_pct": 89,
      "result": "1-2",
-     "status": "L"
+     "status": "L",
+     "ah_line": 0.0,
+     "ah_hw": 0.96,
+     "ah_aw": 0.88
     },
     {
      "date": "2026-10-31",
@@ -183,7 +204,10 @@
      "dir": "主",
      "dir_pct": 77,
      "result": "2-4",
-     "status": "L"
+     "status": "L",
+     "ah_line": -0.75,
+     "ah_hw": 0.86,
+     "ah_aw": 0.98
     },
     {
      "date": "2026-10-31",
@@ -197,7 +221,10 @@
      "dir": "客",
      "dir_pct": 95,
      "result": "0-0",
-     "status": "L"
+     "status": "L",
+     "ah_line": -0.25,
+     "ah_hw": 0.84,
+     "ah_aw": 1.0
     },
     {
      "date": "2026-10-31",
@@ -211,7 +238,10 @@
      "dir": "主",
      "dir_pct": 97,
      "result": "2-0",
-     "status": "W"
+     "status": "W",
+     "ah_line": 0.0,
+     "ah_hw": 0.74,
+     "ah_aw": 1.1
     },
     {
      "date": "2026-11-01",
@@ -225,7 +255,10 @@
      "dir": "主",
      "dir_pct": 40,
      "result": "2-2",
-     "status": "L"
+     "status": "L",
+     "ah_line": -1.5,
+     "ah_hw": 0.88,
+     "ah_aw": 0.96
     },
     {
      "date": "2026-11-01",
@@ -239,7 +272,10 @@
      "dir": "客",
      "dir_pct": 75,
      "result": "1-1",
-     "status": "L"
+     "status": "L",
+     "ah_line": 0.0,
+     "ah_hw": 0.98,
+     "ah_aw": 0.86
     },
     {
      "date": "2026-11-02",
@@ -253,7 +289,10 @@
      "dir": "主",
      "dir_pct": 96,
      "result": "3-1",
-     "status": "W"
+     "status": "W",
+     "ah_line": -1.25,
+     "ah_hw": 1.0,
+     "ah_aw": 0.84
     }
    ]
   },
@@ -275,7 +314,10 @@
      "dir": "主",
      "dir_pct": 98,
      "result": "0-1",
-     "status": "L"
+     "status": "L",
+     "ah_line": -1.25,
+     "ah_hw": 0.76,
+     "ah_aw": 1.08
     },
     {
      "date": "2026-10-31",
@@ -289,7 +331,10 @@
      "dir": "客",
      "dir_pct": 92,
      "result": "0-2",
-     "status": "W"
+     "status": "W",
+     "ah_line": 1.25,
+     "ah_hw": 0.82,
+     "ah_aw": 1.02
     },
     {
      "date": "2026-10-31",
@@ -317,7 +362,10 @@
      "dir": "主",
      "dir_pct": 95,
      "result": "2-1",
-     "status": "W"
+     "status": "W",
+     "ah_line": -1.5,
+     "ah_hw": 0.92,
+     "ah_aw": 0.92
     },
     {
      "date": "2026-11-01",
@@ -331,7 +379,10 @@
      "dir": "主",
      "dir_pct": 80,
      "result": "6-1",
-     "status": "W"
+     "status": "W",
+     "ah_line": -2.75,
+     "ah_hw": 0.94,
+     "ah_aw": 0.9
     },
     {
      "date": "2026-11-01",
@@ -345,7 +396,10 @@
      "dir": "客",
      "dir_pct": 97,
      "result": "3-1",
-     "status": "L"
+     "status": "L",
+     "ah_line": 0.25,
+     "ah_hw": 0.92,
+     "ah_aw": 0.92
     },
     {
      "date": "2026-11-01",
@@ -359,7 +413,10 @@
      "dir": "客",
      "dir_pct": 91,
      "result": "0-3",
-     "status": "W"
+     "status": "W",
+     "ah_line": 2.0,
+     "ah_hw": 0.98,
+     "ah_aw": 0.86
     },
     {
      "date": "2026-11-02",
@@ -373,7 +430,10 @@
      "dir": "主",
      "dir_pct": 85,
      "result": "0-1",
-     "status": "L"
+     "status": "L",
+     "ah_line": -0.25,
+     "ah_hw": 0.9,
+     "ah_aw": 0.94
     },
     {
      "date": "2026-11-02",
@@ -387,7 +447,10 @@
      "dir": "主",
      "dir_pct": 62,
      "result": "2-1",
-     "status": "W"
+     "status": "W",
+     "ah_line": -0.5,
+     "ah_hw": 0.96,
+     "ah_aw": 0.88
     },
     {
      "date": "2026-11-03",
@@ -452,7 +515,10 @@
      "dir": "客",
      "dir_pct": 94,
      "result": "1-0",
-     "status": "L"
+     "status": "L",
+     "ah_line": 0.0,
+     "ah_hw": 0.9,
+     "ah_aw": 0.94
     },
     {
      "date": "2026-11-01",
@@ -480,7 +546,10 @@
      "dir": "客",
      "dir_pct": 59,
      "result": "5-1",
-     "status": "L"
+     "status": "L",
+     "ah_line": -0.5,
+     "ah_hw": 0.86,
+     "ah_aw": 0.98
     },
     {
      "date": "2026-11-02",
@@ -494,7 +563,10 @@
      "dir": "客",
      "dir_pct": 86,
      "result": "3-1",
-     "status": "L"
+     "status": "L",
+     "ah_line": 0.0,
+     "ah_hw": 0.8,
+     "ah_aw": 1.04
     },
     {
      "date": "2026-11-02",
@@ -522,7 +594,10 @@
      "dir": "客",
      "dir_pct": 53,
      "result": "2-0",
-     "status": "L"
+     "status": "L",
+     "ah_line": -0.5,
+     "ah_hw": 0.86,
+     "ah_aw": 0.98
     },
     {
      "date": "2026-11-03",
@@ -559,7 +634,10 @@
      "dir": "主",
      "dir_pct": 93,
      "result": "2-1",
-     "status": "W"
+     "status": "W",
+     "ah_line": -0.75,
+     "ah_hw": 0.8,
+     "ah_aw": 1.04
     },
     {
      "date": "2026-11-01",
@@ -573,7 +651,10 @@
      "dir": "客",
      "dir_pct": 53,
      "result": "2-5",
-     "status": "W"
+     "status": "W",
+     "ah_line": 1.0,
+     "ah_hw": 1.06,
+     "ah_aw": 0.78
     },
     {
      "date": "2026-11-01",
@@ -587,7 +668,10 @@
      "dir": "客",
      "dir_pct": 83,
      "result": "3-1",
-     "status": "L"
+     "status": "L",
+     "ah_line": 0.5,
+     "ah_hw": 0.82,
+     "ah_aw": 1.02
     },
     {
      "date": "2026-11-01",
@@ -601,7 +685,10 @@
      "dir": "主",
      "dir_pct": 69,
      "result": "1-0",
-     "status": "W"
+     "status": "W",
+     "ah_line": -1.5,
+     "ah_hw": 0.76,
+     "ah_aw": 1.08
     },
     {
      "date": "2026-11-01",
@@ -615,7 +702,10 @@
      "dir": "主",
      "dir_pct": 90,
      "result": "2-0",
-     "status": "W"
+     "status": "W",
+     "ah_line": -0.5,
+     "ah_hw": 1.1,
+     "ah_aw": 0.74
     },
     {
      "date": "2026-11-01",
@@ -629,7 +719,10 @@
      "dir": "客",
      "dir_pct": 48,
      "result": "2-1",
-     "status": "L"
+     "status": "L",
+     "ah_line": -1.0,
+     "ah_hw": 0.88,
+     "ah_aw": 0.96
     },
     {
      "date": "2026-11-02",
@@ -643,7 +736,10 @@
      "dir": "客",
      "dir_pct": 87,
      "result": "1-2",
-     "status": "W"
+     "status": "W",
+     "ah_line": 0.25,
+     "ah_hw": 0.8,
+     "ah_aw": 1.04
     },
     {
      "date": "2026-11-02",
@@ -709,7 +805,10 @@
      "dir": "客",
      "dir_pct": 81,
      "result": "2-0",
-     "status": "L"
+     "status": "L",
+     "ah_line": -0.25,
+     "ah_hw": 0.96,
+     "ah_aw": 0.88
     },
     {
      "date": "2026-10-31",
@@ -723,7 +822,10 @@
      "dir": "客",
      "dir_pct": 77,
      "result": "3-1",
-     "status": "L"
+     "status": "L",
+     "ah_line": 0.25,
+     "ah_hw": 0.83,
+     "ah_aw": 1.01
     },
     {
      "date": "2026-10-31",
@@ -737,7 +839,10 @@
      "dir": "客",
      "dir_pct": 84,
      "result": "2-2",
-     "status": "L"
+     "status": "L",
+     "ah_line": 0.25,
+     "ah_hw": 0.84,
+     "ah_aw": 1.0
     },
     {
      "date": "2026-10-31",
@@ -751,7 +856,10 @@
      "dir": "主",
      "dir_pct": 90,
      "result": "2-0",
-     "status": "W"
+     "status": "W",
+     "ah_line": -0.5,
+     "ah_hw": 1.04,
+     "ah_aw": 0.8
     },
     {
      "date": "2026-10-31",
@@ -765,7 +873,10 @@
      "dir": "客",
      "dir_pct": 87,
      "result": "2-0",
-     "status": "L"
+     "status": "L",
+     "ah_line": -0.25,
+     "ah_hw": 0.88,
+     "ah_aw": 0.96
     },
     {
      "date": "2026-10-31",
@@ -807,7 +918,10 @@
      "dir": "客",
      "dir_pct": 41,
      "result": "1-1",
-     "status": "L"
+     "status": "L",
+     "ah_line": -0.5,
+     "ah_hw": 0.98,
+     "ah_aw": 0.86
     },
     {
      "date": "2026-11-02",
@@ -821,7 +935,10 @@
      "dir": "主",
      "dir_pct": 75,
      "result": "0-1",
-     "status": "L"
+     "status": "L",
+     "ah_line": 0.25,
+     "ah_hw": 0.8,
+     "ah_aw": 1.04
     },
     {
      "date": "2026-11-03",
@@ -858,7 +975,10 @@
      "dir": "客",
      "dir_pct": 90,
      "result": "3-1",
-     "status": "L"
+     "status": "L",
+     "ah_line": -0.5,
+     "ah_hw": 0.96,
+     "ah_aw": 0.82
     },
     {
      "date": "2026-10-31",
@@ -872,7 +992,10 @@
      "dir": "客",
      "dir_pct": 43,
      "result": "1-2",
-     "status": "W"
+     "status": "W",
+     "ah_line": 0.25,
+     "ah_hw": 0.95,
+     "ah_aw": 0.83
     },
     {
      "date": "2026-10-31",
@@ -886,7 +1009,10 @@
      "dir": "客",
      "dir_pct": 73,
      "result": "1-1",
-     "status": "L"
+     "status": "L",
+     "ah_line": 0.25,
+     "ah_hw": 0.79,
+     "ah_aw": 0.99
     },
     {
      "date": "2026-10-31",
@@ -900,7 +1026,10 @@
      "dir": "客",
      "dir_pct": 55,
      "result": "0-3",
-     "status": "W"
+     "status": "W",
+     "ah_line": 0.25,
+     "ah_hw": 0.81,
+     "ah_aw": 0.97
     },
     {
      "date": "2026-10-31",
@@ -914,7 +1043,10 @@
      "dir": "客",
      "dir_pct": 82,
      "result": "2-0",
-     "status": "L"
+     "status": "L",
+     "ah_line": -1.0,
+     "ah_hw": 0.9,
+     "ah_aw": 0.88
     },
     {
      "date": "2026-11-01",
@@ -928,7 +1060,10 @@
      "dir": "客",
      "dir_pct": 95,
      "result": "2-1",
-     "status": "L"
+     "status": "L",
+     "ah_line": 0.5,
+     "ah_hw": 0.86,
+     "ah_aw": 0.92
     },
     {
      "date": "2026-11-01",
@@ -942,7 +1077,10 @@
      "dir": "主",
      "dir_pct": 39,
      "result": "1-3",
-     "status": "L"
+     "status": "L",
+     "ah_line": -0.5,
+     "ah_hw": 1.0,
+     "ah_aw": 0.78
     },
     {
      "date": "2026-11-01",
@@ -992,7 +1130,10 @@
      "dir": "主",
      "dir_pct": 28,
      "result": "2-1",
-     "status": "W"
+     "status": "W",
+     "ah_line": -1.5,
+     "ah_hw": 0.81,
+     "ah_aw": 0.97
     },
     {
      "date": "2026-11-01",
@@ -1006,7 +1147,10 @@
      "dir": "客",
      "dir_pct": 82,
      "result": "1-2",
-     "status": "W"
+     "status": "W",
+     "ah_line": 0.75,
+     "ah_hw": 0.92,
+     "ah_aw": 0.86
     },
     {
      "date": "2026-11-01",
@@ -1020,7 +1164,10 @@
      "dir": "主",
      "dir_pct": 78,
      "result": "1-0",
-     "status": "W"
+     "status": "W",
+     "ah_line": -0.75,
+     "ah_hw": 0.96,
+     "ah_aw": 0.82
     },
     {
      "date": "2026-11-01",
@@ -1034,7 +1181,10 @@
      "dir": "主",
      "dir_pct": 57,
      "result": "1-0",
-     "status": "W"
+     "status": "W",
+     "ah_line": -0.5,
+     "ah_hw": 0.83,
+     "ah_aw": 0.95
     },
     {
      "date": "2026-11-01",
@@ -1048,7 +1198,10 @@
      "dir": "主",
      "dir_pct": 77,
      "result": "2-1",
-     "status": "W"
+     "status": "W",
+     "ah_line": -1.5,
+     "ah_hw": 0.9,
+     "ah_aw": 0.88
     },
     {
      "date": "2026-11-03",
@@ -1129,7 +1282,10 @@
      "dir": "客",
      "dir_pct": 90,
      "result": "1-0",
-     "status": "L"
+     "status": "L",
+     "ah_line": -0.25,
+     "ah_hw": 0.88,
+     "ah_aw": 0.9
     },
     {
      "date": "2026-11-01",
@@ -1143,7 +1299,10 @@
      "dir": "客",
      "dir_pct": 35,
      "result": "7-0",
-     "status": "L"
+     "status": "L",
+     "ah_line": -3.0,
+     "ah_hw": 0.85,
+     "ah_aw": 0.93
     },
     {
      "date": "2026-11-01",
@@ -1157,7 +1316,10 @@
      "dir": "主",
      "dir_pct": 71,
      "result": "1-0",
-     "status": "W"
+     "status": "W",
+     "ah_line": -0.5,
+     "ah_hw": 0.8,
+     "ah_aw": 0.98
     },
     {
      "date": "2026-11-01",
@@ -1171,7 +1333,10 @@
      "dir": "主",
      "dir_pct": 98,
      "result": "4-0",
-     "status": "W"
+     "status": "W",
+     "ah_line": 0.0,
+     "ah_hw": 0.82,
+     "ah_aw": 0.96
     },
     {
      "date": "2026-11-01",
@@ -1185,7 +1350,10 @@
      "dir": "客",
      "dir_pct": 72,
      "result": "1-0",
-     "status": "L"
+     "status": "L",
+     "ah_line": -0.25,
+     "ah_hw": 0.98,
+     "ah_aw": 0.8
     },
     {
      "date": "2026-11-01",
@@ -1199,7 +1367,10 @@
      "dir": "客",
      "dir_pct": 85,
      "result": "0-9",
-     "status": "W"
+     "status": "W",
+     "ah_line": 1.25,
+     "ah_hw": 0.78,
+     "ah_aw": 1.0
     },
     {
      "date": "2026-11-01",
@@ -1213,7 +1384,10 @@
      "dir": "客",
      "dir_pct": 92,
      "result": "4-2",
-     "status": "L"
+     "status": "L",
+     "ah_line": 0.5,
+     "ah_hw": 0.79,
+     "ah_aw": 0.99
     },
     {
      "date": "2026-11-01",
@@ -1227,7 +1401,10 @@
      "dir": "客",
      "dir_pct": 51,
      "result": "2-3",
-     "status": "W"
+     "status": "W",
+     "ah_line": -0.75,
+     "ah_hw": 0.94,
+     "ah_aw": 0.84
     }
    ]
   },
@@ -1249,7 +1426,10 @@
      "dir": "客",
      "dir_pct": 80,
      "result": "2-0",
-     "status": "L"
+     "status": "L",
+     "ah_line": 0.75,
+     "ah_hw": 0.8,
+     "ah_aw": 0.98
     },
     {
      "date": "2026-11-03",
@@ -1301,7 +1481,10 @@
      "dir": "主",
      "dir_pct": 96,
      "result": "2-0",
-     "status": "W"
+     "status": "W",
+     "ah_line": -0.25,
+     "ah_hw": 0.8,
+     "ah_aw": 1.04
     },
     {
      "date": "2026-10-31",
@@ -1315,7 +1498,10 @@
      "dir": "客",
      "dir_pct": 71,
      "result": "0-3",
-     "status": "W"
+     "status": "W",
+     "ah_line": 1.25,
+     "ah_hw": 0.86,
+     "ah_aw": 0.98
     },
     {
      "date": "2026-10-31",
@@ -1329,7 +1515,10 @@
      "dir": "客",
      "dir_pct": 90,
      "result": "0-4",
-     "status": "W"
+     "status": "W",
+     "ah_line": 0.5,
+     "ah_hw": 0.94,
+     "ah_aw": 0.9
     },
     {
      "date": "2026-10-31",
@@ -1357,7 +1546,10 @@
      "dir": "主",
      "dir_pct": 68,
      "result": "4-1",
-     "status": "W"
+     "status": "W",
+     "ah_line": -0.75,
+     "ah_hw": 0.84,
+     "ah_aw": 1.0
     },
     {
      "date": "2026-10-31",
@@ -1371,7 +1563,10 @@
      "dir": "客",
      "dir_pct": 86,
      "result": "4-0",
-     "status": "L"
+     "status": "L",
+     "ah_line": -0.25,
+     "ah_hw": 1.02,
+     "ah_aw": 0.82
     },
     {
      "date": "2026-11-01",
@@ -1385,7 +1580,10 @@
      "dir": "客",
      "dir_pct": 65,
      "result": "4-2",
-     "status": "L"
+     "status": "L",
+     "ah_line": 0.25,
+     "ah_hw": 1.04,
+     "ah_aw": 0.8
     },
     {
      "date": "2026-11-01",
@@ -1399,7 +1597,10 @@
      "dir": "客",
      "dir_pct": 68,
      "result": "1-2",
-     "status": "W"
+     "status": "W",
+     "ah_line": 0.0,
+     "ah_hw": 0.84,
+     "ah_aw": 1.0
     },
     {
      "date": "2026-11-01",
@@ -1413,7 +1614,10 @@
      "dir": "主",
      "dir_pct": 81,
      "result": "3-0",
-     "status": "W"
+     "status": "W",
+     "ah_line": 0.0,
+     "ah_hw": 0.98,
+     "ah_aw": 0.86
     },
     {
      "date": "2026-11-01",
@@ -1427,7 +1631,10 @@
      "dir": "客",
      "dir_pct": 53,
      "result": "0-0",
-     "status": "L"
+     "status": "L",
+     "ah_line": -0.75,
+     "ah_hw": 1.04,
+     "ah_aw": 0.8
     }
    ]
   },
@@ -1449,7 +1656,10 @@
      "dir": "主",
      "dir_pct": 57,
      "result": "3-0",
-     "status": "W"
+     "status": "W",
+     "ah_line": -1.75,
+     "ah_hw": 0.87,
+     "ah_aw": 0.91
     },
     {
      "date": "2026-10-29",
@@ -1463,7 +1673,10 @@
      "dir": "主",
      "dir_pct": 92,
      "result": "2-1",
-     "status": "W"
+     "status": "W",
+     "ah_line": -0.75,
+     "ah_hw": 1.0,
+     "ah_aw": 0.78
     },
     {
      "date": "2026-10-29",
@@ -1477,7 +1690,10 @@
      "dir": "客",
      "dir_pct": 95,
      "result": "0-0",
-     "status": "L"
+     "status": "L",
+     "ah_line": 0.5,
+     "ah_hw": 0.81,
+     "ah_aw": 0.97
     },
     {
      "date": "2026-10-29",
@@ -1491,7 +1707,10 @@
      "dir": "主",
      "dir_pct": 75,
      "result": "3-2",
-     "status": "W"
+     "status": "W",
+     "ah_line": -0.5,
+     "ah_hw": 0.88,
+     "ah_aw": 0.9
     },
     {
      "date": "2026-10-29",
@@ -1505,7 +1724,10 @@
      "dir": "主",
      "dir_pct": 63,
      "result": "2-1",
-     "status": "W"
+     "status": "W",
+     "ah_line": 0.0,
+     "ah_hw": 0.8,
+     "ah_aw": 0.98
     },
     {
      "date": "2026-10-30",
@@ -1519,7 +1741,10 @@
      "dir": "客",
      "dir_pct": 94,
      "result": "0-1",
-     "status": "W"
+     "status": "W",
+     "ah_line": 0.25,
+     "ah_hw": 0.75,
+     "ah_aw": 1.03
     },
     {
      "date": "2026-10-30",
@@ -1533,7 +1758,10 @@
      "dir": "客",
      "dir_pct": 94,
      "result": "1-4",
-     "status": "W"
+     "status": "W",
+     "ah_line": 0.75,
+     "ah_hw": 0.93,
+     "ah_aw": 0.85
     },
     {
      "date": "2026-10-30",
@@ -1547,7 +1775,10 @@
      "dir": "主",
      "dir_pct": 73,
      "result": "2-0",
-     "status": "W"
+     "status": "W",
+     "ah_line": -0.25,
+     "ah_hw": 0.92,
+     "ah_aw": 0.86
     },
     {
      "date": "2026-10-31",
@@ -1561,7 +1792,10 @@
      "dir": "客",
      "dir_pct": 96,
      "result": "2-0",
-     "status": "L"
+     "status": "L",
+     "ah_line": -0.5,
+     "ah_hw": 0.8,
+     "ah_aw": 0.98
     },
     {
      "date": "2026-11-01",
@@ -1575,7 +1809,10 @@
      "dir": "主",
      "dir_pct": 83,
      "result": "2-0",
-     "status": "W"
+     "status": "W",
+     "ah_line": -0.5,
+     "ah_hw": 1.04,
+     "ah_aw": 0.74
     }
    ]
   },
@@ -1597,7 +1834,10 @@
      "dir": "客",
      "dir_pct": 62,
      "result": "1-0",
-     "status": "L"
+     "status": "L",
+     "ah_line": 0.0,
+     "ah_hw": 0.99,
+     "ah_aw": 0.79
     },
     {
      "date": "2026-10-31",
@@ -1611,7 +1851,10 @@
      "dir": "主",
      "dir_pct": 84,
      "result": "2-3",
-     "status": "L"
+     "status": "L",
+     "ah_line": 0.25,
+     "ah_hw": 0.96,
+     "ah_aw": 0.82
     },
     {
      "date": "2026-10-31",
@@ -1639,7 +1882,10 @@
      "dir": "主",
      "dir_pct": 89,
      "result": "2-0",
-     "status": "W"
+     "status": "W",
+     "ah_line": -0.5,
+     "ah_hw": 0.81,
+     "ah_aw": 0.97
     },
     {
      "date": "2026-10-31",
@@ -1653,7 +1899,10 @@
      "dir": "主",
      "dir_pct": 46,
      "result": "1-3",
-     "status": "L"
+     "status": "L",
+     "ah_line": 0.0,
+     "ah_hw": 0.94,
+     "ah_aw": 0.84
     },
     {
      "date": "2026-10-31",
@@ -1681,7 +1930,10 @@
      "dir": "主",
      "dir_pct": 55,
      "result": "1-2",
-     "status": "L"
+     "status": "L",
+     "ah_line": 0.0,
+     "ah_hw": 0.97,
+     "ah_aw": 0.81
     },
     {
      "date": "2026-10-31",
@@ -1695,7 +1947,10 @@
      "dir": "客",
      "dir_pct": 58,
      "result": "1-2",
-     "status": "W"
+     "status": "W",
+     "ah_line": -0.5,
+     "ah_hw": 0.8,
+     "ah_aw": 0.98
     },
     {
      "date": "2026-10-31",
@@ -1745,7 +2000,10 @@
      "dir": "主",
      "dir_pct": 95,
      "result": "1-0",
-     "status": "W"
+     "status": "W",
+     "ah_line": -0.25,
+     "ah_hw": 0.84,
+     "ah_aw": 0.94
     },
     {
      "date": "2026-10-31",
@@ -1759,7 +2017,10 @@
      "dir": "主",
      "dir_pct": 75,
      "result": "1-3",
-     "status": "L"
+     "status": "L",
+     "ah_line": 0.25,
+     "ah_hw": 0.81,
+     "ah_aw": 0.97
     },
     {
      "date": "2026-10-31",
@@ -1773,7 +2034,10 @@
      "dir": "主",
      "dir_pct": 69,
      "result": "3-2",
-     "status": "W"
+     "status": "W",
+     "ah_line": -1.0,
+     "ah_hw": 0.9,
+     "ah_aw": 0.88
     },
     {
      "date": "2026-10-31",
@@ -1801,7 +2065,10 @@
      "dir": "客",
      "dir_pct": 95,
      "result": "1-3",
-     "status": "W"
+     "status": "W",
+     "ah_line": -0.5,
+     "ah_hw": 0.79,
+     "ah_aw": 0.99
     },
     {
      "date": "2026-10-31",
@@ -1815,7 +2082,10 @@
      "dir": "客",
      "dir_pct": 95,
      "result": "4-1",
-     "status": "L"
+     "status": "L",
+     "ah_line": -0.25,
+     "ah_hw": 0.78,
+     "ah_aw": 1.0
     },
     {
      "date": "2026-10-31",
@@ -1829,7 +2099,10 @@
      "dir": "主",
      "dir_pct": 92,
      "result": "3-0",
-     "status": "W"
+     "status": "W",
+     "ah_line": -2.0,
+     "ah_hw": 0.82,
+     "ah_aw": 0.96
     },
     {
      "date": "2026-10-31",
@@ -1843,7 +2116,10 @@
      "dir": "主",
      "dir_pct": 85,
      "result": "4-1",
-     "status": "W"
+     "status": "W",
+     "ah_line": -0.75,
+     "ah_hw": 0.78,
+     "ah_aw": 1.0
     },
     {
      "date": "2026-10-31",
@@ -1857,7 +2133,10 @@
      "dir": "客",
      "dir_pct": 57,
      "result": "2-3",
-     "status": "W"
+     "status": "W",
+     "ah_line": 0.25,
+     "ah_hw": 0.8,
+     "ah_aw": 0.98
     },
     {
      "date": "2026-10-31",
@@ -1871,7 +2150,10 @@
      "dir": "客",
      "dir_pct": 68,
      "result": "0-0",
-     "status": "L"
+     "status": "L",
+     "ah_line": -0.5,
+     "ah_hw": 1.01,
+     "ah_aw": 0.77
     },
     {
      "date": "2026-10-31",
@@ -1885,7 +2167,10 @@
      "dir": "主",
      "dir_pct": 32,
      "result": "4-0",
-     "status": "W"
+     "status": "W",
+     "ah_line": -0.75,
+     "ah_hw": 0.97,
+     "ah_aw": 0.81
     },
     {
      "date": "2026-10-31",
@@ -1899,7 +2184,10 @@
      "dir": "主",
      "dir_pct": 77,
      "result": "3-0",
-     "status": "W"
+     "status": "W",
+     "ah_line": -1.0,
+     "ah_hw": 0.88,
+     "ah_aw": 0.9
     }
    ]
   },
@@ -1921,7 +2209,10 @@
      "dir": "客",
      "dir_pct": 78,
      "result": "6-1",
-     "status": "L"
+     "status": "L",
+     "ah_line": -1.5,
+     "ah_hw": 0.96,
+     "ah_aw": 0.82
     },
     {
      "date": "2026-10-31",
@@ -1935,7 +2226,10 @@
      "dir": "客",
      "dir_pct": 63,
      "result": "1-0",
-     "status": "L"
+     "status": "L",
+     "ah_line": -0.75,
+     "ah_hw": 0.91,
+     "ah_aw": 0.87
     },
     {
      "date": "2026-11-01",
@@ -1949,7 +2243,10 @@
      "dir": "主",
      "dir_pct": 51,
      "result": "1-0",
-     "status": "W"
+     "status": "W",
+     "ah_line": -0.5,
+     "ah_hw": 0.98,
+     "ah_aw": 0.8
     },
     {
      "date": "2026-11-01",
@@ -1963,7 +2260,10 @@
      "dir": "客",
      "dir_pct": 83,
      "result": "0-0",
-     "status": "L"
+     "status": "L",
+     "ah_line": 0.0,
+     "ah_hw": 1.04,
+     "ah_aw": 0.74
     },
     {
      "date": "2026-11-01",
@@ -1977,7 +2277,10 @@
      "dir": "客",
      "dir_pct": 95,
      "result": "1-0",
-     "status": "L"
+     "status": "L",
+     "ah_line": 0.25,
+     "ah_hw": 0.92,
+     "ah_aw": 0.86
     },
     {
      "date": "2026-11-02",
@@ -1991,7 +2294,10 @@
      "dir": "主",
      "dir_pct": 89,
      "result": "2-2",
-     "status": "L"
+     "status": "L",
+     "ah_line": 0.0,
+     "ah_hw": 0.7,
+     "ah_aw": 1.08
     },
     {
      "date": "2026-11-03",
@@ -2043,7 +2349,10 @@
      "dir": "主",
      "dir_pct": 72,
      "result": "0-1",
-     "status": "L"
+     "status": "L",
+     "ah_line": -0.25,
+     "ah_hw": 0.98,
+     "ah_aw": 0.8
     },
     {
      "date": "2026-10-31",
@@ -2071,7 +2380,10 @@
      "dir": "客",
      "dir_pct": 97,
      "result": "1-2",
-     "status": "W"
+     "status": "W",
+     "ah_line": 0.5,
+     "ah_hw": 0.94,
+     "ah_aw": 0.84
     },
     {
      "date": "2026-11-01",
@@ -2085,7 +2397,10 @@
      "dir": "主",
      "dir_pct": 96,
      "result": "3-0",
-     "status": "W"
+     "status": "W",
+     "ah_line": -0.5,
+     "ah_hw": 0.88,
+     "ah_aw": 0.9
     },
     {
      "date": "2026-11-01",
@@ -2099,7 +2414,10 @@
      "dir": "主",
      "dir_pct": 88,
      "result": "4-2",
-     "status": "W"
+     "status": "W",
+     "ah_line": -1.25,
+     "ah_hw": 0.82,
+     "ah_aw": 0.96
     },
     {
      "date": "2026-11-01",
@@ -2127,7 +2445,10 @@
      "dir": "主",
      "dir_pct": 95,
      "result": "2-2",
-     "status": "L"
+     "status": "L",
+     "ah_line": -0.25,
+     "ah_hw": 0.91,
+     "ah_aw": 0.87
     },
     {
      "date": "2026-11-02",
@@ -2141,7 +2462,10 @@
      "dir": "主",
      "dir_pct": 65,
      "result": "1-0",
-     "status": "W"
+     "status": "W",
+     "ah_line": -0.75,
+     "ah_hw": 0.99,
+     "ah_aw": 0.79
     },
     {
      "date": "2026-11-02",
@@ -2177,7 +2501,10 @@
      "dir": "客",
      "dir_pct": 36,
      "result": "0-0",
-     "status": "L"
+     "status": "L",
+     "ah_line": 0.0,
+     "ah_hw": 0.98,
+     "ah_aw": 0.8
     },
     {
      "date": "2026-11-01",
@@ -2191,7 +2518,10 @@
      "dir": "客",
      "dir_pct": 71,
      "result": "2-1",
-     "status": "L"
+     "status": "L",
+     "ah_line": -0.25,
+     "ah_hw": 1.01,
+     "ah_aw": 0.77
     },
     {
      "date": "2026-11-01",
@@ -2205,7 +2535,10 @@
      "dir": "客",
      "dir_pct": 87,
      "result": "0-1",
-     "status": "W"
+     "status": "W",
+     "ah_line": -0.25,
+     "ah_hw": 0.83,
+     "ah_aw": 0.95
     }
    ]
   },
@@ -2227,7 +2560,10 @@
      "dir": "主",
      "dir_pct": 94,
      "result": "1-1",
-     "status": "L"
+     "status": "L",
+     "ah_line": 0.0,
+     "ah_hw": 0.82,
+     "ah_aw": 0.96
     },
     {
      "date": "2026-11-01",
@@ -2241,7 +2577,10 @@
      "dir": "客",
      "dir_pct": 74,
      "result": "1-1",
-     "status": "L"
+     "status": "L",
+     "ah_line": 0.0,
+     "ah_hw": 0.94,
+     "ah_aw": 0.84
     },
     {
      "date": "2026-11-01",
@@ -2277,7 +2616,10 @@
      "dir": "主",
      "dir_pct": 95,
      "result": "1-2",
-     "status": "L"
+     "status": "L",
+     "ah_line": 0.5,
+     "ah_hw": 0.86,
+     "ah_aw": 0.92
     },
     {
      "date": "2026-10-31",
@@ -2291,7 +2633,10 @@
      "dir": "客",
      "dir_pct": 89,
      "result": "0-2",
-     "status": "W"
+     "status": "W",
+     "ah_line": -0.25,
+     "ah_hw": 1.05,
+     "ah_aw": 0.73
     },
     {
      "date": "2026-10-31",
@@ -2305,7 +2650,10 @@
      "dir": "客",
      "dir_pct": 89,
      "result": "2-1",
-     "status": "L"
+     "status": "L",
+     "ah_line": -0.75,
+     "ah_hw": 0.93,
+     "ah_aw": 0.85
     },
     {
      "date": "2026-10-31",
@@ -2319,7 +2667,10 @@
      "dir": "客",
      "dir_pct": 95,
      "result": "1-2",
-     "status": "W"
+     "status": "W",
+     "ah_line": 0.5,
+     "ah_hw": 0.93,
+     "ah_aw": 0.85
     },
     {
      "date": "2026-11-01",
@@ -2333,7 +2684,10 @@
      "dir": "主",
      "dir_pct": 70,
      "result": "0-3",
-     "status": "L"
+     "status": "L",
+     "ah_line": 0.0,
+     "ah_hw": 0.74,
+     "ah_aw": 1.04
     },
     {
      "date": "2026-11-01",
@@ -2347,7 +2701,10 @@
      "dir": "主",
      "dir_pct": 88,
      "result": "2-2",
-     "status": "L"
+     "status": "L",
+     "ah_line": -0.5,
+     "ah_hw": 0.84,
+     "ah_aw": 0.94
     },
     {
      "date": "2026-11-01",
@@ -2361,7 +2718,10 @@
      "dir": "主",
      "dir_pct": 88,
      "result": "3-3",
-     "status": "L"
+     "status": "L",
+     "ah_line": -0.5,
+     "ah_hw": 1.02,
+     "ah_aw": 0.76
     },
     {
      "date": "2026-11-02",
@@ -2375,7 +2735,10 @@
      "dir": "主",
      "dir_pct": 53,
      "result": "1-0",
-     "status": "W"
+     "status": "W",
+     "ah_line": -0.25,
+     "ah_hw": 0.82,
+     "ah_aw": 0.96
     },
     {
      "date": "2026-11-02",
@@ -2389,7 +2752,10 @@
      "dir": "客",
      "dir_pct": 78,
      "result": "2-2",
-     "status": "L"
+     "status": "L",
+     "ah_line": -0.5,
+     "ah_hw": 0.87,
+     "ah_aw": 0.91
     },
     {
      "date": "2026-11-02",
@@ -2403,7 +2769,10 @@
      "dir": "主",
      "dir_pct": 47,
      "result": "1-1",
-     "status": "L"
+     "status": "L",
+     "ah_line": -0.25,
+     "ah_hw": 0.79,
+     "ah_aw": 0.99
     },
     {
      "date": "2026-11-02",
@@ -2417,7 +2786,10 @@
      "dir": "主",
      "dir_pct": 95,
      "result": "1-1",
-     "status": "L"
+     "status": "L",
+     "ah_line": -1.0,
+     "ah_hw": 0.81,
+     "ah_aw": 0.97
     },
     {
      "date": "2026-11-03",
@@ -2499,7 +2871,10 @@
      "dir": "主",
      "dir_pct": 71,
      "result": "4-0",
-     "status": "W"
+     "status": "W",
+     "ah_line": -0.5,
+     "ah_hw": 0.87,
+     "ah_aw": 0.91
     },
     {
      "date": "2026-11-01",
@@ -2513,7 +2888,10 @@
      "dir": "主",
      "dir_pct": 53,
      "result": "3-0",
-     "status": "W"
+     "status": "W",
+     "ah_line": -1.25,
+     "ah_hw": 0.93,
+     "ah_aw": 0.85
     },
     {
      "date": "2026-11-01",
@@ -2527,7 +2905,10 @@
      "dir": "主",
      "dir_pct": 69,
      "result": "1-1",
-     "status": "L"
+     "status": "L",
+     "ah_line": -1.25,
+     "ah_hw": 0.87,
+     "ah_aw": 0.91
     },
     {
      "date": "2026-11-01",
@@ -2541,7 +2922,10 @@
      "dir": "主",
      "dir_pct": 95,
      "result": "1-0",
-     "status": "W"
+     "status": "W",
+     "ah_line": -0.25,
+     "ah_hw": 1.0,
+     "ah_aw": 0.78
     },
     {
      "date": "2026-11-01",
@@ -2555,7 +2939,10 @@
      "dir": "主",
      "dir_pct": 84,
      "result": "1-1",
-     "status": "L"
+     "status": "L",
+     "ah_line": 0.5,
+     "ah_hw": 0.78,
+     "ah_aw": 1.0
     },
     {
      "date": "2026-11-01",
@@ -2569,7 +2956,10 @@
      "dir": "主",
      "dir_pct": 88,
      "result": "0-1",
-     "status": "L"
+     "status": "L",
+     "ah_line": -1.0,
+     "ah_hw": 0.9,
+     "ah_aw": 0.88
     },
     {
      "date": "2026-11-01",
@@ -2583,7 +2973,10 @@
      "dir": "客",
      "dir_pct": 83,
      "result": "2-1",
-     "status": "L"
+     "status": "L",
+     "ah_line": 0.0,
+     "ah_hw": 0.91,
+     "ah_aw": 0.87
     },
     {
      "date": "2026-11-01",
@@ -2597,7 +2990,10 @@
      "dir": "主",
      "dir_pct": 97,
      "result": "4-1",
-     "status": "W"
+     "status": "W",
+     "ah_line": -1.5,
+     "ah_hw": 0.86,
+     "ah_aw": 0.92
     },
     {
      "date": "2026-11-01",
@@ -2611,7 +3007,10 @@
      "dir": "客",
      "dir_pct": 84,
      "result": "2-4",
-     "status": "W"
+     "status": "W",
+     "ah_line": -0.25,
+     "ah_hw": 0.99,
+     "ah_aw": 0.79
     },
     {
      "date": "2026-11-02",
@@ -2639,7 +3038,10 @@
      "dir": "主",
      "dir_pct": 45,
      "result": "3-2",
-     "status": "W"
+     "status": "W",
+     "ah_line": -1.5,
+     "ah_hw": 1.02,
+     "ah_aw": 0.76
     },
     {
      "date": "2026-11-02",
@@ -2653,7 +3055,10 @@
      "dir": "客",
      "dir_pct": 53,
      "result": "3-1",
-     "status": "L"
+     "status": "L",
+     "ah_line": -0.5,
+     "ah_hw": 0.95,
+     "ah_aw": 0.83
     },
     {
      "date": "2026-11-02",
@@ -2667,7 +3072,10 @@
      "dir": "客",
      "dir_pct": 75,
      "result": "1-2",
-     "status": "W"
+     "status": "W",
+     "ah_line": 0.25,
+     "ah_hw": 0.9,
+     "ah_aw": 0.88
     },
     {
      "date": "2026-11-02",
@@ -2681,7 +3089,10 @@
      "dir": "客",
      "dir_pct": 77,
      "result": "1-3",
-     "status": "W"
+     "status": "W",
+     "ah_line": -0.75,
+     "ah_hw": 0.92,
+     "ah_aw": 0.86
     },
     {
      "date": "2026-11-02",
@@ -2695,12 +3106,15 @@
      "dir": "主",
      "dir_pct": 93,
      "result": "3-1",
-     "status": "W"
+     "status": "W",
+     "ah_line": -0.75,
+     "ah_hw": 0.91,
+     "ah_aw": 0.87
     }
    ]
   }
  ],
- "source_note": "落飛方向＝titan007「歐」頁三項入面「下降」莊家數最多嗰一項；W＝落飛方向同賽果一致，L＝唔一致，未＝未完場。泰超第7輪數據於 2026-11-02 採集（春武里 vs 巴吞聯一場採自 19:57 截圖，其餘 5 場完場賽後讀取）。 2026-11-02 補入 2026-10-30→11-01 週末輪次：英超第9輪、西甲第11輪、德甲第8輪、意甲第10輪、法甲第9輪、荷甲第11輪、日職第13輪、日乙第14輪、英冠第13輪、德乙第10輪、美職常規賽第33輪、韓職爭冠組/護級組第1輪、墨超秋季第15輪、瑞超第27輪、芬超爭冠組第9輪、阿甲第二階段第15輪、巴甲第33輪、智利甲第26輪。數字為 titan007「歐」頁底部變動統計（已完場為最終數字；未開波場次為 2026-11-02 晚上採集時數字）。",
- "updated_at_hkt": "2026-11-02 21:00",
- "version": 122
+ "source_note": "落飛方向＝titan007「歐」頁三項入面「下降」莊家數最多嗰一項；W＝落飛方向同賽果一致，L＝唔一致，未＝未完場。泰超第7輪數據於 2026-11-02 採集（春武里 vs 巴吞聯一場採自 19:57 截圖，其餘 5 場完場賽後讀取）。 2026-11-02 補入 2026-10-30→11-01 週末輪次：英超第9輪、西甲第11輪、德甲第8輪、意甲第10輪、法甲第9輪、荷甲第11輪、日職第13輪、日乙第14輪、英冠第13輪、德乙第10輪、美職常規賽第33輪、韓職爭冠組/護級組第1輪、墨超秋季第15輪、瑞超第27輪、芬超爭冠組第9輪、阿甲第二階段第15輪、巴甲第33輪、智利甲第26輪。數字為 titan007「歐」頁底部變動統計（已完場為最終數字；未開波場次為 2026-11-02 晚上採集時數字）。 每場另附澳門收盤亞洲盤口（ah_line 為主隊角度）及主/客水位，用作跟飛買讓球回測（138 場已完場、落飛方向主/客）。",
+ "updated_at_hkt": "2026-11-02 21:55",
+ "version": 123
 }
