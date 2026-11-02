@@ -6,7 +6,7 @@
   'use strict';
 
   const DATA_BASE = 'data';
-  const APP_DATA_VERSION = 'football115';
+  const APP_DATA_VERSION = 'football116';
   /** 馬膽 stake, same convention as the ledger heading: 獨贏 $100 · 位置 $300. */
   const STAKE_WIN = 100;
   const STAKE_PLACE = 300;
@@ -5592,16 +5592,15 @@
   /* ---------- init ---------- */
   async function init() {
     bindEvents();
+    // Football-first build: racing data (data/index.json) is not shipped in
+    // this repo, so a failed racing preload must never block routing.
     try {
       await loadIndex();
       await loadAllMeetings();
-      await route();
     } catch (err) {
-      meetingList.innerHTML = '';
-      homeEmpty.hidden = false;
-      homeEmpty.textContent = '載入失敗：' + (err.message || err);
       console.error(err);
     }
+    await route();
   }
 
   if (document.readyState === 'loading') {
