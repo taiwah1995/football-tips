@@ -5270,15 +5270,19 @@
   }
 
   /**
-   * Betting day is 08:00 through 07:59 the next calendar day.
-   * A kickoff before 08:00 is that next morning. So is a later kickoff the
-   * sheet already marks 凌晨 or with the next day's date.
+   * Old-system days (before 2026-11-02) ran 08:00 through 07:59, so a kickoff
+   * before 08:00 is that next morning. New-system days run 12:00 to 11:59,
+   * so any kickoff before 12:00 is the next morning (user correction,
+   * 2026-11-03: an 08:30 next-morning kickoff showed as same-day). A later
+   * kickoff the sheet marks 凌晨 or with the next day's date counts too.
    */
   function footballAllDayNextMorning(item, dayIso) {
     const clock = footballAllDayClock(item);
     if (!clock) return false;
-    if (clock.hour < 8) return true;
-    const day = dayIso || (item && item.date) || '';
+    const day0 = dayIso || (item && item.date) || '';
+    const threshold = day0 >= '2026-11-02' ? 12 : 8;
+    if (clock.hour < threshold) return true;
+    const day = day0;
     const blob = String(item.time || '') + ' ' + String(item.ko || '') + ' ' +
       String(item.match || '') + ' ' + String(item.league || '');
     if (/凌晨/.test(blob)) return true;
