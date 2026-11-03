@@ -2167,8 +2167,11 @@
           "odds": "1.91",
           "confidence": 54,
           "stake": 2,
-          "status": "暫定",
+          "status": "已結算",
           "reason": "拉科同奧沙辛拿積分同11分但客淨勝球差／客場近況明顯差；马會主讓平半@約1.91過門檻，三维輕偏主淺讓，暫定兩注單場卡。",
+          "result": "2-1",
+          "wl": "WH",
+          "profit": 91,
           "stars": 4,
           "count_in_single_sample": true,
           "card_status": "provisional",
@@ -2187,8 +2190,11 @@
           "odds": "1.83",
           "confidence": 54,
           "stake": 1,
-          "status": "暫定",
+          "status": "已結算",
           "reason": "紐卡素主場唔差但水位向客漂移；近段主場對賽偏愛華頓；马會客受平半@約1.83過門檻；t831u英超客受平半封頂1注，暫定一注單場卡，唔組穩陣。",
+          "result": "0-1",
+          "wl": "W",
+          "profit": 83,
           "stars": 4,
           "count_in_single_sample": true,
           "card_status": "provisional",
@@ -2204,5 +2210,5 @@
       "rule": "t692u+t727u+t281u+t789u+t831u+t838u+stable≥57%+t852u-live"
     }
   ],
-  "updated_at_hkt": "2026-11-02 10:24:32 HKT（live-1102-t852u）"
+  "updated_at_hkt": "2026-11-03 09:41:24 HKT"
 }
