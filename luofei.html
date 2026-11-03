@@ -49,6 +49,8 @@
   .dir{font-weight:700}
   .down3{color:var(--muted);font-size:12.5px}
   .note{color:var(--muted);font-size:12px;margin-top:8px;line-height:1.55}
+  .cmt p{margin:5px 0;line-height:1.65;font-size:13.5px}
+  .cmt b.lbl{color:var(--gold)}
   .league-head{display:flex;flex-wrap:wrap;gap:8px;align-items:baseline;margin:0 0 4px}
   .league-head .sum{color:var(--muted);font-size:13px}
   .empty{color:var(--muted);padding:22px 4px;text-align:center}
@@ -80,8 +82,13 @@
     <select id="league-select"><option value="all">全部聯賽</option></select>
   </div>
 
+  <div class="panel" id="cmt-panel" style="display:none">
+    <h2 id="cmt-title">短評</h2>
+    <div class="cmt" id="cmt-body"></div>
+  </div>
+
   <div class="panel">
-    <h2>總覽（各聯賽累積）</h2>
+    <h2 id="sum-title">總覽（各聯賽累積）</h2>
     <div class="table-scroll"><table id="sum-table">
       <thead><tr>
         <th>聯賽</th>
@@ -97,7 +104,7 @@
   </div>
 
   <div class="panel" id="ah-panel" style="display:none">
-    <h2>跟飛買讓球回測（每注 1 注 · 澳門收盤盤口 · 累積全部週數）</h2>
+    <h2 id="ah-title">跟飛買讓球回測（每注 1 注 · 澳門收盤盤口 · 累積全部週數）</h2>
     <div id="ah-body"></div>
     <p class="note">做法：已完場而且落飛方向係主/客嘅場次，每場用 titan007 澳門收盤亞洲盤，買落飛方向嗰隊 1 注，用嗰邊水位計盈虧。讓球命中率＝（全贏＋贏半）÷（全贏＋贏半＋輸半＋全輸），走盤唔入分母。讓球主客和嗰行係近似計法：用亞盤取整數（方向隊讓一球/受讓一球）計命中率，冇用馬會價。</p>
   </div>
@@ -157,7 +164,7 @@ function weekLabel(wk){
   return f(mon)+'–'+f(sun);
 }
 function ahRateNum(t){ var d=t.W+t.WH+t.LH+t.L; return d>0? (t.W+t.WH)/d : null; }
-function sumRows(leagues){
+function sumRows(leagues, single){
   var byName={}, order=[];
   leagues.forEach(function(lg){
     var k=lg.league;
@@ -196,6 +203,7 @@ function sumRows(leagues){
       '<td class="num">'+ahRate(x.a)+'</td>'+x.trend+
       '<td class="num '+pnlCls(x.a.pnl)+'">'+(x.a.n? fmtPnl(x.a.pnl):'—')+'</td></tr>';
   });
+  if(single) return html;
   var tt=tally(allM), ta=ahTally(allM);
   html+='<tr class="tot"><td>總計</td><td class="num">'+leagues.length+'</td>'+
     '<td class="num">'+tt.n+'</td><td class="num w">'+tt.w+'</td><td class="num l">'+tt.l+'</td>'+
@@ -241,10 +249,13 @@ function weekSection(wk, lgs){
     '<span class="sum">'+t.n+'（場）：<span class="w">'+t.w+'(W)</span> / <span class="l">'+t.l+'(L)</span> / <span class="u">'+t.u+'（未）</span>・主客和命中率 '+rate(t)+ahSum+'</span></div>';
   return '<div class="week-sec" data-week="'+esc(wk||'')+'">'+head+lgs.map(leaguePanel).join('')+'</div>';
 }
-function ahPanel(leagues){
+function ahPanel(leagues, onlyName){
+  document.getElementById('ah-title').textContent=onlyName?
+    '跟飛買讓球回測（'+onlyName+'・每注 1 注 · 澳門收盤盤口 · 累積全部週數）' :
+    '跟飛買讓球回測（每注 1 注 · 澳門收盤盤口 · 累積全部週數）';
   var all=[]; leagues.forEach(function(lg){ (lg.matches||[]).forEach(function(m){ all.push(m); }); });
   var t=ahTally(all);
-  if(!t.n) return;
+  if(!t.n){ document.getElementById('ah-panel').style.display='none'; return; }
   function seg(sel){
     var s=ahTally(all.filter(sel));
     return s.n? {n:s.n, pnl:s.pnl, roi:Math.round(s.pnl/s.n*1000)/10} : null;
@@ -271,11 +282,74 @@ function ahPanel(leagues){
   document.getElementById('ah-body').innerHTML=html;
   document.getElementById('ah-panel').style.display='';
 }
+function segDefs(){
+  return [
+    {label:'方向隊讓球（熱門方）', test:function(a,m){ return a.L<0; }},
+    {label:'方向隊受讓（冷門方）', test:function(a,m){ return a.L>0; }},
+    {label:'平手盤', test:function(a,m){ return a.L===0; }},
+    {label:'落飛力度 ≥70%', test:function(a,m){ return m.dir_pct>=70; }},
+    {label:'落飛力度 50–69%', test:function(a,m){ return m.dir_pct>=50 && m.dir_pct<70; }},
+    {label:'落飛力度 <50%', test:function(a,m){ return m.dir_pct<50; }},
+    {label:'主方向', test:function(a,m){ return m.dir==='主'; }},
+    {label:'客方向', test:function(a,m){ return m.dir==='客'; }}
+  ];
+}
+function commentaryHtml(name, entries){
+  var ms=[];
+  entries.forEach(function(lg){ (lg.matches||[]).forEach(function(m){ ms.push(m); }); });
+  var t=ahTally(ms);
+  if(!t.n) return '<p>呢個聯賽暫時未有可判定嘅跟飛讓球回測數據（未齊澳門收盤盤口），暫時冇得評論。</p>';
+  var stats=segDefs().map(function(s){
+    var sub=ms.filter(function(m){ var a=ahGrade(m); return a && s.test(a,m); });
+    var st=ahTally(sub);
+    return {label:s.label, n:st.n, rate:ahRate(st), pnl:st.pnl};
+  }).filter(function(s){ return s.n>0; });
+  function segStr(s){ return s.label+'（'+s.n+' 注・命中率 '+s.rate+'・<b class="'+pnlCls(s.pnl)+'">'+fmtPnl(s.pnl)+' 注</b>）'; }
+  var html='';
+  if(t.n<20) html+='<p>⚠️ <b class="lbl">樣本細</b>：呢個聯賽得 '+t.n+' 注已判定，結論未穩，以下評論只作參考，唔好過度演繹。</p>';
+  html+='<p>累積 '+t.n+' 注：讓球命中率 '+ahRate(t)+'，總盈虧 <b class="'+pnlCls(t.pnl)+'">'+fmtPnl(t.pnl)+' 注</b>。</p>';
+  var pos=stats.filter(function(s){ return s.pnl>0; }).sort(function(a,b){ return b.pnl-a.pnl; });
+  var neg=stats.filter(function(s){ return s.pnl<0; }).sort(function(a,b){ return a.pnl-b.pnl; });
+  if(pos.length){
+    html+='<p><b class="lbl">優勢</b>：'+pos.slice(0,2).map(segStr).join('；')+' — 跟飛嘅回報主要嚟自呢啲環節。</p>';
+  } else {
+    html+='<p><b class="lbl">優勢</b>：暫時冇 — 冇一個細分環節係正數，呢個聯賽跟飛未見有賺錢嘅切入點。</p>';
+  }
+  if(neg.length){
+    html+='<p><b class="lbl">危險注意</b>：'+neg.slice(0,2).map(segStr).join('；')+' — 呢啲買法蝕得最勁，跟飛要避開。</p>';
+  }
+  var byWk={};
+  entries.forEach(function(lg){
+    var wk=lg.week||'';
+    if(!byWk[wk]) byWk[wk]=[];
+    (lg.matches||[]).forEach(function(m){ byWk[wk].push(m); });
+  });
+  var wkStats=[];
+  Object.keys(byWk).sort().forEach(function(wk){
+    var st=ahTally(byWk[wk]); if(st.n) wkStats.push({wk:wk, st:st});
+  });
+  if(wkStats.length>=2){
+    var last=wkStats[wkStats.length-1];
+    var lr=ahRateNum(last.st), cr=ahRateNum(t);
+    var dir=(lr!=null&&cr!=null)? (lr>cr? '升溫' : (lr<cr? '回落' : '持平')) : '—';
+    html+='<p><b class="lbl">近期趨勢</b>：最近一週（'+esc(weekLabel(last.wk))+' 嗰週，'+last.st.n+' 注）命中率 '+ahRate(last.st)+'、盈虧 <b class="'+pnlCls(last.st.pnl)+'">'+fmtPnl(last.st.pnl)+' 注</b>，對比累積命中率 '+ahRate(t)+'，走勢屬<b>'+dir+'</b>。</p>';
+  } else if(wkStats.length===1){
+    html+='<p><b class="lbl">近期趨勢</b>：得一週有回測數據（'+wkStats[0].st.n+' 注），未有得同之前比較。</p>';
+  }
+  var solid=pos.filter(function(s){ return s.n>=8; });
+  if(solid.length){
+    var best=solid[0];
+    html+='<p><b class="lbl">點買先有優勢</b>：跟飛呢個聯賽，只好揀「'+best.label+'」出手 — 回測 '+best.n+' 注、命中率 '+best.rate+'、盈虧 <b class="'+pnlCls(best.pnl)+'">'+fmtPnl(best.pnl)+' 注</b>；其他細分唔好掂。'+(t.n<20? '（樣本細，注碼要更保守。）':'')+'</p>';
+  } else if(pos.length){
+    html+='<p><b class="lbl">點買先有優勢</b>：得「'+pos[0].label+'」呢個細分係正數，但樣本得 '+pos[0].n+' 注，未夠穩陣證明有優勢 — 跟飛呢個聯賽要極之揀擇，甚至暫避。</p>';
+  } else {
+    html+='<p><b class="lbl">點買先有優勢</b>：暫時唔見有優勢買法 — 冇一個細分賺到錢，跟飛要避開呢個聯賽，等數據轉勢先再評估。</p>';
+  }
+  return html;
+}
 fetch('data/football-luofei.json?ts='+Date.now()).then(function(r){return r.json();}).then(function(data){
   document.getElementById('updated').textContent='更新：'+(data.updated_at_hkt||'')+' HKT';
   var leagues=data.leagues||[];
-  document.getElementById('sum-body').innerHTML=leagues.length? sumRows(leagues) : '<tr><td colspan="10" class="empty">暫未有數據</td></tr>';
-  ahPanel(leagues);
   var byWeek={}, weeks=[];
   leagues.forEach(function(lg){
     var wk=lg.week||'';
@@ -312,9 +386,25 @@ fetch('data/football-luofei.json?ts='+Date.now()).then(function(r){return r.json
       if(scroll && any && wv!=='all' && s.getAttribute('data-week')===wv) s.scrollIntoView({behavior:'smooth'});
     });
   }
+  function renderTop(){
+    var lv=lsel.value, single=(lv!=='all');
+    var entries=single? leagues.filter(function(lg){ return lg.league===lv; }) : leagues;
+    document.getElementById('sum-title').textContent=single? '總覽（'+lv+'・累積）' : '總覽（各聯賽累積）';
+    document.getElementById('sum-body').innerHTML=entries.length? sumRows(entries, single) : '<tr><td colspan="10" class="empty">暫未有數據</td></tr>';
+    ahPanel(entries, single? lv : null);
+    var cp=document.getElementById('cmt-panel');
+    if(single){
+      document.getElementById('cmt-title').textContent='短評（'+lv+'）';
+      document.getElementById('cmt-body').innerHTML=commentaryHtml(lv, entries);
+      cp.style.display='';
+    } else {
+      cp.style.display='none';
+    }
+  }
   sel.addEventListener('change', function(){ applyFilter(true); });
-  lsel.addEventListener('change', function(){ applyFilter(false); });
+  lsel.addEventListener('change', function(){ renderTop(); applyFilter(false); });
   if(weeks.length){ sel.value=weeks[0]; }
+  renderTop();
   applyFilter(false);
 }).catch(function(){
   document.getElementById('updated').textContent='數據載入失敗，請重新整理。';
