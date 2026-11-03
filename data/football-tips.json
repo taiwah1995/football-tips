@@ -2170,8 +2170,8 @@
           "status": "已結算",
           "reason": "拉科同奧沙辛拿積分同11分但客淨勝球差／客場近況明顯差；马會主讓平半@約1.91過門檻，三维輕偏主淺讓，暫定兩注單場卡。",
           "result": "2-1",
-          "wl": "WH",
-          "profit": 91,
+          "wl": "W",
+          "profit": 182,
           "stars": 4,
           "count_in_single_sample": true,
           "card_status": "provisional",
@@ -2210,5 +2210,5 @@
       "rule": "t692u+t727u+t281u+t789u+t831u+t838u+stable≥57%+t852u-live"
     }
   ],
-  "updated_at_hkt": "2026-11-03 09:41:24 HKT"
+  "updated_at_hkt": "2026-11-03 10:16:14 HKT"
 }
