@@ -5426,7 +5426,7 @@
       '<select id="football-date" aria-label="日期">' + options + '</select></label></div></section>' +
       footballPassHtml(selected.tips, updated, selected.date, model.locks || [], stableRows || []) +
       '<section class="panel" id="football-matches">' +
-      footballSectionTitle(escapeHtml(footballDayLabel(selected) + '單場推介'), updated, selected.tips) +
+      footballSectionTitle(escapeHtml(footballDayLabel(selected) + '今日精選'), updated, selected.tips) +
       footballByKickoff(selected.tips, selected.date).map((tip) => footballCardHtml(tip, model.unit)).join('') +
       '</section>' +
       '<div id="football-summaries">' +

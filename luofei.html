@@ -38,6 +38,9 @@
   .w{color:var(--green);font-weight:700}
   .l{color:var(--red);font-weight:700}
   .u{color:var(--muted);font-weight:700}
+  .rate55{color:#f5c542;font-weight:700}
+  .rate65{color:var(--blue);font-weight:700}
+  .cutline td{text-align:center;color:#f5c542;background:rgba(245,197,66,.07);border-top:2px solid #f5c542;border-bottom:2px solid #f5c542;font-weight:700;white-space:normal;letter-spacing:.04em}
   .chip{display:inline-block;min-width:26px;text-align:center;padding:1px 7px;border-radius:20px;
     font-size:12px;font-weight:700;border:1px solid var(--border)}
   .chip.w{background:rgba(63,185,80,.14);color:var(--green);border-color:rgba(63,185,80,.4)}
@@ -102,7 +105,7 @@
       </tr></thead>
       <tbody id="sum-body"><tr><td colspan="10" class="empty">載入中…</td></tr></tbody>
     </table></div>
-    <p class="note">落飛方向＝titan007「歐」（歐洲 1X2）頁三項入面，「下降」莊家數最多嗰一項（即最多莊家壓低賠率嗰邊）。主客和命中率：W＝落飛方向同賽果一致；L＝唔一致；未＝未完場。讓球命中率同盈虧見下面回測版塊嘅定義。本表按落飛命中率（讓球）由高至低排；「對上週」＝該聯賽最新一週嘅讓球命中率對比上一週：<span class="w">▲</span> 升、<span class="l">▼</span> 跌、— 即持平或得一週數據。</p>
+    <p class="note">落飛方向＝titan007「歐」（歐洲 1X2）頁三項入面，「下降」莊家數最多嗰一項（即最多莊家壓低賠率嗰邊）。主客和命中率：W＝落飛方向同賽果一致；L＝唔一致；未＝未完場。讓球命中率同盈虧見下面回測版塊嘅定義。本表按落飛命中率（讓球）由高至低排；「對上週」＝該聯賽最新一週嘅讓球命中率對比上一週：<span class="w">▲</span> 升、<span class="l">▼</span> 跌、— 即持平或得一週數據。表中有 <b style="color:#f5c542">50% 分界線</b>：讓球命中率高過 50% 屬線上聯賽、低過屬線下聯賽；命中率數字 <span class="rate55">超過 55% 顯示黃字</span>、<span class="rate65">超過 65% 顯示藍字</span>。</p>
   </div>
 
   <div class="panel" id="ah-panel" style="display:none">
@@ -197,12 +200,23 @@ function sumRows(leagues, single){
     if(ry!==rx) return ry-rx;
     return y.a.pnl-x.a.pnl;
   });
-  var html='';
+  function rateCls(r){
+    if(r==null) return '';
+    var p=Math.round(r*100);
+    if(p>65) return ' rate65';
+    if(p>55) return ' rate55';
+    return '';
+  }
+  var html='', cutDone=false;
   rows.forEach(function(x){
+    if(!single && !cutDone && x.r!=null && x.r<=0.5){
+      html+='<tr class="cutline"><td colspan="10">50% 分界線 — 以上線上聯賽 · 以下線下聯賽</td></tr>';
+      cutDone=true;
+    }
     html+='<tr><td>'+esc(x.k)+'</td><td class="num">'+x.rounds+'</td>'+
       '<td class="num">'+x.t.n+'</td><td class="num w">'+x.t.w+'</td><td class="num l">'+x.t.l+'</td>'+
       '<td class="num u">'+x.t.u+'</td><td class="num">'+rate(x.t)+'</td>'+
-      '<td class="num">'+ahRate(x.a)+'</td>'+x.trend+
+      '<td class="num'+rateCls(x.r)+'">'+ahRate(x.a)+'</td>'+x.trend+
       '<td class="num '+pnlCls(x.a.pnl)+'">'+(x.a.n? fmtPnl(x.a.pnl):'—')+'</td></tr>';
   });
   if(single) return html;
