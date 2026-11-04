@@ -2223,7 +2223,7 @@
      "odds": "2.00",
      "confidence": 57,
      "stake": 2,
-     "status": "確認",
+     "status": "已結算",
      "reason": "仙台作客5勝0和2負；富山主場7戰只贏1場；t648u已核0球",
      "stars": 5,
      "count_in_single_sample": true,
@@ -2231,7 +2231,10 @@
       "穩陣"
      ],
      "market_code": "HDC",
-     "note_gate": "讓球淺線合t692u；用戶2026-11-03「可上」批准發佈｜名單未出｜穩陣二串一腳"
+     "note_gate": "讓球淺線合t692u；用戶2026-11-03「可上」批准發佈｜名單未出｜穩陣二串一腳",
+     "result": "0-1",
+     "wl": "L",
+     "profit": -200
     },
     {
      "no": 2,
@@ -2243,13 +2246,16 @@
      "odds": "1.84",
      "confidence": 54,
      "stake": 2,
-     "status": "確認",
+     "status": "已結算",
      "reason": "大宮主場3勝3和1負；磐城作客2勝1和4負；t648u已核0球",
      "stars": 4,
      "count_in_single_sample": true,
      "parlay_types": [],
      "market_code": "HDC",
-     "note_gate": "讓球淺線合t692u；用戶2026-11-03「可上」批准發佈｜名單未出"
+     "note_gate": "讓球淺線合t692u；用戶2026-11-03「可上」批准發佈｜名單未出",
+     "result": "2-1",
+     "wl": "W",
+     "profit": 168
     },
     {
      "no": 3,
@@ -2261,13 +2267,16 @@
      "odds": "2.15",
      "confidence": 53,
      "stake": 2,
-     "status": "確認",
+     "status": "已結算",
      "reason": "兩隊14戰合共只入24球；t648u已核0球",
      "stars": 4,
      "count_in_single_sample": true,
      "parlay_types": [],
      "market_code": "HAD",
-     "note_gate": "用戶2026-11-03「可上」批准發佈｜名單未出"
+     "note_gate": "用戶2026-11-03「可上」批准發佈｜名單未出",
+     "result": "1-0",
+     "wl": "W",
+     "profit": 230
     },
     {
      "no": 4,
@@ -2279,13 +2288,16 @@
      "odds": "1.97",
      "confidence": 57,
      "stake": 2,
-     "status": "確認",
+     "status": "已結算",
      "reason": "大分14戰只輸3場失12球；八戶14戰失24球；t648u已核0球",
      "stars": 5,
      "count_in_single_sample": true,
      "parlay_types": [],
      "market_code": "HAD",
-     "note_gate": "用戶2026-11-03「可上」批准發佈｜名單未出"
+     "note_gate": "用戶2026-11-03「可上」批准發佈｜名單未出",
+     "result": "1-0",
+     "wl": "W",
+     "profit": 194
     },
     {
      "no": 5,
@@ -2297,13 +2309,16 @@
      "odds": "1.93",
      "confidence": 53,
      "stake": 2,
-     "status": "確認",
+     "status": "已結算",
      "reason": "甲府14戰失28球排包尾；t648u已核0球",
      "stars": 4,
      "count_in_single_sample": true,
      "parlay_types": [],
      "market_code": "HAD",
-     "note_gate": "用戶2026-11-03「可上」批准發佈｜名單未出"
+     "note_gate": "用戶2026-11-03「可上」批准發佈｜名單未出",
+     "result": "0-1",
+     "wl": "W",
+     "profit": 186
     },
     {
      "no": 6,
@@ -2315,13 +2330,16 @@
      "odds": "2.28",
      "confidence": 53,
      "stake": 2,
-     "status": "確認",
+     "status": "已結算",
      "reason": "札幌四連勝；今治近4場不勝；t648u已核0.25球",
      "stars": 4,
      "count_in_single_sample": true,
      "parlay_types": [],
      "market_code": "HAD",
-     "note_gate": "用戶2026-11-03「可上」批准發佈｜名單未出"
+     "note_gate": "用戶2026-11-03「可上」批准發佈｜名單未出",
+     "result": "0-4",
+     "wl": "W",
+     "profit": 256
     },
     {
      "no": 7,
@@ -2333,13 +2351,16 @@
      "odds": "1.86",
      "confidence": 53,
      "stake": 2,
-     "status": "確認",
+     "status": "已結算",
      "reason": "Crow全程不變靠基本面差距；噴射機亞冠3連敗",
      "stars": 4,
      "count_in_single_sample": true,
      "parlay_types": [],
      "market_code": "HDC",
-     "note_gate": "讓球淺線合t692u；用戶2026-11-03「可上」批准發佈｜名單未出"
+     "note_gate": "讓球淺線合t692u；用戶2026-11-03「可上」批准發佈｜名單未出",
+     "result": "2-4",
+     "wl": "W",
+     "profit": 172
     },
     {
      "no": 8,
@@ -2351,13 +2372,16 @@
      "odds": "2.06",
      "confidence": 54,
      "stake": 2,
-     "status": "確認",
+     "status": "已結算",
      "reason": "柔佛近10場9勝1和；全北近況低迷",
      "stars": 4,
      "count_in_single_sample": true,
      "parlay_types": [],
      "market_code": "HDC",
-     "note_gate": "讓球淺線合t692u；用戶2026-11-03「可上」批准發佈｜名單未出"
+     "note_gate": "讓球淺線合t692u；用戶2026-11-03「可上」批准發佈｜名單未出",
+     "result": "2-0",
+     "wl": "L",
+     "profit": -200
     },
     {
      "no": 9,
@@ -2369,13 +2393,16 @@
      "odds": "1.80",
      "confidence": 54,
      "stake": 2,
-     "status": "確認",
+     "status": "已結算",
      "reason": "主場必勝搶出線；艾席貝三場零入球；t648u已核0球",
      "stars": 4,
      "count_in_single_sample": true,
      "parlay_types": [],
      "market_code": "HDC",
-     "note_gate": "讓球淺線合t692u；用戶2026-11-03「可上」批准發佈｜名單未出"
+     "note_gate": "讓球淺線合t692u；用戶2026-11-03「可上」批准發佈｜名單未出",
+     "result": "0-2",
+     "wl": "L",
+     "profit": -200
     },
     {
      "no": 10,
@@ -2387,14 +2414,17 @@
      "odds": "1.97",
      "confidence": 53,
      "stake": 2,
-     "status": "確認",
+     "status": "已結算",
      "reason": "榜首戰主隊贏波即登頂；t648u已核0球",
      "stars": 4,
      "count_in_single_sample": true,
      "parlay_types": [],
      "market_code": "HDC",
      "note_gate": "讓球淺線合t692u；用戶2026-11-03「可上」批准發佈｜名單未出",
-     "ko_note": "（11/04凌晨）"
+     "ko_note": "（11/04凌晨）",
+     "result": "0-3",
+     "wl": "L",
+     "profit": -200
     },
     {
      "no": 11,
@@ -2406,14 +2436,17 @@
      "odds": "1.81",
      "confidence": 53,
      "stake": 2,
-     "status": "確認",
+     "status": "已結算",
      "reason": "四日前聯賽主場贏過同一對手；客軍近5場不勝；t648u已核0球",
      "stars": 4,
      "count_in_single_sample": true,
      "parlay_types": [],
      "market_code": "HDC",
      "note_gate": "讓球淺線合t692u；用戶2026-11-03「可上」批准發佈｜名單未出",
-     "ko_note": "（11/04凌晨）"
+     "ko_note": "（11/04凌晨）",
+     "result": "1-0",
+     "wl": "W",
+     "profit": 162
     },
     {
      "no": 12,
@@ -2425,14 +2458,17 @@
      "odds": "1.88",
      "confidence": 54,
      "stake": 2,
-     "status": "確認",
+     "status": "已結算",
      "reason": "史篤城13輪7勝2和4負；布力般攻守都差過客軍；t648u已核0球",
      "stars": 4,
      "count_in_single_sample": true,
      "parlay_types": [],
      "market_code": "HDC",
      "note_gate": "讓球淺線合t692u；用戶2026-11-03「可上」批准發佈｜名單未出",
-     "ko_note": "（11/04凌晨）"
+     "ko_note": "（11/04凌晨）",
+     "result": "1-2",
+     "wl": "W",
+     "profit": 176
     },
     {
      "no": 13,
@@ -2444,14 +2480,17 @@
      "odds": "2.55",
      "confidence": 53,
      "stake": 1,
-     "status": "確認",
+     "status": "已結算",
      "reason": "史雲斯8勝2和3負防守前列；t648u已核0球",
      "stars": 4,
      "count_in_single_sample": true,
      "parlay_types": [],
      "market_code": "HAD",
      "note_gate": "用戶2026-11-03「可上」批准發佈｜名單未出",
-     "ko_note": "（11/04凌晨）"
+     "ko_note": "（11/04凌晨）",
+     "result": "3-1",
+     "wl": "L",
+     "profit": -100
     },
     {
      "no": 14,
@@ -2463,7 +2502,7 @@
      "odds": "1.83",
      "confidence": 57,
      "stake": 2,
-     "status": "確認",
+     "status": "已結算",
      "reason": "曼聯近10場1勝；羅馬不敗；Crow資金撐羅馬",
      "stars": 5,
      "count_in_single_sample": true,
@@ -2472,7 +2511,10 @@
      ],
      "market_code": "HDC",
      "note_gate": "讓球淺線合t692u；用戶2026-11-03「可上」批准發佈｜名單未出｜穩陣二串一腳",
-     "ko_note": "（11/04凌晨）"
+     "ko_note": "（11/04凌晨）",
+     "result": "3-2",
+     "wl": "L",
+     "profit": -200
     }
    ],
    "note": "日更：單場14卡（日乙6＋亞冠精英2＋亞冠二級2＋丹麥盃1＋英冠2＋歐聯1）；穩陣二串一鎖版 仙台維加泰−0/-0.5@2.00×羅馬+0/+0.5@1.83＝3.66／2注（$200）｜用戶 2026-11-03 11:00 親口「可上」（穩陣組合由用戶親自確認：今批日乙最大信心場＋羅馬；日乙腳無API屬一次性例外）；daozi_none（合規過關腳不足）；紙面29。",
@@ -2517,5 +2559,5 @@
    "rule": "t692u+t727u+t281u+t789u（穩陣經用戶確認例外）+t838u"
   }
  ],
- "updated_at_hkt": "2026-11-03 11:04:16 HKT"
+ "updated_at_hkt": "2026-11-04 08:28 HKT"
 }
