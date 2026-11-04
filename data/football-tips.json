@@ -2524,8 +2524,8 @@
     "stake_label": "注碼2注（$200）",
     "combined_odds": 3.66,
     "footer_line1": "全中過關賠率：3.66倍｜注碼2注（$200）",
-    "footer_line2": "派彩待結算（公開頁口徑；鎖版兩腳；仙台維加泰 × 羅馬）｜未結算",
-    "status": "pending",
+    "footer_line2": "派彩$0.00 · 盈虧−$200.00（公開頁口徑；鎖版兩腳；仙台維加泰L × 羅馬L）",
+    "status": "settled",
     "locked": true,
     "user_confirmed": true,
     "note": "用戶 2026-11-03 親自確認組合（今批日乙最大信心場仙台維加泰＋羅馬，兩腳皆讓球、皆57%）；11:00 親口批「可上」出街；日乙腳無API屬用戶一次性例外，唔作先例；腳序＝開波升序（12:55富山勝利vs仙台維加泰→04:00曼聯vs羅馬）；鎖後禁止自動重排／重揀；stable_parlay_locked=true｜handoff user_publish_approved=true",
@@ -2539,7 +2539,9 @@
       "confidence": 57,
       "stake": 2,
       "stars": 5,
-      "league": "日乙"
+      "league": "日乙",
+      "result": "0-1",
+      "wl": "L"
      },
      {
       "ko": "04:00",
@@ -2551,7 +2553,9 @@
       "stake": 2,
       "stars": 5,
       "league": "歐聯",
-      "ko_note": "（11/04凌晨）"
+      "ko_note": "（11/04凌晨）",
+      "result": "3-2",
+      "wl": "L"
      }
     ]
    },
@@ -2559,5 +2563,5 @@
    "rule": "t692u+t727u+t281u+t789u（穩陣經用戶確認例外）+t838u"
   }
  ],
- "updated_at_hkt": "2026-11-04 08:28 HKT"
+ "updated_at_hkt": "2026-11-04 08:40 HKT"
 }
