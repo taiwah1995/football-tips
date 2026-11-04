@@ -7631,7 +7631,7 @@
    "time": "03:00",
    "match": "羅奇代爾 vs 唐卡士打",
    "confidence": "",
-   "stars": null,
+   "stars": "未評級",
    "pick": "唐卡士打｜主客和 客勝（紙面）",
    "odds": 1.69,
    "stake": 0,
@@ -7893,6 +7893,6 @@
    "wl": "W"
   }
  ],
- "updated_at_hkt": "2026-11-04 11:00 HKT",
+ "updated_at_hkt": "2026-11-04 11:57 HKT",
  "source_note": "2026-11-03 用戶「可上」｜全日分析改由新 Sheet 出：11-03 換入本系統 43 場分析｜count 519→562"
 }
