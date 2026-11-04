@@ -47,6 +47,8 @@
   .chip.lh{background:rgba(248,81,73,.06);color:var(--red);border-color:rgba(248,81,73,.25)}
   .chip.p{background:var(--bg-elev);color:var(--blue);border-color:rgba(88,166,255,.35)}
   .dir{font-weight:700}
+  .dir-w{color:var(--green)}
+  .dir-l{color:var(--red)}
   .down3{color:var(--muted);font-size:12.5px}
   .note{color:var(--muted);font-size:12px;margin-top:8px;line-height:1.55}
   .cmt p{margin:5px 0;line-height:1.65;font-size:13.5px}
@@ -215,7 +217,7 @@ function matchRow(m){
   var when=esc(m.date? m.date.slice(5).replace('-','/') : '')+(m.time? ' '+esc(m.time):'');
   var dir='—', force='—', down3='—';
   if(m.dir){
-    dir='<span class="dir">'+esc(m.dir)+'勝</span>';
+    dir='<span class="dir'+(m.status==='W'?' dir-w':m.status==='L'?' dir-l':'')+'">'+esc(m.dir)+'勝</span>';
     force='↓'+esc(m['down_'+(m.dir==='主'?'h':m.dir==='客'?'a':'d')])+'家（'+esc(m.dir_pct)+'%）';
     down3='主'+esc(m.down_h)+'・平'+esc(m.down_d)+'・客'+esc(m.down_a);
   }
