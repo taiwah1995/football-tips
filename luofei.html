@@ -59,6 +59,7 @@
   .pts li{position:relative;padding:3px 0 3px 16px;line-height:1.6;font-size:12.5px}
   .pts li:before{content:'▸';position:absolute;left:0;color:var(--gold);font-weight:700}
   .cmt b.lbl{color:var(--gold)}
+  .dsep{border-top:1px solid var(--border);margin:14px 0 2px}
   .league-head{display:flex;flex-wrap:wrap;gap:8px;align-items:baseline;margin:0 0 4px}
   .league-head .sum{color:var(--muted);font-size:13px}
   .empty{color:var(--muted);padding:22px 4px;text-align:center}
@@ -407,7 +408,7 @@ function digestHtml(leagues){
   html+='</ul>';
   var avoid=L.filter(function(x){ return x.r!=null && (x.r<0.45 || x.a.pnl<=-8); }).sort(function(a,b){ return a.a.pnl-b.a.pnl; }).slice(0,4);
   if(avoid.length){
-    html+='<p style="margin:12px 0 2px"><b>⚠️ 避開聯賽</b></p><ul class="pts">';
+    html+='<div class="dsep"></div><p style="margin:12px 0 2px"><b>⚠️ 避開聯賽</b></p><ul class="pts">';
     avoid.forEach(function(x){ html+='<li>'+flagOf(x.k)+'<b>'+esc(x.k)+'</b>：命中率 '+ahRate(x.a)+'，累積 <b class="l">'+fmtPnl(x.a.pnl)+' 注</b> — 跟飛長期輸錢，避開。</li>'; });
     html+='</ul>';
   }
@@ -417,7 +418,7 @@ function digestHtml(leagues){
   Object.keys(sideSeg).forEach(function(k){ if(sideSeg[k].n>=20) combos.push({lbl:k, s:sideSeg[k]}); });
   Object.keys(strSeg).forEach(function(k){ if(strSeg[k].n>=20) combos.push({lbl:k, s:strSeg[k]}); });
   combos.sort(function(a,b){ return (b.s.pnl/b.s.n)-(a.s.pnl/a.s.n); });
-  html+='<p style="margin:12px 0 2px"><b>🧩 重點投注項目組合</b></p><ul class="pts">';
+  html+='<div class="dsep"></div><p style="margin:12px 0 2px"><b>🧩 重點投注項目組合</b></p><ul class="pts">';
   var posCombos=combos.filter(function(c){ return c.s.pnl>0; });
   if(posCombos.length){ posCombos.slice(0,3).forEach(function(c){ html+=segLine(c.lbl, c.s); }); }
   else { html+='<li>跨聯賽大路切入（熱門方／冷門方／平手盤、落飛力度分段）暫時<b>全部負回報</b> — 大路跟飛冇肉食，值博位喺下面嘅聯賽 × 方向組合。</li>'; }
@@ -441,7 +442,7 @@ function digestHtml(leagues){
   var tlist=Object.keys(teams).map(function(k){ var s=teams[k]; s.pnl=Math.round(s.pnl*100)/100; s.r=ahRateNum(s); return s; }).filter(function(s){ return s.n>=5 && s.r!=null; });
   var good=tlist.filter(function(s){ return s.r>=0.7; }).sort(function(a,b){ return (b.r-a.r)||(b.n-a.n); }).slice(0,3);
   var bad=tlist.filter(function(s){ return s.r<=0.3; }).sort(function(a,b){ return (a.r-b.r)||(b.n-a.n); }).slice(0,3);
-  html+='<p style="margin:12px 0 2px"><b>👀 重點注意球隊</b>（落飛指向嗰隊・樣本 ≥5 注）</p><ul class="pts">';
+  html+='<div class="dsep"></div><p style="margin:12px 0 2px"><b>👀 重點注意球隊</b>（落飛指向嗰隊・樣本 ≥5 注）</p><ul class="pts">';
   good.forEach(function(s){ html+='<li>'+flagOf(s.lg)+'<b>'+esc(s.tm)+'</b>（'+esc(LEAGUE_SHORT[s.lg]||s.lg)+'）：落飛指向 '+s.n+' 次，贏盤率 <b>'+ahRate(s)+'</b>，盈虧 <b class="w">'+fmtPnl(s.pnl)+' 注</b> — 跟飛信心加分。</li>'; });
   bad.forEach(function(s){ html+='<li>'+flagOf(s.lg)+'<b>'+esc(s.tm)+'</b>（'+esc(LEAGUE_SHORT[s.lg]||s.lg)+'）：落飛指向 '+s.n+' 次，贏盤率得 <b>'+ahRate(s)+'</b>，盈虧 <b class="l">'+fmtPnl(s.pnl)+' 注</b> — 落飛陷阱隊，跟飛要避。</li>'; });
   if(!good.length && !bad.length) html+='<li>暫時冇球隊同時達到樣本門檻又有極端紀錄。</li>';
