@@ -55,6 +55,9 @@
   .down3{color:var(--muted);font-size:12.5px}
   .note{color:var(--muted);font-size:12px;margin-top:8px;line-height:1.55}
   .cmt p{margin:5px 0;line-height:1.65;font-size:13.5px}
+  .pts{list-style:none;margin:4px 0;padding:0}
+  .pts li{position:relative;padding:3px 0 3px 16px;line-height:1.6}
+  .pts li:before{content:'▸';position:absolute;left:0;color:var(--gold);font-weight:700}
   .cmt b.lbl{color:var(--gold)}
   .league-head{display:flex;flex-wrap:wrap;gap:8px;align-items:baseline;margin:0 0 4px}
   .league-head .sum{color:var(--muted);font-size:13px}
@@ -261,7 +264,7 @@ function weekSection(wk, lgs){
   lgs.forEach(function(lg){ (lg.matches||[]).forEach(function(m){ allM.push(m); }); });
   var t=tally(allM), a=ahTally(allM);
   var ahSum=a.n? '・讓球命中率 '+ahRate(a)+'・讓球盈虧 <span class="'+pnlCls(a.pnl)+'">'+fmtPnl(a.pnl)+' 注</span>' : '';
-  var head='<div class="week-head"><h2>🗓 '+esc(weekLabel(wk))+' 嗰週</h2>'+
+  var head='<div class="week-head"><h2>🗓 '+esc(weekLabel(wk))+' 週</h2>'+
     '<span class="sum">'+t.n+'（場）：<span class="w">'+t.w+'(W)</span> / <span class="l">'+t.l+'(L)</span> / <span class="u">'+t.u+'（未）</span>・主客和命中率 '+rate(t)+ahSum+'</span></div>';
   return '<div class="week-sec" data-week="'+esc(wk||'')+'">'+head+lgs.map(leaguePanel).join('')+'</div>';
 }
@@ -277,7 +280,7 @@ function ahPanel(leagues, onlyName){
     return s.n? {n:s.n, pnl:s.pnl, roi:Math.round(s.pnl/s.n*1000)/10} : null;
   }
   function segTxt(label, s){
-    return s? '<span>'+label+'：<b class="'+pnlCls(s.pnl)+'">'+fmtPnl(s.pnl)+' 注</b>（'+s.n+' 注・ROI '+(s.roi>0?'+':'')+s.roi+'%）</span>' : '';
+    return s? '<li>'+label+'：<b class="'+pnlCls(s.pnl)+'">'+fmtPnl(s.pnl)+' 注</b>（'+s.n+' 注・ROI '+(s.roi>0?'+':'')+s.roi+'%）</li>' : '';
   }
   var fav=seg(function(m){ var a=ahGrade(m); return a&&a.L<0; });
   var dog=seg(function(m){ var a=ahGrade(m); return a&&a.L>0; });
@@ -288,13 +291,15 @@ function ahPanel(leagues, onlyName){
   var hw=0, hl=0;
   all.forEach(function(m){ var h=hhadGrade(m); if(h==='W')hw++; else if(h==='L')hl++; });
   var roi=Math.round(t.pnl/t.n*1000)/10;
-  var html='<div class="seg"><span>覆蓋：<b>'+t.n+'</b> 注</span>'+
-    '<span>全贏 <b class="w">'+t.W+'</b>・贏半 <b class="w">'+t.WH+'</b>・走盤 <b>'+t.P+'</b>・輸半 <b class="l">'+t.LH+'</b>・全輸 <b class="l">'+t.L+'</b></span>'+
-    '<span>總盈虧：<b class="'+pnlCls(t.pnl)+'">'+fmtPnl(t.pnl)+' 注</b>（ROI '+(roi>0?'+':'')+roi+'%）</span>'+
-    '<span>落飛命中率（讓球）：<b>'+ahRate(t)+'</b></span></div>'+
-    '<div class="seg">'+segTxt('方向隊讓球（熱門方）', fav)+segTxt('方向隊受讓（冷門方）', dog)+segTxt('平手盤', lvl)+'</div>'+
-    '<div class="seg">'+segTxt('落飛力度 ≥70%', b1)+segTxt('力度 50–69%', b2)+segTxt('力度 <50%', b3)+'</div>'+
-    (hw+hl? '<div class="seg"><span>讓球主客和（近似）：命中 <b class="'+(hw/(hw+hl)>=0.5?'w':'l')+'">'+hw+'/'+(hw+hl)+'（'+Math.round(hw/(hw+hl)*100)+'%）</b> — 呢個命中率低過一般入場價需要嘅回本線，跟飛唔好買讓球主客和。</span></div>':'');
+  var html='<ul class="pts">'+
+    '<li>覆蓋：<b>'+t.n+'</b> 注</li>'+
+    '<li>全贏 <b class="w">'+t.W+'</b>・贏半 <b class="w">'+t.WH+'</b>・走盤 <b>'+t.P+'</b>・輸半 <b class="l">'+t.LH+'</b>・全輸 <b class="l">'+t.L+'</b></li>'+
+    '<li>總盈虧：<b class="'+pnlCls(t.pnl)+'">'+fmtPnl(t.pnl)+' 注</b>（ROI '+(roi>0?'+':'')+roi+'%）</li>'+
+    '<li>落飛命中率（讓球）：<b>'+ahRate(t)+'</b></li>'+
+    segTxt('方向隊讓球（熱門方）', fav)+segTxt('方向隊受讓（冷門方）', dog)+segTxt('平手盤', lvl)+
+    segTxt('落飛力度 ≥70%', b1)+segTxt('力度 50–69%', b2)+segTxt('力度 <50%', b3)+
+    (hw+hl? '<li>讓球主客和（近似）：命中 <b class="'+(hw/(hw+hl)>=0.5?'w':'l')+'">'+hw+'/'+(hw+hl)+'（'+Math.round(hw/(hw+hl)*100)+'%）</b> — 呢個命中率低過一般入場價需要嘅回本線，跟飛唔好買讓球主客和。</li>':'')+
+    '</ul>';
   document.getElementById('ah-body').innerHTML=html;
   document.getElementById('ah-panel').style.display='';
 }
@@ -321,18 +326,18 @@ function commentaryHtml(name, entries){
     return {label:s.label, n:st.n, rate:ahRate(st), pnl:st.pnl};
   }).filter(function(s){ return s.n>0; });
   function segStr(s){ return s.label+'（'+s.n+' 注・命中率 '+s.rate+'・<b class="'+pnlCls(s.pnl)+'">'+fmtPnl(s.pnl)+' 注</b>）'; }
-  var html='';
-  if(t.n<20) html+='<p>⚠️ <b class="lbl">樣本細</b>：呢個聯賽得 '+t.n+' 注已判定，結論未穩，以下評論只作參考，唔好過度演繹。</p>';
-  html+='<p>累積 '+t.n+' 注：讓球命中率 '+ahRate(t)+'，總盈虧 <b class="'+pnlCls(t.pnl)+'">'+fmtPnl(t.pnl)+' 注</b>。</p>';
+  var html='<ul class="pts">';
+  if(t.n<20) html+='<li>⚠️ <b class="lbl">樣本細</b>：呢個聯賽得 '+t.n+' 注已判定，結論未穩，以下評論只作參考，唔好過度演繹。</li>';
+  html+='<li>累積 '+t.n+' 注：讓球命中率 '+ahRate(t)+'，總盈虧 <b class="'+pnlCls(t.pnl)+'">'+fmtPnl(t.pnl)+' 注</b>。</li>';
   var pos=stats.filter(function(s){ return s.pnl>0; }).sort(function(a,b){ return b.pnl-a.pnl; });
   var neg=stats.filter(function(s){ return s.pnl<0; }).sort(function(a,b){ return a.pnl-b.pnl; });
   if(pos.length){
-    html+='<p><b class="lbl">優勢</b>：'+pos.slice(0,2).map(segStr).join('；')+' — 跟飛嘅回報主要嚟自呢啲環節。</p>';
+    html+='<li><b class="lbl">優勢</b>：'+pos.slice(0,2).map(segStr).join('；')+' — 跟飛嘅回報主要嚟自呢啲環節。</li>';
   } else {
-    html+='<p><b class="lbl">優勢</b>：暫時冇 — 冇一個細分環節係正數，呢個聯賽跟飛未見有賺錢嘅切入點。</p>';
+    html+='<li><b class="lbl">優勢</b>：暫時冇 — 冇一個細分環節係正數，呢個聯賽跟飛未見有賺錢嘅切入點。</li>';
   }
   if(neg.length){
-    html+='<p><b class="lbl">危險注意</b>：'+neg.slice(0,2).map(segStr).join('；')+' — 呢啲買法蝕得最勁，跟飛要避開。</p>';
+    html+='<li><b class="lbl">危險注意</b>：'+neg.slice(0,2).map(segStr).join('；')+' — 呢啲買法蝕得最勁，跟飛要避開。</li>';
   }
   var byWk={};
   entries.forEach(function(lg){
@@ -348,20 +353,20 @@ function commentaryHtml(name, entries){
     var last=wkStats[wkStats.length-1];
     var lr=ahRateNum(last.st), cr=ahRateNum(t);
     var dir=(lr!=null&&cr!=null)? (lr>cr? '升溫' : (lr<cr? '回落' : '持平')) : '—';
-    html+='<p><b class="lbl">近期趨勢</b>：最近一週（'+esc(weekLabel(last.wk))+' 嗰週，'+last.st.n+' 注）命中率 '+ahRate(last.st)+'、盈虧 <b class="'+pnlCls(last.st.pnl)+'">'+fmtPnl(last.st.pnl)+' 注</b>，對比累積命中率 '+ahRate(t)+'，走勢屬<b>'+dir+'</b>。</p>';
+    html+='<li><b class="lbl">近期趨勢</b>：最近一週（'+esc(weekLabel(last.wk))+'，'+last.st.n+' 注）命中率 '+ahRate(last.st)+'、盈虧 <b class="'+pnlCls(last.st.pnl)+'">'+fmtPnl(last.st.pnl)+' 注</b>，對比累積命中率 '+ahRate(t)+'，走勢屬<b>'+dir+'</b>。</li>';
   } else if(wkStats.length===1){
-    html+='<p><b class="lbl">近期趨勢</b>：得一週有回測數據（'+wkStats[0].st.n+' 注），未有得同之前比較。</p>';
+    html+='<li><b class="lbl">近期趨勢</b>：得一週有回測數據（'+wkStats[0].st.n+' 注），未有得同之前比較。</li>';
   }
   var solid=pos.filter(function(s){ return s.n>=8; });
   if(solid.length){
     var best=solid[0];
-    html+='<p><b class="lbl">點買先有優勢</b>：跟飛呢個聯賽，只好揀「'+best.label+'」出手 — 回測 '+best.n+' 注、命中率 '+best.rate+'、盈虧 <b class="'+pnlCls(best.pnl)+'">'+fmtPnl(best.pnl)+' 注</b>；其他細分唔好掂。'+(t.n<20? '（樣本細，注碼要更保守。）':'')+'</p>';
+    html+='<li><b class="lbl">點買先有優勢</b>：跟飛呢個聯賽，只好揀「'+best.label+'」出手 — 回測 '+best.n+' 注、命中率 '+best.rate+'、盈虧 <b class="'+pnlCls(best.pnl)+'">'+fmtPnl(best.pnl)+' 注</b>；其他細分唔好掂。'+(t.n<20? '（樣本細，注碼要更保守。）':'')+'</li>';
   } else if(pos.length){
-    html+='<p><b class="lbl">點買先有優勢</b>：得「'+pos[0].label+'」呢個細分係正數，但樣本得 '+pos[0].n+' 注，未夠穩陣證明有優勢 — 跟飛呢個聯賽要極之揀擇，甚至暫避。</p>';
+    html+='<li><b class="lbl">點買先有優勢</b>：得「'+pos[0].label+'」呢個細分係正數，但樣本得 '+pos[0].n+' 注，未夠穩陣證明有優勢 — 跟飛呢個聯賽要極之揀擇，甚至暫避。</li>';
   } else {
-    html+='<p><b class="lbl">點買先有優勢</b>：暫時唔見有優勢買法 — 冇一個細分賺到錢，跟飛要避開呢個聯賽，等數據轉勢先再評估。</p>';
+    html+='<li><b class="lbl">點買先有優勢</b>：暫時唔見有優勢買法 — 冇一個細分賺到錢，跟飛要避開呢個聯賽，等數據轉勢先再評估。</li>';
   }
-  return html;
+  return html+'</ul>';
 }
 fetch('data/football-luofei.json?ts='+Date.now()).then(function(r){return r.json();}).then(function(data){
   document.getElementById('updated').textContent='更新：'+(data.updated_at_hkt||'')+' HKT';
@@ -377,7 +382,7 @@ fetch('data/football-luofei.json?ts='+Date.now()).then(function(r){return r.json
   var sel=document.getElementById('week-select');
   weeks.forEach(function(wk){
     var o=document.createElement('option');
-    o.value=wk; o.textContent=weekLabel(wk)+' 嗰週';
+    o.value=wk; o.textContent=weekLabel(wk);
     sel.appendChild(o);
   });
   var lsel=document.getElementById('league-select');
