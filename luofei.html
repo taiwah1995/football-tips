@@ -111,6 +111,12 @@
     <p class="note">落飛方向＝titan007「歐」（歐洲 1X2）頁三項入面，「下降」莊家數最多嗰一項（即最多莊家壓低賠率嗰邊）。主客和命中率：W＝落飛方向同賽果一致；L＝唔一致；未＝未完場。讓球命中率同盈虧見下面回測版塊嘅定義。本表按落飛命中率（讓球）由高至低排；「對上週」＝該聯賽最新一週嘅讓球命中率對比上一週：<span class="w">▲</span> 升、<span class="l">▼</span> 跌、— 即持平或得一週數據。表中有 <b style="color:#f5c542">50% 分界線</b>：讓球命中率高過 50% 屬線上聯賽、低過屬線下聯賽；命中率數字 <span class="rate55">超過 55% 顯示黃字</span>、<span class="rate65">超過 65% 顯示藍字</span>。</p>
   </div>
 
+  <div class="panel" id="digest-panel">
+    <h2>📌 落飛聯賽摘要</h2>
+    <div id="digest-body"></div>
+    <p class="note">本卡由累積落飛紀錄自動統計：重點留意＝讓球命中率同盈虧俱佳嘅聯賽；組合＝邊種跟飛切入點（方向隊讓球／受讓／平手盤、落飛力度、聯賽×方向）歷史上最賺錢；注意球隊＝落飛指向次數 ≥5 嗰啲贏盤率極高或極低嘅隊。每週採集更新數據後，本卡會自動跟住變。</p>
+  </div>
+
   <div class="panel" id="ah-panel" style="display:none">
     <h2 id="ah-title">跟飛買讓球回測（每注 1 注 · 澳門收盤盤口 · 累積全部週數）</h2>
     <div id="ah-body"></div>
@@ -156,6 +162,7 @@ function ahTally(ms){
 }
 var LEAGUE_FLAG={'泰國超級聯賽':'🇹🇭','西班牙甲組聯賽':'🇪🇸','英格蘭超級聯賽':'🇬🇧','英格蘭冠軍聯賽':'🇬🇧','法國甲組聯賽':'🇫🇷','德國甲組聯賽':'🇩🇪','德國乙組聯賽':'🇩🇪','巴西甲組聯賽':'🇧🇷','日本J1聯賽':'🇯🇵','日本J2聯賽':'🇯🇵','墨西哥甲組聯賽':'🇲🇽','美國職業足球聯賽':'🇺🇸','意大利甲組聯賽':'🇮🇹','瑞典超級聯賽':'🇸🇪','荷蘭甲組聯賽':'🇳🇱','芬蘭超級聯賽':'🇫🇮','智利甲組聯賽':'🇨🇱','阿根廷甲組聯賽':'🇦🇷','韓國K聯賽':'🇰🇷'};
 function flagOf(name){ var f=LEAGUE_FLAG[name]; return f? f+' ' : ''; }
+var LEAGUE_SHORT={'泰國超級聯賽':'泰超','西班牙甲組聯賽':'西甲','英格蘭超級聯賽':'英超','英格蘭冠軍聯賽':'英冠','法國甲組聯賽':'法甲','德國甲組聯賽':'德甲','德國乙組聯賽':'德乙','巴西甲組聯賽':'巴甲','日本J1聯賽':'日職','日本J2聯賽':'J2','墨西哥甲組聯賽':'墨超','美國職業足球聯賽':'美職','意大利甲組聯賽':'意甲','瑞典超級聯賽':'瑞典超','荷蘭甲組聯賽':'荷甲','芬蘭超級聯賽':'芬超','智利甲組聯賽':'智甲','阿根廷甲組聯賽':'阿甲','韓國K聯賽':'韓職'};
 function ahRate(t){ var d=t.W+t.WH+t.LH+t.L; return d>0 ? Math.round((t.W+t.WH)/d*100)+'%' : '—'; }
 function fmtPnl(v){ return (v>0? '+':'')+ (Math.round(v*100)/100); }
 function pnlCls(v){ return v>0? 'w' : (v<0? 'l':'u'); }
@@ -370,6 +377,78 @@ function commentaryHtml(name, entries){
   }
   return html+'</ul>';
 }
+function digestHtml(leagues){
+  var byName={}, order=[];
+  leagues.forEach(function(lg){
+    if(!byName[lg.league]){ byName[lg.league]=[]; order.push(lg.league); }
+    (lg.matches||[]).forEach(function(m){ byName[lg.league].push(m); });
+  });
+  var allM=[]; order.forEach(function(k){ allM=allM.concat(byName[k]); });
+  function seg(ms, fn){
+    var o={};
+    ms.forEach(function(m){ var g=ahGrade(m); if(!g) return; var key=fn(m,g); if(!key) return;
+      if(!o[key]) o[key]={n:0,W:0,WH:0,P:0,LH:0,L:0,pnl:0};
+      var s=o[key]; s.n++; s[g.grade]++; s.pnl+=g.pnl; });
+    Object.keys(o).forEach(function(k){ o[k].pnl=Math.round(o[k].pnl*100)/100; });
+    return o;
+  }
+  function segLine(lbl, s){
+    var roi=s.n? Math.round(s.pnl/s.n*100):0;
+    return '<li><b>'+lbl+'</b>：命中率 '+ahRate(s)+'，盈虧 <b class="'+pnlCls(s.pnl)+'">'+fmtPnl(s.pnl)+' 注</b>（'+s.n+' 注・ROI '+(roi>0?'+':'')+roi+'%）</li>';
+  }
+  var L=order.map(function(k){ var a=ahTally(byName[k]); return {k:k, a:a, r:ahRateNum(a)}; });
+  var html='';
+  var watch=L.filter(function(x){ return x.r!=null && x.r>0.55; }).sort(function(a,b){ return b.r-a.r; });
+  var online=L.filter(function(x){ return x.r!=null && x.r>0.5 && x.r<=0.55 && x.a.pnl>0; }).sort(function(a,b){ return b.a.pnl-a.a.pnl; }).slice(0,3);
+  html+='<p style="margin:10px 0 2px"><b>🎯 重點留意聯賽</b></p><ul class="pts">';
+  watch.forEach(function(x){ html+='<li>'+flagOf(x.k)+'<b>'+esc(x.k)+'</b>：讓球命中率 <b>'+ahRate(x.a)+'</b>，累積盈虧 <b class="'+pnlCls(x.a.pnl)+'">'+fmtPnl(x.a.pnl)+' 注</b>（'+x.a.n+' 注已判定）— 跟飛首選。</li>'; });
+  online.forEach(function(x){ html+='<li>'+flagOf(x.k)+'<b>'+esc(x.k)+'</b>：命中率 '+ahRate(x.a)+'，盈虧 <b class="'+pnlCls(x.a.pnl)+'">'+fmtPnl(x.a.pnl)+' 注</b> — 線上聯賽，可細注跟。</li>'; });
+  if(!watch.length && !online.length) html+='<li>暫時冇聯賽同時過 50% 命中率又賺錢，整體跟飛值博率低。</li>';
+  html+='</ul>';
+  var avoid=L.filter(function(x){ return x.r!=null && (x.r<0.45 || x.a.pnl<=-8); }).sort(function(a,b){ return a.a.pnl-b.a.pnl; }).slice(0,4);
+  if(avoid.length){
+    html+='<p style="margin:12px 0 2px"><b>⚠️ 避開聯賽</b></p><ul class="pts">';
+    avoid.forEach(function(x){ html+='<li>'+flagOf(x.k)+'<b>'+esc(x.k)+'</b>：命中率 '+ahRate(x.a)+'，累積 <b class="l">'+fmtPnl(x.a.pnl)+' 注</b> — 跟飛長期輸錢，避開。</li>'; });
+    html+='</ul>';
+  }
+  var sideSeg=seg(allM, function(m,g){ return g.L<0? '方向隊讓球（熱門方）跟飛' : g.L>0? '方向隊受讓（冷門方）跟飛' : '平手盤跟飛'; });
+  var strSeg=seg(allM, function(m){ var p=+m.dir_pct||0; return p>=70? '落飛力度 ≥70% 跟飛' : p>=50? '落飛力度 50–69% 跟飛' : '落飛力度 <50% 跟飛'; });
+  var combos=[];
+  Object.keys(sideSeg).forEach(function(k){ if(sideSeg[k].n>=20) combos.push({lbl:k, s:sideSeg[k]}); });
+  Object.keys(strSeg).forEach(function(k){ if(strSeg[k].n>=20) combos.push({lbl:k, s:strSeg[k]}); });
+  combos.sort(function(a,b){ return (b.s.pnl/b.s.n)-(a.s.pnl/a.s.n); });
+  html+='<p style="margin:12px 0 2px"><b>🧩 重點投注項目組合</b></p><ul class="pts">';
+  var posCombos=combos.filter(function(c){ return c.s.pnl>0; });
+  if(posCombos.length){ posCombos.slice(0,3).forEach(function(c){ html+=segLine(c.lbl, c.s); }); }
+  else { html+='<li>跨聯賽大路切入（熱門方／冷門方／平手盤、落飛力度分段）暫時<b>全部負回報</b> — 大路跟飛冇肉食，值博位喺下面嘅聯賽 × 方向組合。</li>'; }
+  var lx=[];
+  order.forEach(function(k){
+    var ss=seg(byName[k], function(m,g){ return g.L<0? '讓球' : g.L>0? '受讓' : '平手盤'; });
+    Object.keys(ss).forEach(function(sk){ var s=ss[sk]; if(s.n>=12 && s.pnl>0) lx.push({k:k, sk:sk, s:s, roi:s.pnl/s.n}); });
+  });
+  lx.sort(function(a,b){ return b.roi-a.roi; });
+  lx.slice(0,3).forEach(function(x){ html+='<li>'+flagOf(x.k)+'<b>'+esc(x.k)+' × 方向隊'+x.sk+'</b>：命中率 '+ahRate(x.s)+'，盈虧 <b class="w">'+fmtPnl(x.s.pnl)+' 注</b>（'+x.s.n+' 注）— 嗰個聯賽最值博嘅切入點。</li>'; });
+  var worst=combos[combos.length-1];
+  if(worst && worst.s.pnl<0) html+='<li>最差組合：<b>'+worst.lbl+'</b> 盈虧 <b class="l">'+fmtPnl(worst.s.pnl)+' 注</b>（'+worst.s.n+' 注），跟飛要避。</li>';
+  html+='</ul>';
+  var teams={};
+  order.forEach(function(k){
+    byName[k].forEach(function(m){ var g=ahGrade(m); if(!g) return; var tm=(m.dir==='主')? m.home : m.away; if(!tm) return;
+      var key=k+'|'+tm;
+      if(!teams[key]) teams[key]={lg:k, tm:tm, n:0,W:0,WH:0,P:0,LH:0,L:0,pnl:0};
+      var s=teams[key]; s.n++; s[g.grade]++; s.pnl+=g.pnl; });
+  });
+  var tlist=Object.keys(teams).map(function(k){ var s=teams[k]; s.pnl=Math.round(s.pnl*100)/100; s.r=ahRateNum(s); return s; }).filter(function(s){ return s.n>=5 && s.r!=null; });
+  var good=tlist.filter(function(s){ return s.r>=0.7; }).sort(function(a,b){ return (b.r-a.r)||(b.n-a.n); }).slice(0,3);
+  var bad=tlist.filter(function(s){ return s.r<=0.3; }).sort(function(a,b){ return (a.r-b.r)||(b.n-a.n); }).slice(0,3);
+  html+='<p style="margin:12px 0 2px"><b>👀 重點注意球隊</b>（落飛指向嗰隊・樣本 ≥5 注）</p><ul class="pts">';
+  good.forEach(function(s){ html+='<li>'+flagOf(s.lg)+'<b>'+esc(s.tm)+'</b>（'+esc(LEAGUE_SHORT[s.lg]||s.lg)+'）：落飛指向 '+s.n+' 次，贏盤率 <b>'+ahRate(s)+'</b>，盈虧 <b class="w">'+fmtPnl(s.pnl)+' 注</b> — 跟飛信心加分。</li>'; });
+  bad.forEach(function(s){ html+='<li>'+flagOf(s.lg)+'<b>'+esc(s.tm)+'</b>（'+esc(LEAGUE_SHORT[s.lg]||s.lg)+'）：落飛指向 '+s.n+' 次，贏盤率得 <b>'+ahRate(s)+'</b>，盈虧 <b class="l">'+fmtPnl(s.pnl)+' 注</b> — 落飛陷阱隊，跟飛要避。</li>'; });
+  if(!good.length && !bad.length) html+='<li>暫時冇球隊同時達到樣本門檻又有極端紀錄。</li>';
+  html+='</ul>';
+  return html;
+}
+
 fetch('data/football-luofei.json?ts='+Date.now()).then(function(r){return r.json();}).then(function(data){
   document.getElementById('updated').textContent='更新：'+(data.updated_at_hkt||'')+' HKT';
   var leagues=data.leagues||[];
@@ -414,6 +493,9 @@ fetch('data/football-luofei.json?ts='+Date.now()).then(function(r){return r.json
     var entries=single? leagues.filter(function(lg){ return lg.league===lv; }) : leagues;
     document.getElementById('sum-title').textContent=single? '總覽（'+lv+'・累積）' : '總覽（各聯賽累積）';
     document.getElementById('sum-body').innerHTML=entries.length? sumRows(entries, single) : '<tr><td colspan="10" class="empty">暫未有數據</td></tr>';
+    var dp=document.getElementById('digest-panel');
+    if(single){ dp.style.display='none'; }
+    else { document.getElementById('digest-body').innerHTML=digestHtml(leagues); dp.style.display=''; }
     ahPanel(entries, single? lv : null);
     var cp=document.getElementById('cmt-panel');
     if(single){
