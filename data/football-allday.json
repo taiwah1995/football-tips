@@ -7314,7 +7314,9 @@
    "odds": 1.57,
    "stake": 0,
    "source": "API",
-   "league": "日乙"
+   "league": "日乙",
+   "result": "2-1",
+   "wl": "W"
   },
   {
    "date": "2026-11-03",
@@ -7340,7 +7342,9 @@
    "odds": 1.74,
    "stake": 0,
    "source": "API",
-   "league": "日乙"
+   "league": "日乙",
+   "result": "0-1",
+   "wl": "L"
   },
   {
    "date": "2026-11-03",
@@ -7352,7 +7356,9 @@
    "odds": 2.12,
    "stake": 0,
    "source": "API",
-   "league": "日乙"
+   "league": "日乙",
+   "result": "1-2",
+   "wl": "W"
   },
   {
    "date": "2026-11-03",
@@ -7392,7 +7398,9 @@
    "odds": 1.59,
    "stake": 0,
    "source": "API",
-   "league": "日乙"
+   "league": "日乙",
+   "result": "3-0",
+   "wl": "W"
   },
   {
    "date": "2026-11-03",
@@ -7446,7 +7454,9 @@
    "odds": 1.49,
    "stake": 0,
    "source": "API",
-   "league": "亞冠精英"
+   "league": "亞冠精英",
+   "result": "2-0",
+   "wl": "W"
   },
   {
    "date": "2026-11-03",
@@ -7472,7 +7482,9 @@
    "odds": 1.11,
    "stake": 0,
    "source": "API",
-   "league": "亞冠精英"
+   "league": "亞冠精英",
+   "result": "3-2",
+   "wl": "W"
   },
   {
    "date": "2026-11-03",
@@ -7484,7 +7496,9 @@
    "odds": 1.63,
    "stake": 0,
    "source": "API",
-   "league": "亞冠精英"
+   "league": "亞冠精英",
+   "result": "7-4",
+   "wl": "L"
   },
   {
    "date": "2026-11-03",
@@ -7496,7 +7510,9 @@
    "odds": 1.93,
    "stake": 0,
    "source": "API",
-   "league": "亞冠精英"
+   "league": "亞冠精英",
+   "result": "0-0",
+   "wl": "LH"
   },
   {
    "date": "2026-11-03",
@@ -7522,7 +7538,9 @@
    "odds": 1.96,
    "stake": 0,
    "source": "API",
-   "league": "亞冠精英"
+   "league": "亞冠精英",
+   "result": "1-0",
+   "wl": "W"
   },
   {
    "date": "2026-11-03",
@@ -7562,7 +7580,9 @@
    "odds": 1.91,
    "stake": 0,
    "source": "API",
-   "league": "歐聯"
+   "league": "歐聯",
+   "result": "2-0",
+   "wl": "W"
   },
   {
    "date": "2026-11-03",
@@ -7574,7 +7594,9 @@
    "odds": 2.11,
    "stake": 0,
    "source": "API",
-   "league": "歐聯"
+   "league": "歐聯",
+   "result": "0-1",
+   "wl": "L"
   },
   {
    "date": "2026-11-03",
@@ -7586,7 +7608,9 @@
    "odds": 1.16,
    "stake": 0,
    "source": "API",
-   "league": "瑞超"
+   "league": "瑞超",
+   "result": "2-0",
+   "wl": "W"
   },
   {
    "date": "2026-11-03",
@@ -7598,7 +7622,9 @@
    "odds": 1.26,
    "stake": 0,
    "source": "API",
-   "league": "亞冠精英"
+   "league": "亞冠精英",
+   "result": "2-0",
+   "wl": "W"
   },
   {
    "date": "2026-11-03",
@@ -7610,7 +7636,9 @@
    "odds": 1.69,
    "stake": 0,
    "source": "API",
-   "league": "英聯賽錦標"
+   "league": "英聯賽錦標",
+   "result": "1-4",
+   "wl": "W"
   },
   {
    "date": "2026-11-03",
@@ -7636,7 +7664,9 @@
    "odds": 2.04,
    "stake": 0,
    "source": "API",
-   "league": "英冠"
+   "league": "英冠",
+   "result": "0-1",
+   "wl": "L"
   },
   {
    "date": "2026-11-03",
@@ -7648,7 +7678,9 @@
    "odds": 1.9,
    "stake": 0,
    "source": "API",
-   "league": "英冠"
+   "league": "英冠",
+   "result": "0-4",
+   "wl": "W"
   },
   {
    "date": "2026-11-03",
@@ -7674,7 +7706,9 @@
    "odds": 2.07,
    "stake": 0,
    "source": "API",
-   "league": "英冠"
+   "league": "英冠",
+   "result": "2-3",
+   "wl": "W"
   },
   {
    "date": "2026-11-03",
@@ -7686,7 +7720,9 @@
    "odds": 2.04,
    "stake": 0,
    "source": "API",
-   "league": "英冠"
+   "league": "英冠",
+   "result": "1-1",
+   "wl": "L"
   },
   {
    "date": "2026-11-03",
@@ -7698,7 +7734,9 @@
    "odds": 2.55,
    "stake": 0,
    "source": "API",
-   "league": "英冠"
+   "league": "英冠",
+   "result": "1-0",
+   "wl": "L"
   },
   {
    "date": "2026-11-03",
@@ -7710,7 +7748,9 @@
    "odds": 1.78,
    "stake": 0,
    "source": "API",
-   "league": "英冠"
+   "league": "英冠",
+   "result": "3-0",
+   "wl": "W"
   },
   {
    "date": "2026-11-03",
@@ -7722,7 +7762,9 @@
    "odds": 2.43,
    "stake": 0,
    "source": "API",
-   "league": "英冠"
+   "league": "英冠",
+   "result": "1-1",
+   "wl": "L"
   },
   {
    "date": "2026-11-03",
@@ -7734,7 +7776,9 @@
    "odds": 1.17,
    "stake": 0,
    "source": "API",
-   "league": "歐聯"
+   "league": "歐聯",
+   "result": "3-0",
+   "wl": "W"
   },
   {
    "date": "2026-11-03",
@@ -7760,7 +7804,9 @@
    "odds": 1.98,
    "stake": 0,
    "source": "API",
-   "league": "歐聯"
+   "league": "歐聯",
+   "result": "0-2",
+   "wl": "L"
   },
   {
    "date": "2026-11-03",
@@ -7772,7 +7818,9 @@
    "odds": 1.53,
    "stake": 0,
    "source": "API",
-   "league": "歐聯"
+   "league": "歐聯",
+   "result": "0-6",
+   "wl": "W"
   },
   {
    "date": "2026-11-03",
@@ -7784,7 +7832,9 @@
    "odds": 2.05,
    "stake": 0,
    "source": "API",
-   "league": "歐聯"
+   "league": "歐聯",
+   "result": "0-3",
+   "wl": "L"
   },
   {
    "date": "2026-11-03",
@@ -7796,7 +7846,9 @@
    "odds": 1.73,
    "stake": 0,
    "source": "API",
-   "league": "歐聯"
+   "league": "歐聯",
+   "result": "0-0",
+   "wl": "L"
   },
   {
    "date": "2026-11-03",
@@ -7808,7 +7860,9 @@
    "odds": 1.85,
    "stake": 0,
    "source": "API",
-   "league": "歐聯"
+   "league": "歐聯",
+   "result": "4-0",
+   "wl": "W"
   },
   {
    "date": "2026-11-03",
@@ -7820,7 +7874,9 @@
    "odds": 1.78,
    "stake": 0,
    "source": "API",
-   "league": "巴甲"
+   "league": "巴甲",
+   "result": "1-2",
+   "wl": "W"
   },
   {
    "date": "2026-11-03",
@@ -7835,6 +7891,6 @@
    "league": "巴甲"
   }
  ],
- "updated_at_hkt": "2026-11-04 08:28 HKT",
+ "updated_at_hkt": "2026-11-04 09:05 HKT",
  "source_note": "2026-11-03 用戶「可上」｜全日分析改由新 Sheet 出：11-03 換入本系統 43 場分析｜count 519→562"
 }
