@@ -8420,8 +8420,8 @@
    "odds": 1.64,
    "stake": 0,
    "source": "無API",
-   "result": "",
-   "wl": "",
+   "result": "2-0",
+   "wl": "L",
    "league": "亞冠二級聯賽"
   },
   {
@@ -8434,8 +8434,8 @@
    "odds": 1.72,
    "stake": 0,
    "source": "無API",
-   "result": "",
-   "wl": "",
+   "result": "0-1",
+   "wl": "L",
    "league": "女子阿根廷甲組聯賽"
   },
   {
@@ -9078,11 +9078,11 @@
    "odds": "2.00",
    "stake": 0,
    "source": "無API",
-   "result": "",
-   "wl": "",
+   "result": "5-1",
+   "wl": "W",
    "league": "俄羅斯盃"
   }
  ],
- "updated_at_hkt": "2026-11-05 21:30",
+ "updated_at_hkt": "2026-11-06 02:29",
  "source_note": "2026-11-04 用戶「交接／上」｜全日分析改由新 Sheet 出：11-04 換入本系統 32 場分析｜count 562→594"
 }
