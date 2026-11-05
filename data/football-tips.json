@@ -2684,7 +2684,71 @@
       },
       "daozi_none": true,
       "rule": "t692u+t727u+t281u+t789u+t838u"
+    },
+    {
+      "date": "2026-11-05",
+      "label": "11月5日",
+      "tips": [
+        {
+          "no": 1,
+          "ko": "01:45",
+          "ko_note": "（11/06凌晨）",
+          "league": "歐霸盃",
+          "match": "安德列治 vs 薩爾斯堡",
+          "pick": "安德列治",
+          "market": "主客和 主勝",
+          "odds": "1.86",
+          "confidence": 56,
+          "stake": 2,
+          "status": "確認",
+          "reason": "安德列治主場9戰7勝＋薩爾斯堡7人傷缺；t648u已核0球",
+          "stars": 4,
+          "count_in_single_sample": true,
+          "parlay_types": [],
+          "market_code": "HAD",
+          "note_gate": "主客和水位過1.8；2026-11-04長期授權初選自動上網｜名單預計（待確認）"
+        },
+        {
+          "no": 2,
+          "ko": "04:00",
+          "ko_note": "（11/06凌晨）",
+          "league": "歐霸盃",
+          "match": "阿爾克馬爾 vs 祖雲達斯",
+          "pick": "阿爾克馬爾",
+          "market": "讓球 阿爾克馬爾 +0/+0.5",
+          "odds": "2.06",
+          "confidence": 56,
+          "stake": 2,
+          "status": "確認",
+          "reason": "阿爾克馬爾歐霸主場贏過＋祖雲達斯11人缺陣；t648u已核0球",
+          "stars": 4,
+          "count_in_single_sample": true,
+          "parlay_types": [],
+          "market_code": "HDC",
+          "note_gate": "讓球淺線合t692u；2026-11-04長期授權初選自動上網｜名單預計（待確認）"
+        },
+        {
+          "no": 3,
+          "ko": "06:13",
+          "league": "阿根廷甲組聯賽",
+          "match": "甘拿斯亞 vs 貝格拉諾",
+          "pick": "甘拿斯亞",
+          "market": "讓球 甘拿斯亞 -0/-0.5",
+          "odds": "1.88",
+          "confidence": 56,
+          "stake": 2,
+          "status": "確認",
+          "reason": "甘拿斯亞5場不敗＋主場4勝＋H2H佔優；t648u已核0球",
+          "stars": 4,
+          "count_in_single_sample": true,
+          "parlay_types": [],
+          "market_code": "HDC",
+          "note_gate": "讓球淺線合t692u；2026-11-04長期授權初選自動上網｜名單預計（待確認）"
+        }
+      ],
+      "note": "日更：單場3卡（歐霸盃2＋阿甲1）；stable_none（合規公開卡只有3張且全部56%，未達t789u兩腳≥57%門檻；57%+場次全部因線深／水位／無合規市場被剔）；daozi_none（合規可買★4+只有3張，唔過10場門檻）；全日50場（有注7張：公開3＋私訊★3 4張，紙面43）。",
+      "stable": null
     }
   ],
-  "updated_at_hkt": "2026-11-04 12:05 HKT"
+  "updated_at_hkt": "2026-11-05 10:15"
 }
