@@ -8952,8 +8952,8 @@
    "odds": 1.88,
    "stake": 2,
    "source": "無API",
-   "result": "",
-   "wl": "",
+   "result": "2-1",
+   "wl": "W",
    "league": "阿根廷甲組聯賽"
   },
   {
@@ -8966,8 +8966,8 @@
    "odds": 1.12,
    "stake": 0,
    "source": "API",
-   "result": "",
-   "wl": "",
+   "result": "6-1",
+   "wl": "W",
    "league": "巴西甲組聯賽"
   },
   {
@@ -8980,8 +8980,8 @@
    "odds": 1.89,
    "stake": 0,
    "source": "無API",
-   "result": "",
-   "wl": "",
+   "result": "1-1",
+   "wl": "L",
    "league": "女子墨西哥超級聯賽"
   },
   {
@@ -8994,8 +8994,8 @@
    "odds": 1.08,
    "stake": 0,
    "source": "無API",
-   "result": "",
-   "wl": "",
+   "result": "0-6",
+   "wl": "W",
    "league": "烏拉圭盃"
   },
   {
@@ -9008,8 +9008,8 @@
    "odds": 1.62,
    "stake": 0,
    "source": "API",
-   "result": "",
-   "wl": "",
+   "result": "3-2",
+   "wl": "W",
    "league": "巴西甲組聯賽"
   },
   {
@@ -9022,8 +9022,8 @@
    "odds": 1.8,
    "stake": 2,
    "source": "無API",
-   "result": "",
-   "wl": "",
+   "result": "1-1",
+   "wl": "WH",
    "league": "墨西哥甲組聯賽"
   },
   {
@@ -9036,8 +9036,8 @@
    "odds": 1.85,
    "stake": 0,
    "source": "無API",
-   "result": "",
-   "wl": "",
+   "result": "1-1",
+   "wl": "L",
    "league": "女子墨西哥超級聯賽"
   },
   {
@@ -9050,8 +9050,8 @@
    "odds": 1.65,
    "stake": 0,
    "source": "無API",
-   "result": "",
-   "wl": "",
+   "result": "1-0",
+   "wl": "LH",
    "league": "墨西哥甲組聯賽"
   },
   {
@@ -9064,8 +9064,8 @@
    "odds": 1.98,
    "stake": 2,
    "source": "無API",
-   "result": "",
-   "wl": "",
+   "result": "4-2",
+   "wl": "W",
    "league": "女子墨西哥超級聯賽"
   },
   {
@@ -9601,6 +9601,6 @@
    "league": "墨西哥超級聯賽"
   }
  ],
- "updated_at_hkt": "2026-11-06 10:26",
+ "updated_at_hkt": "2026-11-06 13:19",
  "source_note": "2026-11-04 用戶「交接／上」｜全日分析改由新 Sheet 出：11-04 換入本系統 32 場分析｜count 562→594"
 }

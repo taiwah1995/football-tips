@@ -2720,7 +2720,10 @@
      "count_in_single_sample": true,
      "parlay_types": [],
      "market_code": "HAD",
-     "note_gate": "主客和水位過1.8；2026-11-04長期授權初選自動上網｜名單預計（待確認）"
+     "note_gate": "主客和水位過1.8；2026-11-04長期授權初選自動上網｜名單預計（待確認）",
+     "result": "2-0",
+     "wl": "W",
+     "profit": 172.0
     },
     {
      "no": 2,
@@ -2739,7 +2742,10 @@
      "count_in_single_sample": true,
      "parlay_types": [],
      "market_code": "HDC",
-     "note_gate": "讓球淺線合t692u；2026-11-04長期授權初選自動上網｜名單預計（待確認）"
+     "note_gate": "讓球淺線合t692u；2026-11-04長期授權初選自動上網｜名單預計（待確認）",
+     "result": "1-2",
+     "wl": "L",
+     "profit": -200.0
     },
     {
      "no": 3,
@@ -2757,7 +2763,10 @@
      "count_in_single_sample": true,
      "parlay_types": [],
      "market_code": "HDC",
-     "note_gate": "讓球淺線合t692u；2026-11-04長期授權初選自動上網｜名單預計（待確認）"
+     "note_gate": "讓球淺線合t692u；2026-11-04長期授權初選自動上網｜名單預計（待確認）",
+     "result": "2-1",
+     "wl": "W",
+     "profit": 176.0
     }
    ],
    "note": "日更：單場3卡（歐霸盃2＋阿甲1）；stable_none（合規公開卡只有3張且全部56%，未達t789u兩腳≥57%門檻；57%+場次全部因線深／水位／無合規市場被剔）；daozi_none（合規可買★4+只有3張，唔過10場門檻）；全日50場（有注7張：公開3＋私訊★3 4張，紙面43）。",
@@ -2792,5 +2801,5 @@
    "daozi_none": true
   }
  ],
- "updated_at_hkt": "2026-11-06 10:26"
+ "updated_at_hkt": "2026-11-06 13:19"
 }
