@@ -9092,8 +9092,8 @@
    "odds": 2.01,
    "stake": 0,
    "source": "無API",
-   "result": "",
-   "wl": "",
+   "result": "0-2",
+   "wl": "W",
    "league": "女子澳洲職業聯賽"
   },
   {
@@ -9106,8 +9106,8 @@
    "odds": 1.81,
    "stake": 0,
    "source": "無API",
-   "result": "",
-   "wl": "",
+   "result": "2-1",
+   "wl": "L",
    "league": "澳洲冠軍聯賽盃"
   },
   {
@@ -9120,8 +9120,8 @@
    "odds": 1.95,
    "stake": 0,
    "source": "無API",
-   "result": "",
-   "wl": "",
+   "result": "4-1",
+   "wl": "W",
    "league": "澳洲職業聯賽"
   },
   {
@@ -9601,6 +9601,6 @@
    "league": "墨西哥超級聯賽"
   }
  ],
- "updated_at_hkt": "2026-11-06 14:00",
+ "updated_at_hkt": "2026-11-06 21:05",
  "source_note": "2026-11-04 用戶「交接／上」｜全日分析改由新 Sheet 出：11-04 換入本系統 32 場分析｜count 562→594"
 }
