@@ -1,18 +1,1 @@
-{
-  "version": "2026-10-18",
-  "rules": [
-    { "max": 52, "stars": 1 },
-    { "min": 53, "max": 54, "stars": 4 },
-    { "min": 55, "max": 55, "stars": 2 },
-    { "min": 56, "max": 56, "stars": 3 },
-    { "min": 57, "max": 58, "stars": 5 },
-    { "min": 59, "stars": 3 }
-  ],
-  "colors": {
-    "1": "#8b949e",
-    "2": "#ffffff",
-    "3": "#e6c35c",
-    "4": "#39ff14",
-    "5": "#58a6ff"
-  }
-}
+{"colors":{"1":"#8b949e","2":"#ffffff","3":"#e6c35c","4":"#39ff14","5":"#58a6ff"},"rules":[{"max":52,"stars":1},{"max":54,"min":53,"stars":3},{"max":55,"min":55,"stars":2},{"max":56,"min":56,"stars":4},{"min":57,"stars":5}],"version":"2026-11-07"}
