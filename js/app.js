@@ -4333,6 +4333,7 @@
       );
       if (!book || !book.total || book.total.payout == null || book.total.profit == null) return;
       parts.push({
+        date: day.date,
         item: footballDayLabel(day),
         stake: book.total.stake,
         payout: book.total.payout,
@@ -4358,6 +4359,7 @@
       if (dayRows.some((item) => item.item.indexOf('全日分析') >= 0)) return;
       covered[row.date] = true;
       parts.push({
+        date: row.date,
         item: footballDayLabel({ date: row.date }),
         stake: row.stake,
         payout: row.payout,
@@ -4371,6 +4373,7 @@
       );
       if (!computed || !computed.total || computed.total.payout == null || computed.total.profit == null) return;
       parts.push({
+        date: day.date,
         item: footballDayLabel(day),
         stake: computed.total.stake,
         payout: computed.total.payout,
@@ -4429,6 +4432,66 @@
       footballStatHtml('派彩', footballBookAmount(total.payout)) +
       footballStatHtml('盈虧', footballBookSigned(total.profit), profitClass, true) +
       (total.units != null ? footballStatHtml('總注數', formatFbUnits(total.units)) : '') +
+      '</div>' +
+      (lines ? '<ul class="fb-day-lines">' + lines + '</ul>' : '') +
+      '</section>';
+  }
+
+  let footballCumulativeView = null;
+
+  /**
+   * 累計總結 panel: month filter on top, the selected month's
+   * 投注額/派彩/盈虧 plus the all-time 累計盈虧, then that month's daily lines.
+   * Falls back to the plain book layout when no dated parts exist.
+   */
+  function footballCumulativeHtml(book, updated, monthKey) {
+    if (!book || !book.total) {
+      return '<section class="panel" id="football-cumulative">' +
+        panelTitleHtml('累計總結', updated) +
+        '<p class="fb-pending">未有累計總結</p></section>';
+    }
+    const parts = (book.parts || []).filter((part) => part && part.date);
+    if (!parts.length) return footballDayBookHtml(book, updated, 'football-cumulative', '累計總結');
+    const months = [...new Set(parts.map((part) => String(part.date).slice(0, 7)))]
+      .sort((a, b) => b.localeCompare(a));
+    const selected = months.indexOf(monthKey) >= 0 ? monthKey : months[0];
+    const monthParts = parts
+      .filter((part) => String(part.date).slice(0, 7) === selected)
+      .slice()
+      .sort((a, b) => String(a.date).localeCompare(String(b.date)));
+    const monthTotal = footballSumBooks(monthParts);
+    const currentKey = getCurrentMonthKey();
+    const monthProfitLabel = selected === currentKey
+      ? '本月盈虧'
+      : Number(selected.slice(5)) + '月盈虧';
+    const options = months.map((month) => {
+      const label = month === currentKey ? '本月' : formatMonthLabel(month);
+      return '<option value="' + escapeAttr(month) + '"' +
+        (month === selected ? ' selected' : '') + '>' + escapeHtml(label) + '</option>';
+    }).join('');
+    const profitClass = (value) => value > 0 ? 'pl-pos' : (value < 0 ? 'pl-neg' : '');
+    const lines = monthParts.map((part) => {
+      const cls = profitClass(part.profit);
+      const signed = part.profit == null ? '—' : formatFbSigned(part.profit);
+      const signedHtml = part.profit == null
+        ? '—'
+        : '<span class="' + cls + '">' + escapeHtml(signed) + '</span>';
+      return '<li class="fb-day-line"><span class="fb-day-name">' + escapeHtml(part.item) + '</span>' +
+        '<span class="fb-day-amt">投注 ' + escapeHtml(footballBookAmount(part.stake)) +
+        ' · 派彩 ' + escapeHtml(footballBookAmount(part.payout)) +
+        ' · ' + signedHtml + '</span></li>';
+    }).join('');
+    return '<section class="panel" id="football-cumulative">' +
+      panelTitleHtml('累計總結', updated) +
+      '<div class="fb-pad"><label class="fb-date"><span class="sr-only">月份</span>' +
+      '<select id="football-month" aria-label="月份">' + options + '</select></label></div>' +
+      '<div class="fb-stats">' +
+      footballStatHtml('投注額', footballBookAmount(monthTotal.stake)) +
+      footballStatHtml('派彩', footballBookAmount(monthTotal.payout)) +
+      footballStatHtml(monthProfitLabel, footballBookSigned(monthTotal.profit), profitClass(monthTotal.profit)) +
+      '<div class="fb-stat fb-stat-cum"><span class="fb-k">累計盈虧</span>' +
+      '<span class="fb-n ' + profitClass(book.total.profit) + '">' +
+      escapeHtml(footballBookSigned(book.total.profit)) + '</span></div>' +
       '</div>' +
       (lines ? '<ul class="fb-day-lines">' + lines + '</ul>' : '') +
       '</section>';
@@ -5419,6 +5482,9 @@
         (day.date === selected.date ? ' selected' : '') + '>' +
         escapeHtml(footballDayLabel(day) + ' ' + day.date + latestMark) + '</option>';
     }).join('');
+    const cumulativeBook = footballDataCumulative(model, stableRows || []) ||
+      footballCumulativeBook(dayBook, model, stableRows || []);
+    footballCumulativeView = { book: cumulativeBook, updated: updated };
     host.innerHTML =
       '<section class="panel" id="football-history">' +
       panelTitleHtml('過往日期', updated) +
@@ -5437,13 +5503,7 @@
         'football-day-summary',
         '當日總結'
       ) +
-      footballDayBookHtml(
-        footballDataCumulative(model, stableRows || []) ||
-        footballCumulativeBook(dayBook, model, stableRows || []),
-        updated,
-        'football-cumulative',
-        '累計總結'
-      ) +
+      footballCumulativeHtml(cumulativeBook, updated, null) +
       '<p class="fb-note fb-rule">1注=$' + escapeHtml(String(model.unit)) +
       '。命中率計全贏同贏半，走盤唔計。未結場唔計入派彩、盈虧、命中率。</p></div>' +
       footballAllDayHtml(allday, selected.date, updated, selected.tips);
@@ -5458,6 +5518,18 @@
       if (!target) return;
       if (target.matches && target.matches('input[data-fb-star]')) {
         applyFootballStarFilter();
+        return;
+      }
+      if (target.id === 'football-month') {
+        if (footballCumulativeView && footballCumulativeView.book) {
+          const section = document.getElementById('football-cumulative');
+          if (section) {
+            const holder = document.createElement('div');
+            holder.innerHTML = footballCumulativeHtml(
+              footballCumulativeView.book, footballCumulativeView.updated, target.value);
+            if (holder.firstElementChild) section.replaceWith(holder.firstElementChild);
+          }
+        }
         return;
       }
       if (target.id !== 'football-date') return;

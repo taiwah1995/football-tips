@@ -1256,6 +1256,11 @@ body {
   padding: 8px 10px;
 }
 #view-football .fb-stat-wide { grid-column: 1 / -1; }
+#view-football .fb-stat-cum {
+  background: color-mix(in srgb, var(--gold) 20%, var(--bg-elev));
+  border-color: var(--gold-dim);
+}
+#view-football .fb-stat-cum .fb-k { color: var(--gold); font-weight: 700; }
 #view-football .fb-stat .fb-k {
   display: block;
   color: var(--text-muted);
