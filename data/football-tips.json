@@ -3384,9 +3384,9 @@
           "parlay_types": [],
           "market_code": "HAD",
           "note_gate": "主客和水位過1.8；t648u已核0.25球；2026-11-04長期授權初選自動上網｜名單預計（待確認）",
-          "result": "",
-          "wl": "",
-          "profit": ""
+          "result": "0-3",
+          "wl": "W",
+          "profit": 166.0
         },
         {
           "no": 2,
@@ -3406,9 +3406,9 @@
           "parlay_types": [],
           "market_code": "HDC",
           "note_gate": "讓球線|0.25|合t692u；水位過1.8；t648u已核0球；2026-11-04長期授權初選自動上網｜名單預計（待確認）",
-          "result": "",
-          "wl": "",
-          "profit": ""
+          "result": "0-0",
+          "wl": "LH",
+          "profit": -100.0
         },
         {
           "no": 3,
@@ -3428,9 +3428,9 @@
           "parlay_types": [],
           "market_code": "HDC",
           "note_gate": "讓球線|0.25|合t692u；水位過1.8；t648u已核0球；2026-11-04長期授權初選自動上網｜名單預計（待確認）",
-          "result": "",
-          "wl": "",
-          "profit": ""
+          "result": "2-2",
+          "wl": "LH",
+          "profit": -100.0
         },
         {
           "no": 4,
@@ -3450,9 +3450,9 @@
           "parlay_types": [],
           "market_code": "HDC",
           "note_gate": "讓球線|0.25|合t692u；水位過1.8；t648u已核0.25球；2026-11-04長期授權初選自動上網｜名單預計（待確認）",
-          "result": "",
-          "wl": "",
-          "profit": ""
+          "result": "1-2",
+          "wl": "W",
+          "profit": 196.0
         },
         {
           "no": 5,
@@ -3472,9 +3472,9 @@
           "parlay_types": [],
           "market_code": "HDC",
           "note_gate": "讓球線|0.25|合t692u；水位過1.8；t648u已核0球；2026-11-04長期授權初選自動上網｜名單預計（待確認）",
-          "result": "",
-          "wl": "",
-          "profit": ""
+          "result": "3-2",
+          "wl": "W",
+          "profit": 204.0
         },
         {
           "no": 6,
@@ -3494,9 +3494,9 @@
           "parlay_types": [],
           "market_code": "HAD",
           "note_gate": "主客和水位過1.8；t648u已核0.25球；2026-11-04長期授權初選自動上網｜名單預計（待確認）",
-          "result": "",
-          "wl": "",
-          "profit": ""
+          "result": "1-0",
+          "wl": "W",
+          "profit": 184.0
         },
         {
           "no": 7,
@@ -4015,5 +4015,5 @@
       }
     }
   ],
-  "updated_at_hkt": "2026-11-08 13:43"
+  "updated_at_hkt": "2026-11-08 19:24"
 }
