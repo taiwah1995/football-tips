@@ -11962,8 +11962,8 @@
    "odds": 1.72,
    "stake": 0,
    "source": "無API",
-   "result": "",
-   "wl": "",
+   "result": "3-1",
+   "wl": "W",
    "league": "女子德國甲組聯賽"
   },
   {
@@ -11976,8 +11976,8 @@
    "odds": 1.83,
    "stake": 2,
    "source": "無API",
-   "result": "",
-   "wl": "",
+   "result": "1-0",
+   "wl": "L",
    "league": "挪威超級聯賽"
   },
   {
@@ -11990,8 +11990,8 @@
    "odds": 1.27,
    "stake": 0,
    "source": "無API",
-   "result": "",
-   "wl": "",
+   "result": "3-0",
+   "wl": "W",
    "league": "女子西班牙甲組聯賽"
   },
   {
@@ -12004,8 +12004,8 @@
    "odds": 1.61,
    "stake": 0,
    "source": "無API",
-   "result": "",
-   "wl": "",
+   "result": "1-1",
+   "wl": "L",
    "league": "烏拉圭盃"
   },
   {
@@ -12018,8 +12018,8 @@
    "odds": 1.57,
    "stake": 0,
    "source": "無API",
-   "result": "",
-   "wl": "",
+   "result": "0-0",
+   "wl": "L",
    "league": "西班牙乙組聯賽"
   },
   {
@@ -12032,8 +12032,8 @@
    "odds": 1.88,
    "stake": 2,
    "source": "無API",
-   "result": "",
-   "wl": "",
+   "result": "2-0",
+   "wl": "W",
    "league": "西班牙乙組聯賽"
   },
   {
@@ -12046,8 +12046,8 @@
    "odds": 1.53,
    "stake": 0,
    "source": "無API",
-   "result": "",
-   "wl": "",
+   "result": "0-2",
+   "wl": "L",
    "league": "女子西班牙甲組聯賽"
   },
   {
@@ -12065,6 +12065,6 @@
    "league": "烏拉圭盃"
   }
  ],
- "updated_at_hkt": "2026-11-09 21:14",
+ "updated_at_hkt": "2026-11-10 08:23",
  "source_note": "2026-11-04 用戶「交接／上」｜全日分析改由新 Sheet 出：11-04 換入本系統 32 場分析｜count 562→594"
 }
