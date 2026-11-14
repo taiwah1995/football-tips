@@ -1,6 +1,6 @@
 {
   "date": "2026-11-09",
-  "count": 1037,
+  "count": 1042,
   "star_colors": {
     "1": "#9ca3af",
     "2": "#60a5fa",
@@ -14541,8 +14541,78 @@
       "result": "",
       "wl": "",
       "league": "女子墨西哥超級聯賽"
+    },
+    {
+      "date": "2026-11-14",
+      "time": "05:27",
+      "match": "科基姆博 vs 奧希金斯",
+      "confidence": 54,
+      "stars": 3,
+      "pick": "科基姆博｜讓球 主勝 -0/-0.5",
+      "odds": 1.88,
+      "stake": 2,
+      "source": "無API",
+      "result": "",
+      "wl": "",
+      "league": "智利聯賽盃"
+    },
+    {
+      "date": "2026-11-14",
+      "time": "05:30",
+      "match": "海地 vs 美國",
+      "confidence": 54,
+      "stars": 3,
+      "pick": "美國｜讓球 客勝 -1.5/-2（紙面）",
+      "odds": 2.09,
+      "stake": 0,
+      "source": "無API",
+      "result": "",
+      "wl": "",
+      "league": "中北美洲國家聯賽"
+    },
+    {
+      "date": "2026-11-14",
+      "time": "08:00",
+      "match": "聖文森及格林納丁斯 vs 伯利茲",
+      "confidence": 54,
+      "stars": 3,
+      "pick": "聖文森及格林納丁斯｜讓球 主勝 -0.5/-1（紙面）",
+      "odds": 1.86,
+      "stake": 0,
+      "source": "無API",
+      "result": "",
+      "wl": "",
+      "league": "中北美洲國家聯賽"
+    },
+    {
+      "date": "2026-11-14",
+      "time": "09:00",
+      "match": "牙買加 vs 墨西哥",
+      "confidence": 54,
+      "stars": 3,
+      "pick": "墨西哥｜讓球 客勝 -1（紙面）",
+      "odds": 1.9,
+      "stake": 0,
+      "source": "無API",
+      "result": "",
+      "wl": "",
+      "league": "中北美洲國家聯賽"
+    },
+    {
+      "date": "2026-11-14",
+      "time": "11:00",
+      "match": "拉帕斯體育會 vs 維拉克魯斯海盜",
+      "confidence": 55,
+      "stars": 2,
+      "pick": "拉帕斯體育會｜讓球 主勝 +0（紙面）",
+      "odds": 1.79,
+      "stake": 0,
+      "source": "無API",
+      "result": "",
+      "wl": "",
+      "league": "墨西哥甲組聯賽"
     }
   ],
-  "updated_at_hkt": "2026-11-14 21:20",
+  "updated_at_hkt": "2026-11-14 22:10",
   "source_note": "2026-11-04 用戶「交接／上」｜全日分析改由新 Sheet 出：11-04 換入本系統 32 場分析｜count 562→594"
 }
