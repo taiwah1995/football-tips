@@ -13684,8 +13684,8 @@
    "odds": 1.44,
    "stake": 0,
    "source": "無API",
-   "result": "",
-   "wl": "",
+   "result": "1-2",
+   "wl": "L",
    "league": "國際賽"
   },
   {
@@ -13698,8 +13698,8 @@
    "odds": 1.31,
    "stake": 0,
    "source": "無API",
-   "result": "",
-   "wl": "",
+   "result": "1-0",
+   "wl": "W",
    "league": "國際賽"
   },
   {
@@ -13712,8 +13712,8 @@
    "odds": 1.12,
    "stake": 0,
    "source": "無API",
-   "result": "",
-   "wl": "",
+   "result": "2-0",
+   "wl": "W",
    "league": "國際賽"
   },
   {
@@ -13726,8 +13726,8 @@
    "odds": 1.48,
    "stake": 0,
    "source": "無API",
-   "result": "",
-   "wl": "",
+   "result": "2-0",
+   "wl": "W",
    "league": "國際賽"
   },
   {
@@ -14543,6 +14543,6 @@
    "league": "女子墨西哥超級聯賽"
   }
  ],
- "updated_at_hkt": "2026-11-14 10:13",
+ "updated_at_hkt": "2026-11-14 11:07",
  "source_note": "2026-11-04 用戶「交接／上」｜全日分析改由新 Sheet 出：11-04 換入本系統 32 場分析｜count 562→594"
 }
