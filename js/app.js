@@ -5251,7 +5251,7 @@
       team +
       market +
       '<span class="fb-all-odds">' + escapeHtml(odds) + '</span>' +
-      '<span class="fb-all-stake">' + escapeHtml(stake) + '</span>' +
+      '<span class="fb-all-stake' + (Number.isFinite(stakeNum) && stakeNum > 0 ? ' fb-all-stake-on' : '') + '">' + escapeHtml(stake) + '</span>' +
       scoreHtml +
       footballRatingHtml(row) +
       '</div>' +
@@ -5279,6 +5279,13 @@
       '<input type="checkbox" data-fb-star="' + n + '" checked>' +
       '<span class="fb-chip-star" aria-hidden="true">★</span>' +
       '<span>' + n + '星</span></label>';
+  }
+
+  /** 「2注」chip (user request, 2026-11-15): tick it to show only rows with a stake. */
+  function footballStakeChipHtml() {
+    return '<label class="fb-star-chip fb-stake-chip">' +
+      '<input type="checkbox" data-fb-staked>' +
+      '<span>2注</span></label>';
   }
 
   function footballAddDays(iso, days) {
@@ -5397,7 +5404,7 @@
       date
     );
     const source = allday && allday.source ? allday.source : '';
-    const chips = [1, 2, 3, 4, 5].map(footballStarChipHtml).join('');
+    const chips = [1, 2, 3, 4, 5].map(footballStarChipHtml).join('') + footballStakeChipHtml();
     const starredHits = rows
       .filter((row) => footballRowStars(row) != null)
       .map((row) => ({ wl: footballResolvedWl(row) }));
@@ -5427,11 +5434,14 @@
         any = true;
       }
     });
+    const stakedInput = panel.querySelector('input[data-fb-staked]');
+    const stakedOnly = !!(stakedInput && stakedInput.checked);
     const counted = [];
     panel.querySelectorAll('.fb-all-row').forEach((row) => {
       const unrated = row.getAttribute('data-unrated') === '1';
       const stars = row.getAttribute('data-stars');
-      const show = any ? (!unrated && !!stars && !!selected[stars]) : true;
+      let show = any ? (!unrated && !!stars && !!selected[stars]) : true;
+      if (show && stakedOnly) show = Number(row.getAttribute('data-stake')) > 0;
       row.hidden = !show;
       if (!show) return;
       counted.push({ wl: row.getAttribute('data-wl') });
@@ -5516,7 +5526,7 @@
     viewFootball.addEventListener('change', (event) => {
       const target = event.target;
       if (!target) return;
-      if (target.matches && target.matches('input[data-fb-star]')) {
+      if (target.matches && target.matches('input[data-fb-star], input[data-fb-staked]')) {
         applyFootballStarFilter();
         return;
       }

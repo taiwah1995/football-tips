@@ -1702,6 +1702,11 @@ body {
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
 }
+#view-football .fb-all-stake.fb-all-stake-on {
+  color: #39ff14;
+  font-weight: 700;
+}
+#view-football .fb-star-chip.fb-stake-chip { --fb-chip: #39ff14; }
 #view-football .fb-stars {
   margin-left: auto;
   letter-spacing: 0.5px;
