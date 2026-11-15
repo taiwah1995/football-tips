@@ -1,6 +1,6 @@
 {
  "date": "2026-11-09",
- "count": 1085,
+ "count": 1090,
  "star_colors": {
   "1": "#9ca3af",
   "2": "#60a5fa",
@@ -15213,8 +15213,78 @@
    "result": "",
    "wl": "",
    "league": "女子墨西哥超級聯賽"
+  },
+  {
+   "date": "2026-11-15",
+   "time": "22:00",
+   "match": "呂米伊華尼利斯 vs 聖伊天",
+   "confidence": 54,
+   "stars": 3,
+   "pick": "聖伊天｜主客和 客勝（紙面）",
+   "odds": 1.22,
+   "stake": 0,
+   "source": "無API",
+   "result": "",
+   "wl": "",
+   "league": "法國足總盃"
+  },
+  {
+   "date": "2026-11-15",
+   "time": "23:30",
+   "match": "艾查捷拉 vs 賓尼耶斯",
+   "confidence": 54,
+   "stars": 3,
+   "pick": "艾查捷拉｜主客和 主勝（紙面）",
+   "odds": 1.25,
+   "stake": 0,
+   "source": "無API",
+   "result": "",
+   "wl": "",
+   "league": "阿聯酋聯賽盃"
+  },
+  {
+   "date": "2026-11-15",
+   "time": "23:45",
+   "match": "川迪女足 vs 燕豪芬女足",
+   "confidence": 53,
+   "stars": 3,
+   "pick": "川迪女足｜讓球 主勝 -0.5/-1（紙面）",
+   "odds": 2.02,
+   "stake": 0,
+   "source": "無API",
+   "result": "",
+   "wl": "",
+   "league": "女子荷蘭甲組聯賽"
+  },
+  {
+   "date": "2026-11-15",
+   "time": "04:00",
+   "match": "新澤西紐約高譚女足 vs 肯薩斯城潮流女足",
+   "confidence": 52,
+   "stars": 1,
+   "pick": "新澤西紐約高譚女足｜讓球 主勝 0（紙面）",
+   "odds": 1.71,
+   "stake": 0,
+   "source": "無API",
+   "result": "",
+   "wl": "",
+   "league": "女子美國職業聯賽"
+  },
+  {
+   "date": "2026-11-15",
+   "time": "04:28",
+   "match": "聖路易斯女足 vs 聖羅倫素女足",
+   "confidence": 54,
+   "stars": 3,
+   "pick": "聖羅倫素女足｜讓球 客勝 -0.5/-1（紙面）",
+   "odds": 1.77,
+   "stake": 0,
+   "source": "無API",
+   "result": "",
+   "wl": "",
+   "league": "女子阿根廷甲組聯賽"
   }
  ],
- "updated_at_hkt": "2026-11-15 21:15",
+ "updated_at_hkt": "2026-11-15 21:50",
  "source_note": "2026-11-04 用戶「交接／上」｜全日分析改由新 Sheet 出：11-04 換入本系統 32 場分析｜count 562→594"
 }
