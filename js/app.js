@@ -5454,13 +5454,15 @@
   function footballDaysForView(model, allday) {
     const days = (model && model.days ? model.days : []).slice();
     const seen = {};
-    let newest = '';
     days.forEach((day) => {
       seen[day.date] = true;
-      if (day.date > newest) newest = day.date;
     });
+    // Every date with 全日分析 rows must stay selectable, even when a newer
+    // tip day exists (user report, 2026-11-15: 11-09..11-14 vanished from the
+    // date picker once 11-15 — a day with a public card — became the newest
+    // model day, because allday-only dates were only added when newer than it).
     ((allday && allday.rows) || []).forEach((row) => {
-      if (!row || !row.date || seen[row.date] || (newest && row.date <= newest)) return;
+      if (!row || !row.date || seen[row.date]) return;
       seen[row.date] = true;
       days.push({ date: row.date, label: '', tips: [] });
     });
