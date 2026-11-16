@@ -1,6 +1,6 @@
 {
  "date": "2026-11-09",
- "count": 1113,
+ "count": 1118,
  "star_colors": {
   "1": "#9ca3af",
   "2": "#60a5fa",
@@ -15294,7 +15294,7 @@
    "odds": 1.81,
    "stake": 2,
    "source": "無API",
-   "result": "",
+   "result": "取消",
    "wl": "",
    "league": "國際賽"
   },
@@ -15605,8 +15605,78 @@
    "result": "",
    "wl": "",
    "league": "烏拉圭甲組聯賽"
+  },
+  {
+   "date": "2026-11-16",
+   "time": "19:00",
+   "match": "烏茲別克U20 vs 委內瑞拉U20",
+   "confidence": 54,
+   "stars": 3,
+   "pick": "烏茲別克U20｜主客和 主勝",
+   "odds": 1.94,
+   "stake": 2,
+   "source": "無API",
+   "result": "5-2",
+   "wl": "W",
+   "league": "國際友誼賽"
+  },
+  {
+   "date": "2026-11-16",
+   "time": "08:00",
+   "match": "馬提尼克 vs 阿魯巴",
+   "confidence": 54,
+   "stars": 3,
+   "pick": "馬提尼克｜主客和 主勝（紙面）",
+   "odds": 1.11,
+   "stake": 0,
+   "source": "無API",
+   "result": "",
+   "wl": "",
+   "league": "中北美國家聯賽"
+  },
+  {
+   "date": "2026-11-16",
+   "time": "08:00",
+   "match": "千里達 vs 安提瓜和巴布達",
+   "confidence": 53,
+   "stars": 3,
+   "pick": "安提瓜和巴布達｜讓球 客勝 +2/+2.5（紙面）",
+   "odds": 1.75,
+   "stake": 0,
+   "source": "無API",
+   "result": "",
+   "wl": "",
+   "league": "中北美國家聯賽"
+  },
+  {
+   "date": "2026-11-16",
+   "time": "09:00",
+   "match": "加拿大 vs 危地馬拉",
+   "confidence": 54,
+   "stars": 3,
+   "pick": "加拿大｜主客和 主勝（紙面）",
+   "odds": 1.09,
+   "stake": 0,
+   "source": "無API",
+   "result": "",
+   "wl": "",
+   "league": "中北美國家聯賽"
+  },
+  {
+   "date": "2026-11-16",
+   "time": "09:59",
+   "match": "新墨西哥聯 vs 薩克拉門托共和",
+   "confidence": 54,
+   "stars": 3,
+   "pick": "薩克拉門托共和｜讓球 客勝 +0（紙面）",
+   "odds": 1.75,
+   "stake": 0,
+   "source": "無API",
+   "result": "",
+   "wl": "",
+   "league": "美國冠軍聯賽"
   }
  ],
- "updated_at_hkt": "2026-11-16 13:10",
+ "updated_at_hkt": "2026-11-16 21:50",
  "source_note": "2026-11-04 用戶「交接／上」｜全日分析改由新 Sheet 出：11-04 換入本系統 32 場分析｜count 562→594"
 }
