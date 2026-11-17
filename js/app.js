@@ -2526,9 +2526,56 @@
    */
   const FOOTBALL_EURO_PHRASE = /回補[・·‧．.]?(?:上週|週中)?(?:歐聯|歐霸|歐協|歐戰)|上週(?:歐聯|歐霸|歐協)|週中有賽事|週中(?:歐聯|歐霸|歐協|歐戰)|歐戰/;
 
+  /**
+   * Public-page wording (Tai Wah 2026-11-17): internal codes and source
+   * names never show on the website — same plain-language rule as the
+   * Slack copies. HDC/HAD-style market codes become 讓球 / 主客和.
+   */
+  function footballPlain(text) {
+    let t = String(text == null ? '' : text);
+    if (!t) return t;
+    t = t
+      .replace(/titan007/gi, '')
+      .replace(/r1104[abcd]\s*已核實/g, '關鍵球員已核實')
+      .replace(/r1104[abcd]\s*未核實/g, '關鍵球員未核實')
+      .replace(/r1104[abcd]/g, '關鍵球員核實')
+      .replace(/t648u\s*已核/g, '盤口變動已核')
+      .replace(/t648u\s*未核實/g, '盤口變動未核實')
+      .replace(/t648u/g, '盤口變動')
+      .replace(/t692u/g, '淺盤要求')
+      .replace(/t789u/g, '過關要求')
+      .replace(/kill\s*switch/gi, '止蝕規則')
+      .replace(/\bHHAD\b/g, '讓球主客和')
+      .replace(/\bHDC\b/g, '讓球')
+      .replace(/\bHAD\b/g, '主客和')
+      .replace(/\bAH\b/g, '讓球')
+      .replace(/\bt\d{2,4}[a-z]?\b/g, '')
+      .replace(/（\s+/g, '（')
+      .replace(/\s+）/g, '）')
+      .replace(/\(\s+/g, '(')
+      .replace(/\s+\)/g, ')')
+      .replace(/\s{2,}/g, ' ')
+      .replace(/^[+\s｜|]+/, '')
+      .replace(/[+｜|]+$/, '')
+      .trim();
+    return t;
+  }
+
+  /** Deep-apply footballPlain to every string in parsed file data. */
+  function footballPlainData(value) {
+    if (typeof value === 'string') return footballPlain(value);
+    if (Array.isArray(value)) return value.map(footballPlainData);
+    if (value && typeof value === 'object') {
+      Object.keys(value).forEach((key) => {
+        value[key] = footballPlainData(value[key]);
+      });
+    }
+    return value;
+  }
+
   /** Full 推介原因. A blank cell stays blank so the JSON reason can fill it. */
   function footballReason(text) {
-    return String(text || '').trim();
+    return footballPlain(String(text || '').trim());
   }
 
   /** Optional 過關 cell. Y / 是 / 1 locks that row into 穩陣過關. */
@@ -2553,8 +2600,8 @@
       date: date,
       ko: footballText(csv('時間'), json('時間')),
       match: footballText(csv('場次'), json('場次')),
-      pick: footballText(csv('推介'), json('推介')),
-      line: footballText(csv('買法'), json('買法')),
+      pick: footballPlain(footballText(csv('推介'), json('推介'))),
+      line: footballPlain(footballText(csv('買法'), json('買法'))),
       odds: footballOdds(csv('賠率'), json('賠率')),
     };
   }
@@ -2571,8 +2618,8 @@
       ko: footballText(csv('時間'), json('時間')),
       league: footballText(csv('聯賽'), json('聯賽')),
       match: footballText(csv('場次'), json('場次')),
-      pick: footballText(csv('推介'), json('推介')),
-      line: footballText(csv('買法'), json('買法')),
+      pick: footballPlain(footballText(csv('推介'), json('推介'))),
+      line: footballPlain(footballText(csv('買法'), json('買法'))),
       odds: footballOdds(csv('賠率'), json('賠率')),
       confidence: footballText(csv('信心%'), json('信心%')),
       stake: stake,
@@ -2765,7 +2812,7 @@
     try {
       const res = await fetch(dataUrl('football-tips.json'));
       if (!res.ok) return null;
-      return await res.json();
+      return footballPlainData(await res.json());
     } catch (err) {
       console.error(err);
       return null;
@@ -2813,8 +2860,8 @@
       time: footballText(csv('時間'), json('時間')),
       league: footballText(csv('聯賽'), json('聯賽')),
       match: footballText(csv('場次'), json('場次')),
-      pick: footballText(csv('推介'), json('推介')),
-      line: footballText(csv('買法'), json('買法')),
+      pick: footballPlain(footballText(csv('推介'), json('推介'))),
+      line: footballPlain(footballText(csv('買法'), json('買法'))),
       odds: footballOdds(csv('賠率'), json('賠率')),
       confidence: footballText(csv('信心%'), json('信心%')),
       stake: stake,
@@ -3053,7 +3100,7 @@
     try {
       const res = await fetch(dataUrl('football-allday.json'));
       if (!res.ok) return null;
-      return await res.json();
+      return footballPlainData(await res.json());
     } catch (err) {
       console.error(err);
       return null;
