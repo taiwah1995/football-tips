@@ -15602,8 +15602,8 @@
    "odds": 1.88,
    "stake": 0,
    "source": "無API",
-   "result": "",
-   "wl": "",
+   "result": "2-1",
+   "wl": "W",
    "league": "烏拉圭甲組聯賽"
   },
   {
@@ -15630,8 +15630,8 @@
    "odds": 1.11,
    "stake": 0,
    "source": "無API",
-   "result": "",
-   "wl": "",
+   "result": "1-1",
+   "wl": "L",
    "league": "中北美國家聯賽"
   },
   {
@@ -15644,8 +15644,8 @@
    "odds": 1.75,
    "stake": 0,
    "source": "無API",
-   "result": "",
-   "wl": "",
+   "result": "1-1",
+   "wl": "W",
    "league": "中北美國家聯賽"
   },
   {
@@ -15658,8 +15658,8 @@
    "odds": 1.09,
    "stake": 0,
    "source": "無API",
-   "result": "",
-   "wl": "",
+   "result": "4-1",
+   "wl": "W",
    "league": "中北美國家聯賽"
   },
   {
@@ -15672,8 +15672,8 @@
    "odds": 1.75,
    "stake": 0,
    "source": "無API",
-   "result": "",
-   "wl": "",
+   "result": "1-1",
+   "wl": "P",
    "league": "美國冠軍聯賽"
   },
   {
@@ -16265,6 +16265,6 @@
    "league": "國際賽"
   }
  ],
- "updated_at_hkt": "2026-11-17 10:23",
+ "updated_at_hkt": "2026-11-17 12:53",
  "source_note": "2026-11-04 用戶「交接／上」｜全日分析改由新 Sheet 出：11-04 換入本系統 32 場分析｜count 562→594"
 }
