@@ -1,6 +1,6 @@
 {
  "date": "2026-11-09",
- "count": 1160,
+ "count": 1165,
  "star_colors": {
   "1": "#9ca3af",
   "2": "#60a5fa",
@@ -16263,8 +16263,78 @@
    "result": "",
    "wl": "",
    "league": "國際賽"
+  },
+  {
+   "date": "2026-11-17",
+   "time": "00:15",
+   "match": "伊拉克 vs 伊朗",
+   "confidence": 53,
+   "stars": 3,
+   "pick": "伊朗｜主客和 客勝（紙面）",
+   "odds": 1.74,
+   "stake": 0,
+   "source": "無API",
+   "result": "",
+   "wl": "",
+   "league": "巴士拉邀請賽"
+  },
+  {
+   "date": "2026-11-17",
+   "time": "08:00",
+   "match": "美國 vs 海地",
+   "confidence": 54,
+   "stars": 3,
+   "pick": "美國｜主客和 主勝（紙面）",
+   "odds": 1.04,
+   "stake": 0,
+   "source": "無API",
+   "result": "",
+   "wl": "",
+   "league": "中北美國家聯賽"
+  },
+  {
+   "date": "2026-11-17",
+   "time": "09:00",
+   "match": "薩爾瓦多 vs 法屬聖馬丁",
+   "confidence": 54,
+   "stars": 3,
+   "pick": "薩爾瓦多｜主客和 主勝（紙面）",
+   "odds": 1.24,
+   "stake": 0,
+   "source": "無API",
+   "result": "",
+   "wl": "",
+   "league": "中北美國家聯賽"
+  },
+  {
+   "date": "2026-11-17",
+   "time": "10:30",
+   "match": "墨西哥 vs 牙買加",
+   "confidence": 54,
+   "stars": 3,
+   "pick": "墨西哥｜主客和 主勝（紙面）",
+   "odds": 1.08,
+   "stake": 0,
+   "source": "無API",
+   "result": "",
+   "wl": "",
+   "league": "中北美國家聯賽"
+  },
+  {
+   "date": "2026-11-17",
+   "time": "11:00",
+   "match": "尼加拉瓜 vs 蒙特塞拉特",
+   "confidence": 54,
+   "stars": 3,
+   "pick": "尼加拉瓜｜主客和 主勝（紙面）",
+   "odds": 1.09,
+   "stake": 0,
+   "source": "無API",
+   "result": "",
+   "wl": "",
+   "league": "中北美國家聯賽"
   }
  ],
- "updated_at_hkt": "2026-11-17 12:53",
+ "updated_at_hkt": "2026-11-17 21:23",
  "source_note": "2026-11-04 用戶「交接／上」｜全日分析改由新 Sheet 出：11-04 換入本系統 32 場分析｜count 562→594"
 }
