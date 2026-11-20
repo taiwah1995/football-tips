@@ -6,7 +6,7 @@
   'use strict';
 
   const DATA_BASE = 'data';
-  const APP_DATA_VERSION = 'football124';
+  const APP_DATA_VERSION = 'football125';
   /** 馬膽 stake, same convention as the ledger heading: 獨贏 $100 · 位置 $300. */
   const STAKE_WIN = 100;
   const STAKE_PLACE = 300;
@@ -4464,6 +4464,49 @@
     return { total: footballSumBooks(parts), parts: parts };
   }
 
+  /**
+   * Pending day book from the featured (staked) cards themselves, used only
+   * when no settled day book exists yet: the panel keeps its place and shows
+   * today's stake at once. Payout/profit stay blank until every featured
+   * card is settled; a settled day book always takes precedence.
+   */
+  function footballPendingDayBook(featured, unit) {
+    const staked = (featured || []).filter((tip) => Number(tip.stake) > 0);
+    if (!staked.length) return null;
+    const stakeUnits = staked.reduce((sum, tip) => sum + Number(tip.stake), 0);
+    const stake = footballRound2(stakeUnits * unit);
+    let payout = 0;
+    let allSettled = true;
+    staked.forEach((tip) => {
+      const dollars = Number(tip.stake) * unit;
+      const odds = Number(tip.odds);
+      if (!tip.wl || !Number.isFinite(odds)) {
+        allSettled = false;
+        return;
+      }
+      if (tip.wl === 'W') payout += dollars * odds;
+      else if (tip.wl === 'WH') payout += dollars * (1 + odds) / 2;
+      else if (tip.wl === 'LH') payout += dollars / 2;
+      else if (tip.wl === 'P') payout += dollars;
+      else if (tip.wl !== 'L') allSettled = false;
+    });
+    const part = {
+      item: '①單場推介',
+      stake: stake,
+      payout: allSettled ? footballRound2(payout) : null,
+      profit: allSettled ? footballRound2(payout - stake) : null,
+    };
+    return {
+      total: {
+        stake: stake,
+        payout: part.payout,
+        profit: part.profit,
+        units: stakeUnits,
+      },
+      parts: [part],
+    };
+  }
+
   function footballBookAmount(value) {
     return value == null ? '—' : formatFbMoney(value);
   }
@@ -5625,7 +5668,8 @@
       '<div id="football-summaries">' +
       footballDayBookHtml(
         footballSheetDayBook(dayBook, selected.date) ||
-        footballComputedDayBook(selected.tips, model.unit, selected.date, model.locks || [], stableRows || []),
+        footballComputedDayBook(selected.tips, model.unit, selected.date, model.locks || [], stableRows || []) ||
+        footballPendingDayBook(featured, model.unit),
         updated,
         'football-day-summary',
         '當日總結'
