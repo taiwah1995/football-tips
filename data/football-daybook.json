@@ -793,13 +793,85 @@
    "units": 22
   },
   {
+   "date": "2026-11-16",
+   "item": "①單場推介",
+   "kind": "part",
+   "stake": 1200,
+   "payout": 1740,
+   "profit": 540,
+   "units": 12
+  },
+  {
+   "date": "2026-11-16",
+   "item": "當日總結（三項加總）",
+   "kind": "day-total",
+   "stake": 1200,
+   "payout": 1740,
+   "profit": 540,
+   "units": 12
+  },
+  {
+   "date": "2026-11-17",
+   "item": "①單場推介",
+   "kind": "part",
+   "stake": 3600,
+   "payout": 4216,
+   "profit": 616,
+   "units": 36
+  },
+  {
+   "date": "2026-11-17",
+   "item": "當日總結（三項加總）",
+   "kind": "day-total",
+   "stake": 3600,
+   "payout": 4216,
+   "profit": 616,
+   "units": 36
+  },
+  {
+   "date": "2026-11-18",
+   "item": "①單場推介",
+   "kind": "part",
+   "stake": 1600,
+   "payout": 1780,
+   "profit": 180,
+   "units": 16
+  },
+  {
+   "date": "2026-11-18",
+   "item": "當日總結（三項加總）",
+   "kind": "day-total",
+   "stake": 1600,
+   "payout": 1780,
+   "profit": 180,
+   "units": 16
+  },
+  {
+   "date": "2026-11-19",
+   "item": "①單場推介",
+   "kind": "part",
+   "stake": 800,
+   "payout": 1042,
+   "profit": 242,
+   "units": 8
+  },
+  {
+   "date": "2026-11-19",
+   "item": "當日總結（三項加總）",
+   "kind": "day-total",
+   "stake": 800,
+   "payout": 1042,
+   "profit": 242,
+   "units": 8
+  },
+  {
    "date": "",
    "item": "累計總結（三項每日累積）",
    "kind": "cumulative",
-   "stake": 41740,
-   "payout": 46483.83,
-   "profit": 4743.83,
-   "units": 417.4
+   "stake": 48940,
+   "payout": 55261.83,
+   "profit": 6321.83,
+   "units": 489.4
   }
  ],
  "updated_at_hkt": "2026-11-16 13:10"
