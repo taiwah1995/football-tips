@@ -6,7 +6,7 @@
   'use strict';
 
   const DATA_BASE = 'data';
-  const APP_DATA_VERSION = 'football122';
+  const APP_DATA_VERSION = 'football123';
   /** 馬膽 stake, same convention as the ledger heading: 獨贏 $100 · 位置 $300. */
   const STAKE_WIN = 100;
   const STAKE_PLACE = 300;
@@ -4392,11 +4392,6 @@
   }
 
   function footballCumulativeBook(rows, model, stableRows) {
-    const explicit = (rows || []).find((row) => {
-      return row.kind === 'cumulative' &&
-        row.stake != null && row.payout != null && row.profit != null;
-    });
-    if (explicit) return { total: explicit, parts: [] };
     const covered = {};
     const parts = [];
     (rows || []).forEach((row) => {
@@ -4427,8 +4422,15 @@
         profit: computed.total.profit,
       });
     });
-    if (!parts.length) return null;
-    return { total: footballSumBooks(parts), parts: parts.length > 1 ? parts : [] };
+    if (parts.length) {
+      return { total: footballSumBooks(parts), parts: parts.length > 1 ? parts : [] };
+    }
+    const explicit = (rows || []).find((row) => {
+      return row.kind === 'cumulative' &&
+        row.stake != null && row.payout != null && row.profit != null;
+    });
+    if (explicit) return { total: explicit, parts: [] };
+    return null;
   }
 
   function footballComputedDayBook(tips, unit, date, locks, stableRows) {
@@ -5516,6 +5518,54 @@
     return days;
   }
 
+  /**
+   * 今日精選 (user instruction, 2026-11-20): the day's model tips plus every
+   * 全日分析 row staked at exactly 2 units that is not already a tip, so all
+   * 2-unit recommendations appear as featured cards, every day.
+   */
+  function footballFeaturedTips(selected, allday) {
+    const tips = (selected.tips || []).slice();
+    const have = {};
+    tips.forEach((tip) => { have[footballMatchKey(tip.match)] = true; });
+    ((allday && allday.rows) || []).forEach((row) => {
+      if (!row || row.date !== selected.date) return;
+      if (Number(row.stake) !== 2) return;
+      const key = footballMatchKey(row.match);
+      if (!key || have[key]) return;
+      have[key] = true;
+      const parts = footballAllDayParts(row);
+      const odds = Number(row.odds);
+      let profit = null;
+      if (row.wl && Number.isFinite(odds)) {
+        if (row.wl === 'W') profit = 200 * (odds - 1);
+        else if (row.wl === 'WH') profit = 100 * (odds - 1);
+        else if (row.wl === 'LH') profit = -100;
+        else if (row.wl === 'L') profit = -200;
+        else if (row.wl === 'P') profit = 0;
+        if (profit != null) profit = Math.round(profit * 100) / 100;
+      }
+      tips.push({
+        date: row.date,
+        ko: row.time || '',
+        league: row.league || '',
+        match: row.match || '',
+        pick: parts.team || '',
+        line: parts.market || '',
+        odds: row.odds || '',
+        confidence: row.confidence || '',
+        stake: 2,
+        status: row.wl ? '已結算' : '',
+        reason: '',
+        addendum: row.addendum || '',
+        result: row.result || '',
+        wl: row.wl || '',
+        profit: profit,
+        stars: row.stars,
+      });
+    });
+    return tips;
+  }
+
   function paintFootball(model, source, wanted, allday, stableRows, dayBook) {
     const host = $('#football-body');
     if (!host) return;
@@ -5533,7 +5583,8 @@
       host.innerHTML = '<p class="empty">暫未有注數大於 0 的推介</p>';
       return;
     }
-    pageSub.textContent = footballDayLabel(selected) + ' · ' + selected.tips.length + '場';
+    const featured = footballFeaturedTips(selected, allday);
+    pageSub.textContent = footballDayLabel(selected) + ' · ' + featured.length + '場';
     const ordered = days.slice().sort((a, b) => b.date.localeCompare(a.date));
     const options = ordered.map((day) => {
       const latestMark = latest && day.date === latest.date ? '（最新）' : '';
@@ -5541,8 +5592,8 @@
         (day.date === selected.date ? ' selected' : '') + '>' +
         escapeHtml(footballDayLabel(day) + ' ' + day.date + latestMark) + '</option>';
     }).join('');
-    const cumulativeBook = footballDataCumulative(model, stableRows || []) ||
-      footballCumulativeBook(dayBook, model, stableRows || []);
+    const cumulativeBook = footballCumulativeBook(dayBook, model, stableRows || []) ||
+      footballDataCumulative(model, stableRows || []);
     footballCumulativeView = { book: cumulativeBook, updated: updated };
     host.innerHTML =
       '<section class="panel" id="football-history">' +
@@ -5551,13 +5602,13 @@
       '<select id="football-date" aria-label="日期">' + options + '</select></label></div></section>' +
       footballPassHtml(selected.tips, updated, selected.date, model.locks || [], stableRows || []) +
       '<section class="panel" id="football-matches">' +
-      footballSectionTitle(escapeHtml(footballDayLabel(selected) + '今日精選'), updated, selected.tips) +
-      footballByKickoff(selected.tips, selected.date).map((tip) => footballCardHtml(tip, model.unit)).join('') +
+      footballSectionTitle(escapeHtml(footballDayLabel(selected) + '今日精選'), updated, featured) +
+      footballByKickoff(featured, selected.date).map((tip) => footballCardHtml(tip, model.unit)).join('') +
       '</section>' +
       '<div id="football-summaries">' +
       footballDayBookHtml(
-        footballComputedDayBook(selected.tips, model.unit, selected.date, model.locks || [], stableRows || []) ||
-        footballSheetDayBook(dayBook, selected.date),
+        footballSheetDayBook(dayBook, selected.date) ||
+        footballComputedDayBook(selected.tips, model.unit, selected.date, model.locks || [], stableRows || []),
         updated,
         'football-day-summary',
         '當日總結'
