@@ -1599,7 +1599,9 @@ body {
   position: relative;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 3px;
+  min-width: 68px;
   min-height: 36px;
   padding: 4px 10px;
   border: 1px solid var(--border);
@@ -1707,6 +1709,8 @@ body {
   font-weight: 700;
 }
 #view-football .fb-star-chip.fb-stake-chip { --fb-chip: #39ff14; }
+#view-football .fb-star-chip.fb-stake1-chip { --fb-chip: #ffd21f; }
+#view-football .fb-star-chip .fb-stake1-label { color: #ffd21f; }
 #view-football .fb-stars {
   margin-left: auto;
   letter-spacing: 0.5px;

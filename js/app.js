@@ -6,7 +6,7 @@
   'use strict';
 
   const DATA_BASE = 'data';
-  const APP_DATA_VERSION = 'football126';
+  const APP_DATA_VERSION = 'football128';
   /** 馬膽 stake, same convention as the ledger heading: 獨贏 $100 · 位置 $300. */
   const STAKE_WIN = 100;
   const STAKE_PLACE = 300;
@@ -5390,10 +5390,16 @@
       '<span>' + n + '星</span></label>';
   }
 
-  /** 「2注」chip (user request, 2026-11-15): tick it to show only rows with a stake. */
-  function footballStakeChipHtml() {
+  /** Stake chips (「2注」user request 2026-11-15; 「1注」added 2026-11-21):
+   * tick one to show only rows with that exact stake; tick both for either. */
+  function footballStakeChipHtml(units) {
+    if (units === 1) {
+      return '<label class="fb-star-chip fb-stake-chip fb-stake1-chip">' +
+        '<input type="checkbox" data-fb-stake="1">' +
+        '<span class="fb-stake1-label">1注</span></label>';
+    }
     return '<label class="fb-star-chip fb-stake-chip">' +
-      '<input type="checkbox" data-fb-staked>' +
+      '<input type="checkbox" data-fb-stake="2">' +
       '<span>2注</span></label>';
   }
 
@@ -5513,7 +5519,7 @@
       date
     );
     const source = allday && allday.source ? allday.source : '';
-    const chips = [1, 2, 3, 4, 5].map(footballStarChipHtml).join('') + footballStakeChipHtml();
+    const chips = [1, 2, 3, 4, 5].map(footballStarChipHtml).join('') + footballStakeChipHtml(2) + footballStakeChipHtml(1);
     const starredHits = rows
       .filter((row) => footballRowStars(row) != null)
       .map((row) => ({ wl: footballResolvedWl(row) }));
@@ -5543,14 +5549,16 @@
         any = true;
       }
     });
-    const stakedInput = panel.querySelector('input[data-fb-staked]');
-    const stakedOnly = !!(stakedInput && stakedInput.checked);
+    const stakeFilter = [];
+    panel.querySelectorAll('input[data-fb-stake]').forEach((input) => {
+      if (input.checked) stakeFilter.push(Number(input.getAttribute('data-fb-stake')));
+    });
     const counted = [];
     panel.querySelectorAll('.fb-all-row').forEach((row) => {
       const unrated = row.getAttribute('data-unrated') === '1';
       const stars = row.getAttribute('data-stars');
       let show = any ? (!unrated && !!stars && !!selected[stars]) : true;
-      if (show && stakedOnly) show = Number(row.getAttribute('data-stake')) > 0;
+      if (show && stakeFilter.length) show = stakeFilter.indexOf(Number(row.getAttribute('data-stake'))) !== -1;
       row.hidden = !show;
       if (!show) return;
       counted.push({ wl: row.getAttribute('data-wl') });
@@ -5687,7 +5695,7 @@
     viewFootball.addEventListener('change', (event) => {
       const target = event.target;
       if (!target) return;
-      if (target.matches && target.matches('input[data-fb-star], input[data-fb-staked]')) {
+      if (target.matches && target.matches('input[data-fb-star], input[data-fb-stake]')) {
         applyFootballStarFilter();
         return;
       }
