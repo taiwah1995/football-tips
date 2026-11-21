@@ -6,7 +6,7 @@
   'use strict';
 
   const DATA_BASE = 'data';
-  const APP_DATA_VERSION = 'football129';
+  const APP_DATA_VERSION = 'football130';
   /** 馬膽 stake, same convention as the ledger heading: 獨贏 $100 · 位置 $300. */
   const STAKE_WIN = 100;
   const STAKE_PLACE = 300;
@@ -4693,11 +4693,11 @@
       '</div>' + extra + '</section>';
   }
 
-  function footballFieldHtml(label, value, wide) {
+  function footballFieldHtml(label, value, wide, valueCls) {
     if (value == null || String(value).trim() === '') return '';
     return '<div class="fb-field' + (wide ? ' fb-field-wide' : '') + '">' +
       '<span class="fb-k">' + label + '</span>' +
-      '<span class="fb-v">' + escapeHtml(String(value)) + '</span></div>';
+      '<span class="fb-v' + (valueCls ? ' ' + valueCls : '') + '">' + escapeHtml(String(value)) + '</span></div>';
   }
 
   function footballMatchKey(name) {
@@ -5034,7 +5034,7 @@
       footballMatchTitleHtml(tip) +
       '<div class="fb-fields">' +
       footballPickHtml(tip) +
-      footballFieldHtml('注碼', formatFbStake(tip.stake, unit), true) +
+      footballFieldHtml('注碼', formatFbStake(tip.stake, unit), true, Number(tip.stake) === 1 ? 'fb-stake1-value' : '') +
       '</div>' +
       footballReasonHtml(tip) +
       footballAddendumHtml(tip) +
@@ -5587,9 +5587,9 @@
   }
 
   /**
-   * 今日精選 (user instruction, 2026-11-20): the day's model tips plus every
-   * 全日分析 row staked at exactly 2 units that is not already a tip, so all
-   * 2-unit recommendations appear as featured cards, every day.
+   * 今日精選 (user instruction, 2026-11-20; redefined 2026-11-21): 今日精選
+   * means every match staked that day — the day's model tips plus every
+   * 全日分析 row with a stake (1 or 2 units) that is not already a tip.
    */
   function footballFeaturedTips(selected, allday) {
     const tips = (selected.tips || []).slice();
@@ -5597,7 +5597,8 @@
     tips.forEach((tip) => { have[footballMatchKey(tip.match)] = true; });
     ((allday && allday.rows) || []).forEach((row) => {
       if (!row || row.date !== selected.date) return;
-      if (Number(row.stake) !== 2) return;
+      const stakeUnits = Number(row.stake);
+      if (stakeUnits !== 1 && stakeUnits !== 2) return;
       const key = footballMatchKey(row.match);
       if (!key || have[key]) return;
       have[key] = true;
@@ -5605,10 +5606,10 @@
       const odds = Number(row.odds);
       let profit = null;
       if (row.wl && Number.isFinite(odds)) {
-        if (row.wl === 'W') profit = 200 * (odds - 1);
-        else if (row.wl === 'WH') profit = 100 * (odds - 1);
-        else if (row.wl === 'LH') profit = -100;
-        else if (row.wl === 'L') profit = -200;
+        if (row.wl === 'W') profit = stakeUnits * 100 * (odds - 1);
+        else if (row.wl === 'WH') profit = stakeUnits * 50 * (odds - 1);
+        else if (row.wl === 'LH') profit = -stakeUnits * 50;
+        else if (row.wl === 'L') profit = -stakeUnits * 100;
         else if (row.wl === 'P') profit = 0;
         if (profit != null) profit = Math.round(profit * 100) / 100;
       }
@@ -5621,7 +5622,7 @@
         line: parts.market || '',
         odds: row.odds || '',
         confidence: row.confidence || '',
-        stake: 2,
+        stake: stakeUnits,
         status: row.wl ? '已結算' : '',
         reason: row.reason || '',
         addendum: row.addendum || '',

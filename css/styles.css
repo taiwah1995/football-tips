@@ -1711,6 +1711,7 @@ body {
 #view-football .fb-all-stake.fb-all-stake-1 {
   color: #ffd21f;
 }
+#view-football .fb-field .fb-v.fb-stake1-value { color: #ffd21f; }
 #view-football .fb-star-chip.fb-stake-chip { --fb-chip: #39ff14; }
 #view-football .fb-star-chip.fb-stake1-chip { --fb-chip: #ffd21f; }
 #view-football .fb-star-chip .fb-stake1-label { color: #ffd21f; }
