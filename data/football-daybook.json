@@ -949,19 +949,19 @@
    "date": "2026-11-21",
    "item": "①單場推介",
    "kind": "part",
-   "stake": 3000,
+   "stake": 4000,
    "payout": null,
    "profit": null,
-   "units": 30
+   "units": 40
   },
   {
    "date": "2026-11-21",
    "item": "當日總結（三項加總）",
    "kind": "day-total",
-   "stake": 3000,
+   "stake": 4000,
    "payout": null,
    "profit": null,
-   "units": 30
+   "units": 40
   }
  ],
  "updated_at_hkt": "2026-11-21 10:51 HKT"
