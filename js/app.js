@@ -6,7 +6,7 @@
   'use strict';
 
   const DATA_BASE = 'data';
-  const APP_DATA_VERSION = 'football128';
+  const APP_DATA_VERSION = 'football129';
   /** 馬膽 stake, same convention as the ledger heading: 獨贏 $100 · 位置 $300. */
   const STAKE_WIN = 100;
   const STAKE_PLACE = 300;
@@ -5360,7 +5360,7 @@
       team +
       market +
       '<span class="fb-all-odds">' + escapeHtml(odds) + '</span>' +
-      '<span class="fb-all-stake' + (Number.isFinite(stakeNum) && stakeNum > 0 ? ' fb-all-stake-on' : '') + '">' + escapeHtml(stake) + '</span>' +
+      '<span class="fb-all-stake' + (Number.isFinite(stakeNum) && stakeNum > 0 ? ' fb-all-stake-on' : '') + (stakeNum === 1 ? ' fb-all-stake-1' : '') + '">' + escapeHtml(stake) + '</span>' +
       scoreHtml +
       footballRatingHtml(row) +
       '</div>' +
