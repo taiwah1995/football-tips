@@ -986,8 +986,8 @@
       "item": "①單場推介",
       "kind": "part",
       "stake": 1900,
-      "payout": null,
-      "profit": null,
+      "payout": 2095.0,
+      "profit": 195.0,
       "units": 19
     },
     {
@@ -995,8 +995,8 @@
       "item": "當日總結（三項加總）",
       "kind": "day-total",
       "stake": 1900,
-      "payout": null,
-      "profit": null,
+      "payout": 2095.0,
+      "profit": 195.0,
       "units": 19
     },
     {
@@ -1018,5 +1018,5 @@
       "units": 62
     }
   ],
-  "updated_at_hkt": "2026-11-24 10:42"
+  "updated_at_hkt": "2026-11-24 11:26"
 }
