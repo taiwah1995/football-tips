@@ -6,7 +6,7 @@
   'use strict';
 
   const DATA_BASE = 'data';
-  const APP_DATA_VERSION = 'football161';
+  const APP_DATA_VERSION = 'football162';
   /** 馬膽 stake, same convention as the ledger heading: 獨贏 $100 · 位置 $300. */
   const STAKE_WIN = 100;
   const STAKE_PLACE = 300;
@@ -5538,6 +5538,32 @@
       : prefix + ' ' + clock.text;
   }
 
+  /** Simple win-rate by confidence % over the day's staked rows, shown at the
+   * bottom of the 全日分析 list (user request, 2026-11-25). Settled rows only
+   * count toward a rate; a group with nothing settled yet reads 尚待結算. */
+  function footballConfStatsHtml(rows) {
+    const groups = new Map();
+    (rows || []).forEach((row) => {
+      if (!(Number(row.stake) > 0)) return;
+      const conf = footballConfidenceNumber(row.confidence);
+      if (conf == null) return;
+      if (!groups.has(conf)) groups.set(conf, []);
+      groups.get(conf).push({ wl: footballResolvedWl(row) });
+    });
+    if (!groups.size) return '';
+    const lines = [...groups.keys()].sort((a, b) => a - b).map((conf) => {
+      const stats = footballHitStats(groups.get(conf));
+      const rate = stats.decided
+        ? '命中 ' + stats.hits + '/' + stats.decided + ' · ' + Math.round((stats.hits / stats.decided) * 100) + '%'
+        : '尚待結算';
+      return '<li class="fb-conf-stat"><span class="fb-conf-stat-pct">' +
+        escapeHtml(formatFbConfidence(String(conf))) + '</span>' +
+        '<span class="fb-conf-stat-rate">' + rate + '</span></li>';
+    }).join('');
+    return '<div class="fb-conf-stats"><p class="fb-conf-stats-title">有注勝率（按信心度）</p>' +
+      '<ul class="fb-conf-stats-list">' + lines + '</ul></div>';
+  }
+
   function footballAllDayHtml(allday, date, updated, tips) {
     const rows = footballAllDayByKickoff(
       footballAttachResults(
@@ -5556,7 +5582,8 @@
       ? '<div class="fb-star-filter">' +
         '<div class="fb-star-chips" role="group" aria-label="星級篩選">' + chips + '</div>' +
         '<p class="fb-star-count">' + footballHitFraction(starredHits) + '</p></div>' +
-        '<ul class="fb-all-list">' + rows.map((row) => footballAllDayRowHtml(row, date)).join('') + '</ul>'
+        '<ul class="fb-all-list">' + rows.map((row) => footballAllDayRowHtml(row, date)).join('') + '</ul>' +
+        footballConfStatsHtml(rows)
       : '<p class="fb-pending">呢日未有全日分析</p>';
     const hitRows = rows
       .filter((row) => Number(row.stake) > 0)

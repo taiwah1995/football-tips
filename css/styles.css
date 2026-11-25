@@ -1720,6 +1720,35 @@ body {
   color: #ffd21f;
 }
 #view-football .fb-field .fb-v.fb-stake1-value { color: #ffd21f; }
+/* Bottom-of-list win-rate by confidence % over staked rows. */
+#view-football .fb-conf-stats {
+  padding: 8px 10px 10px;
+  border-top: 1px solid var(--border);
+}
+#view-football .fb-conf-stats-title {
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+#view-football .fb-conf-stats-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+#view-football .fb-conf-stat {
+  display: flex;
+  gap: 8px;
+  align-items: baseline;
+  font-size: 0.78rem;
+  line-height: 1.5;
+  font-variant-numeric: tabular-nums;
+}
+#view-football .fb-conf-stat-pct {
+  font-weight: 700;
+  min-width: 3em;
+}
+#view-football .fb-conf-stat-rate { color: var(--text-muted); }
 #view-football .fb-star-chip.fb-stake-chip { --fb-chip: #39ff14; }
 #view-football .fb-star-chip.fb-conf-chip { --fb-chip: #59b7ff; }
 #view-football .fb-star-chip.fb-stake1-chip { --fb-chip: #ffd21f; }
