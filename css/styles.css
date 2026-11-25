@@ -1726,11 +1726,20 @@ body {
   border-top: 1px solid var(--border);
 }
 #view-football .fb-conf-stats-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
   color: var(--text-muted);
   font-size: 0.75rem;
   font-weight: 700;
   margin-bottom: 4px;
 }
+#view-football .fb-conf-stats-asof {
+  font-weight: 400;
+  white-space: nowrap;
+}
+#view-football .fb-conf-stat-note { color: var(--text-muted); }
 #view-football .fb-conf-stats-list {
   list-style: none;
   margin: 0;

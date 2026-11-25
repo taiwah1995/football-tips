@@ -6,7 +6,7 @@
   'use strict';
 
   const DATA_BASE = 'data';
-  const APP_DATA_VERSION = 'football163';
+  const APP_DATA_VERSION = 'football164';
   /** 馬膽 stake, same convention as the ledger heading: 獨贏 $100 · 位置 $300. */
   const STAKE_WIN = 100;
   const STAKE_PLACE = 300;
@@ -5532,29 +5532,28 @@
       : prefix + ' ' + clock.text;
   }
 
-  /** Simple win-rate by confidence % over the day's staked rows, shown at the
-   * bottom of the 全日分析 list (user request, 2026-11-25). Settled rows only
-   * count toward a rate; a group with nothing settled yet reads 尚待結算. */
-  function footballConfStatsHtml(rows) {
-    const groups = new Map();
-    (rows || []).forEach((row) => {
-      if (!(Number(row.stake) > 0)) return;
-      const conf = footballConfidenceNumber(row.confidence);
-      if (conf == null) return;
-      if (!groups.has(conf)) groups.set(conf, []);
-      groups.get(conf).push({ wl: footballResolvedWl(row) });
-    });
-    if (!groups.size) return '';
-    const lines = [...groups.keys()].sort((a, b) => a - b).map((conf) => {
-      const stats = footballHitStats(groups.get(conf));
-      const rate = stats.decided
-        ? '命中 ' + stats.hits + '/' + stats.decided + ' · ' + Math.round((stats.hits / stats.decided) * 100) + '%'
-        : '尚待結算';
-      return '<li class="fb-conf-stat"><span class="fb-conf-stat-pct">' +
-        escapeHtml(formatFbConfidence(String(conf))) + '</span>' +
-        '<span class="fb-conf-stat-rate">' + rate + '</span></li>';
-    }).join('');
-    return '<div class="fb-conf-stats"><p class="fb-conf-stats-title">有注勝率（按信心度）</p>' +
+  /** Standing annotation at the bottom of the 全日分析 list: historical
+   * win-rate by confidence band over staked cards, in the wording reported
+   * to the user on 2026-11-25 (user instruction: 圖1 註解要用圖2 解說).
+   * Source: private ledger, settled staked rows 2026-11-02 to 2026-11-24.
+   * Static on purpose — the site all-day rows undercount the 56% and 57%+
+   * bands against the ledger, so a live recount would contradict the
+   * reported figures; refreshed at the monthly big review. */
+  function footballConfStatsHtml() {
+    const bands = [
+      { label: '53%', rate: '52.7%', n: 93, note: '' },
+      { label: '54%', rate: '46.8%', n: 139, note: '最弱嗰段' },
+      { label: '56%', rate: '64.3%', n: 42, note: '最強' },
+      { label: '57% 或以上', rate: '57.7%', n: 26, note: '' },
+    ];
+    const lines = bands.map((band) =>
+      '<li class="fb-conf-stat"><span class="fb-conf-stat-pct">' + escapeHtml(band.label) + '</span>' +
+      '<span class="fb-conf-stat-rate">' + escapeHtml(band.rate) + '（' + band.n + ' 場）</span>' +
+      (band.note ? '<span class="fb-conf-stat-note">— ' + escapeHtml(band.note) + '</span>' : '') +
+      '</li>'
+    ).join('');
+    return '<div class="fb-conf-stats"><p class="fb-conf-stats-title">有注歷史勝率（按信心度）' +
+      '<span class="fb-conf-stats-asof">截至 11月24日結算</span></p>' +
       '<ul class="fb-conf-stats-list">' + lines + '</ul></div>';
   }
 
@@ -5577,7 +5576,7 @@
         '<div class="fb-star-chips" role="group" aria-label="星級篩選">' + chips + '</div>' +
         '<p class="fb-star-count">' + footballHitFraction(starredHits) + '</p></div>' +
         '<ul class="fb-all-list">' + rows.map((row) => footballAllDayRowHtml(row, date)).join('') + '</ul>' +
-        footballConfStatsHtml(rows)
+        footballConfStatsHtml()
       : '<p class="fb-pending">呢日未有全日分析</p>';
     const hitRows = rows
       .filter((row) => Number(row.stake) > 0)
