@@ -6,7 +6,7 @@
   'use strict';
 
   const DATA_BASE = 'data';
-  const APP_DATA_VERSION = 'football164';
+  const APP_DATA_VERSION = 'football165';
   /** 馬膽 stake, same convention as the ledger heading: 獨贏 $100 · 位置 $300. */
   const STAKE_WIN = 100;
   const STAKE_PLACE = 300;
@@ -3367,6 +3367,26 @@
     }
   }
 
+  /** Historical win-rate by confidence band (bottom annotation). Refreshed
+   * from the private ledger at every daily review settlement; null when the
+   * file is missing or malformed, and the renderer falls back to the last
+   * reported figures. */
+  async function loadFootballBandStats() {
+    try {
+      const res = await fetch(dataUrl('football-band-stats.json'));
+      if (!res.ok) return null;
+      const data = await res.json();
+      if (!data || !Array.isArray(data.bands) || !data.bands.length) return null;
+      const bands = data.bands.filter((band) => band && band.label &&
+        Number.isFinite(Number(band.hits)) && Number.isFinite(Number(band.decided)));
+      if (!bands.length) return null;
+      return { updatedThrough: String(data.updated_through || ''), bands: bands };
+    } catch (err) {
+      console.error(err);
+      return null;
+    }
+  }
+
   /** Sheet tab first. A missing tab, or a ledger still labelled 全日分析, uses the JSON copy. */
   async function loadFootballDayBook() {
     try {
@@ -5535,29 +5555,64 @@
   /** Standing annotation at the bottom of the 全日分析 list: historical
    * win-rate by confidence band over staked cards, in the wording reported
    * to the user on 2026-11-25 (user instruction: 圖1 註解要用圖2 解說).
-   * Source: private ledger, settled staked rows 2026-11-02 to 2026-11-24.
-   * Static on purpose — the site all-day rows undercount the 56% and 57%+
-   * bands against the ledger, so a live recount would contradict the
-   * reported figures; refreshed at the monthly big review. */
-  function footballConfStatsHtml() {
-    const bands = [
-      { label: '53%', rate: '52.7%', n: 93, note: '' },
-      { label: '54%', rate: '46.8%', n: 139, note: '最弱嗰段' },
-      { label: '56%', rate: '64.3%', n: 42, note: '最強' },
-      { label: '57% 或以上', rate: '57.7%', n: 26, note: '' },
-    ];
-    const lines = bands.map((band) =>
-      '<li class="fb-conf-stat"><span class="fb-conf-stat-pct">' + escapeHtml(band.label) + '</span>' +
-      '<span class="fb-conf-stat-rate">' + escapeHtml(band.rate) + '（' + band.n + ' 場）</span>' +
-      (band.note ? '<span class="fb-conf-stat-note">— ' + escapeHtml(band.note) + '</span>' : '') +
-      '</li>'
-    ).join('');
+   * Figures load from data/football-band-stats.json, refreshed from the
+   * private ledger at every daily review settlement (user instruction,
+   * 2026-11-25: 註解要定期 update). The hard-coded fallback is the set
+   * reported on 2026-11-25 (settled staked rows 2026-11-02 to 2026-11-24),
+   * used only when the data file cannot be loaded. The weakest/strongest
+   * tags follow the loaded figures. */
+  function footballConfStatsHtml(bandStats) {
+    const fallback = {
+      updatedThrough: '2026-11-24',
+      bands: [
+        { label: '53%', hits: 49, decided: 93 },
+        { label: '54%', hits: 65, decided: 139 },
+        { label: '56%', hits: 27, decided: 42 },
+        { label: '57% 或以上', hits: 15, decided: 26 },
+      ],
+    };
+    const data = bandStats && bandStats.bands && bandStats.bands.length ? bandStats : fallback;
+    const rated = data.bands
+      .map((band) => ({
+        label: String(band.label),
+        hits: Number(band.hits),
+        decided: Number(band.decided),
+        rate: Number(band.decided) > 0 ? Number(band.hits) / Number(band.decided) : null,
+      }))
+      .filter((band) => band.rate != null);
+    let weakest = null;
+    let strongest = null;
+    rated.forEach((band) => {
+      if (!weakest || band.rate < weakest.rate) weakest = band;
+      if (!strongest || band.rate > strongest.rate) strongest = band;
+    });
+    if (weakest && strongest && weakest.label === strongest.label) {
+      weakest = null;
+      strongest = null;
+    }
+    const lines = data.bands.map((band) => {
+      const hits = Number(band.hits);
+      const decided = Number(band.decided);
+      const rateText = decided > 0
+        ? (Math.round((hits / decided) * 1000) / 10).toFixed(1) + '%（' + decided + ' 場）'
+        : '尚待結算';
+      let note = '';
+      if (weakest && band.label === weakest.label) note = '最弱嗰段';
+      if (strongest && band.label === strongest.label) note = '最強';
+      return '<li class="fb-conf-stat"><span class="fb-conf-stat-pct">' + escapeHtml(String(band.label)) + '</span>' +
+        '<span class="fb-conf-stat-rate">' + escapeHtml(rateText) + '</span>' +
+        (note ? '<span class="fb-conf-stat-note">— ' + escapeHtml(note) + '</span>' : '') +
+        '</li>';
+    }).join('');
+    const asOf = /^\d{4}-(\d{2})-(\d{2})$/.test(data.updatedThrough || '')
+      ? '截至 ' + Number(data.updatedThrough.slice(5, 7)) + '月' + Number(data.updatedThrough.slice(8, 10)) + '日結算'
+      : '';
     return '<div class="fb-conf-stats"><p class="fb-conf-stats-title">有注歷史勝率（按信心度）' +
-      '<span class="fb-conf-stats-asof">截至 11月24日結算</span></p>' +
+      (asOf ? '<span class="fb-conf-stats-asof">' + escapeHtml(asOf) + '</span>' : '') + '</p>' +
       '<ul class="fb-conf-stats-list">' + lines + '</ul></div>';
   }
 
-  function footballAllDayHtml(allday, date, updated, tips) {
+  function footballAllDayHtml(allday, date, updated, tips, bandStats) {
     const rows = footballAllDayByKickoff(
       footballAttachResults(
         (allday && allday.rows ? allday.rows : []).filter((row) => row.date === date),
@@ -5576,7 +5631,7 @@
         '<div class="fb-star-chips" role="group" aria-label="星級篩選">' + chips + '</div>' +
         '<p class="fb-star-count">' + footballHitFraction(starredHits) + '</p></div>' +
         '<ul class="fb-all-list">' + rows.map((row) => footballAllDayRowHtml(row, date)).join('') + '</ul>' +
-        footballConfStatsHtml()
+        footballConfStatsHtml(bandStats)
       : '<p class="fb-pending">呢日未有全日分析</p>';
     const hitRows = rows
       .filter((row) => Number(row.stake) > 0)
@@ -5689,7 +5744,7 @@
     return tips;
   }
 
-  function paintFootball(model, source, wanted, allday, stableRows, dayBook) {
+  function paintFootball(model, source, wanted, allday, stableRows, dayBook, bandStats) {
     const host = $('#football-body');
     if (!host) return;
     host.dataset.source = source;
@@ -5740,7 +5795,7 @@
       footballCumulativeHtml(cumulativeBook, updated, null) +
       '<p class="fb-note fb-rule">1注=$' + escapeHtml(String(model.unit)) +
       '。命中率計全贏同贏半，走盤唔計。未結場唔計入派彩、盈虧、命中率。</p></div>' +
-      footballAllDayHtml(allday, selected.date, updated, selected.tips);
+      footballAllDayHtml(allday, selected.date, updated, selected.tips, bandStats);
     applyFootballStarFilter();
   }
 
@@ -5797,17 +5852,19 @@
       const alldayPromise = loadFootballAllDay();
       const stablePromise = loadFootballStable();
       const dayBookPromise = loadFootballDayBook();
+      const bandStatsPromise = loadFootballBandStats();
       const mapPromise = loadFootballStarsMap();
       const loaded = await loadedPromise;
       const allday = await alldayPromise;
       const stableRows = await stablePromise;
       const dayBook = await dayBookPromise;
+      const bandStats = await bandStatsPromise;
       footballStarsMap = await mapPromise;
       footballApplyStarColors(footballStarsMap);
       if (token !== footballLoad || viewFootball.hidden) return;
       if (status) status.hidden = true;
       if (host) host.dataset.alldaySource = allday.source || '';
-      paintFootball(loaded.model, loaded.source, wanted || '', allday, stableRows, dayBook);
+      paintFootball(loaded.model, loaded.source, wanted || '', allday, stableRows, dayBook, bandStats);
     } catch (err) {
       console.error(err);
       if (token !== footballLoad) return;
