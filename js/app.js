@@ -6,7 +6,7 @@
   'use strict';
 
   const DATA_BASE = 'data';
-  const APP_DATA_VERSION = 'football162';
+  const APP_DATA_VERSION = 'football163';
   /** 馬膽 stake, same convention as the ledger heading: 獨贏 $100 · 位置 $300. */
   const STAKE_WIN = 100;
   const STAKE_PLACE = 300;
@@ -5353,20 +5353,14 @@
     const iconHtml = icon ? '<span class="fb-all-icon">' + icon + '</span>' : '';
     const scoreHtml = score ? '<span class="fb-all-score">賽果 ' + escapeHtml(score) + '</span>' : '';
     const stakeNum = Number(row.stake);
-    // Confidence % right after the picked team's name in the fixture line,
-    // in the same type style as the odds below (user request, 2026-11-25).
+    // Confidence % at the very end of the fixture line, after both team
+    // names, in the same type style as the odds below (user requests,
+    // 2026-11-25: first after the picked team, then corrected to the end).
     const confNum = footballConfidenceNumber(row.confidence);
     let matchHtml = escapeHtml(row.match || '—');
     if (confNum != null) {
-      const confHtml = '<span class="fb-all-conf">' + escapeHtml(formatFbConfidence(row.confidence)) + '</span>';
-      const teamEsc = parts.team ? escapeHtml(parts.team) : '';
-      const at = teamEsc ? matchHtml.indexOf(teamEsc) : -1;
-      if (at >= 0) {
-        const cut = at + teamEsc.length;
-        matchHtml = matchHtml.slice(0, cut) + ' ' + confHtml + matchHtml.slice(cut);
-      } else {
-        matchHtml = matchHtml + ' ' + confHtml;
-      }
+      matchHtml = matchHtml + ' <span class="fb-all-conf">' +
+        escapeHtml(formatFbConfidence(row.confidence)) + '</span>';
     }
     return '<li class="fb-all-row"' +
       (unrated ? ' data-unrated="1" hidden' : (stars == null ? '' : ' data-stars="' + stars + '"')) +
