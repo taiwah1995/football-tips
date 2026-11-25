@@ -6,7 +6,7 @@
   'use strict';
 
   const DATA_BASE = 'data';
-  const APP_DATA_VERSION = 'football159';
+  const APP_DATA_VERSION = 'football160';
   /** 馬膽 stake, same convention as the ledger heading: 獨贏 $100 · 位置 $300. */
   const STAKE_WIN = 100;
   const STAKE_PLACE = 300;
@@ -4413,10 +4413,14 @@
     const parts = [];
     (rows || []).forEach((row) => {
       if (!row.date || row.kind !== 'day-total') return;
+      // A daybook day whose payout is still null is pending: mark it covered
+      // so the computed fallback below cannot present a partially settled
+      // public subset as that day's final line (2026-11-25: 11-24 showed a
+      // bogus $600 / $0 / -$400 while its real $3,000 book was unsettled).
+      covered[row.date] = true;
       if (row.stake == null || row.payout == null || row.profit == null) return;
       const dayRows = rows.filter((item) => item.date === row.date);
       if (dayRows.some((item) => item.item.indexOf('全日分析') >= 0)) return;
-      covered[row.date] = true;
       parts.push({
         date: row.date,
         item: footballDayLabel({ date: row.date }),
