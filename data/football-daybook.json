@@ -1003,10 +1003,10 @@
       "date": "2026-11-24",
       "item": "①單場推介",
       "kind": "part",
-      "stake": 3000,
+      "stake": 2800,
       "payout": null,
       "profit": null,
-      "units": 30
+      "units": 28
     },
     {
       "date": "2026-11-24",
@@ -1021,11 +1021,11 @@
       "date": "2026-11-24",
       "item": "當日總結（三項加總）",
       "kind": "day-total",
-      "stake": 3200,
+      "stake": 3000,
       "payout": null,
       "profit": null,
-      "units": 32
+      "units": 30
     }
   ],
-  "updated_at_hkt": "2026-11-25 08:42"
+  "updated_at_hkt": "2026-11-25 08:52"
 }
