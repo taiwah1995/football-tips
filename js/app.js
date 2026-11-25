@@ -6,7 +6,7 @@
   'use strict';
 
   const DATA_BASE = 'data';
-  const APP_DATA_VERSION = 'football160';
+  const APP_DATA_VERSION = 'football161';
   /** 馬膽 stake, same convention as the ledger heading: 獨贏 $100 · 位置 $300. */
   const STAKE_WIN = 100;
   const STAKE_PLACE = 300;
@@ -5353,13 +5353,29 @@
     const iconHtml = icon ? '<span class="fb-all-icon">' + icon + '</span>' : '';
     const scoreHtml = score ? '<span class="fb-all-score">賽果 ' + escapeHtml(score) + '</span>' : '';
     const stakeNum = Number(row.stake);
+    // Confidence % right after the picked team's name in the fixture line,
+    // in the same type style as the odds below (user request, 2026-11-25).
+    const confNum = footballConfidenceNumber(row.confidence);
+    let matchHtml = escapeHtml(row.match || '—');
+    if (confNum != null) {
+      const confHtml = '<span class="fb-all-conf">' + escapeHtml(formatFbConfidence(row.confidence)) + '</span>';
+      const teamEsc = parts.team ? escapeHtml(parts.team) : '';
+      const at = teamEsc ? matchHtml.indexOf(teamEsc) : -1;
+      if (at >= 0) {
+        const cut = at + teamEsc.length;
+        matchHtml = matchHtml.slice(0, cut) + ' ' + confHtml + matchHtml.slice(cut);
+      } else {
+        matchHtml = matchHtml + ' ' + confHtml;
+      }
+    }
     return '<li class="fb-all-row"' +
       (unrated ? ' data-unrated="1" hidden' : (stars == null ? '' : ' data-stars="' + stars + '"')) +
       ' data-stake="' + (Number.isFinite(stakeNum) ? stakeNum : '') + '"' +
+      ' data-conf="' + (confNum == null ? '' : confNum) + '"' +
       ' data-wl="' + escapeAttr(footballResolvedWl(row)) + '">' +
       '<span class="fb-all-time">' + escapeHtml(footballAllDayTimeLabel(row, dayIso)) + '</span>' +
       iconHtml +
-      '<span class="fb-all-match">' + escapeHtml(row.match || '—') + '</span>' +
+      '<span class="fb-all-match">' + matchHtml + '</span>' +
       '<div class="fb-all-bot">' +
       team +
       market +
@@ -5405,6 +5421,14 @@
     return '<label class="fb-star-chip fb-stake-chip">' +
       '<input type="checkbox" data-fb-stake="2">' +
       '<span>2注</span></label>';
+  }
+
+  /** Confidence chips (user request, 2026-11-25): tick one to show only rows
+   * with that exact confidence %; tick several for any of them. */
+  function footballConfChipHtml(pct) {
+    return '<label class="fb-star-chip fb-conf-chip">' +
+      '<input type="checkbox" data-fb-conf="' + pct + '">' +
+      '<span>' + pct + '%</span></label>';
   }
 
   function footballAddDays(iso, days) {
@@ -5523,7 +5547,8 @@
       date
     );
     const source = allday && allday.source ? allday.source : '';
-    const chips = [1, 2, 3, 4, 5].map(footballStarChipHtml).join('') + footballStakeChipHtml(2) + footballStakeChipHtml(1);
+    const chips = [1, 2, 3, 4, 5].map(footballStarChipHtml).join('') + footballStakeChipHtml(2) + footballStakeChipHtml(1) +
+      [53, 56, 57].map(footballConfChipHtml).join('');
     const starredHits = rows
       .filter((row) => footballRowStars(row) != null)
       .map((row) => ({ wl: footballResolvedWl(row) }));
@@ -5557,12 +5582,17 @@
     panel.querySelectorAll('input[data-fb-stake]').forEach((input) => {
       if (input.checked) stakeFilter.push(Number(input.getAttribute('data-fb-stake')));
     });
+    const confFilter = [];
+    panel.querySelectorAll('input[data-fb-conf]').forEach((input) => {
+      if (input.checked) confFilter.push(Number(input.getAttribute('data-fb-conf')));
+    });
     const counted = [];
     panel.querySelectorAll('.fb-all-row').forEach((row) => {
       const unrated = row.getAttribute('data-unrated') === '1';
       const stars = row.getAttribute('data-stars');
       let show = any ? (!unrated && !!stars && !!selected[stars]) : true;
       if (show && stakeFilter.length) show = stakeFilter.indexOf(Number(row.getAttribute('data-stake'))) !== -1;
+      if (show && confFilter.length) show = confFilter.indexOf(Number(row.getAttribute('data-conf'))) !== -1;
       row.hidden = !show;
       if (!show) return;
       counted.push({ wl: row.getAttribute('data-wl') });
@@ -5700,7 +5730,7 @@
     viewFootball.addEventListener('change', (event) => {
       const target = event.target;
       if (!target) return;
-      if (target.matches && target.matches('input[data-fb-star], input[data-fb-stake]')) {
+      if (target.matches && target.matches('input[data-fb-star], input[data-fb-stake], input[data-fb-conf]')) {
         applyFootballStarFilter();
         return;
       }

@@ -69,7 +69,6 @@ body {
 .header-inner {
   display: flex;
   align-items: center;
-  flex-wrap: nowrap;
   gap: 8px;
   min-width: 0;
 }
@@ -89,34 +88,6 @@ body {
   justify-content: center;
 }
 .btn-back:active { background: var(--bg-hover); }
-
-.btn-home {
-  flex: 0 0 auto;
-  margin-left: auto;
-  min-width: var(--tap);
-  min-height: var(--tap);
-  padding: 0 14px;
-  border: 1px solid var(--gold-dim);
-  border-radius: 10px;
-  background: var(--bg-elev);
-  color: var(--gold);
-  font-family: inherit;
-  font-size: 0.95rem;
-  font-weight: 700;
-  line-height: 1;
-  letter-spacing: 0.06em;
-  text-decoration: none;
-  white-space: nowrap;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-}
-.btn-home:active { background: var(--bg-hover); }
-.btn-home:focus-visible {
-  outline: 2px solid var(--gold);
-  outline-offset: 2px;
-}
 
 .header-titles {
   min-width: 0;
@@ -1733,6 +1704,14 @@ body {
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
 }
+/* Confidence % after the picked team in the fixture line: same type style
+   as the odds (muted, tabular numbers), not the fixture's bold. */
+#view-football .fb-all-conf {
+  color: var(--text-muted);
+  font-weight: 400;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
 #view-football .fb-all-stake.fb-all-stake-on {
   color: #39ff14;
   font-weight: 700;
@@ -1742,6 +1721,7 @@ body {
 }
 #view-football .fb-field .fb-v.fb-stake1-value { color: #ffd21f; }
 #view-football .fb-star-chip.fb-stake-chip { --fb-chip: #39ff14; }
+#view-football .fb-star-chip.fb-conf-chip { --fb-chip: #59b7ff; }
 #view-football .fb-star-chip.fb-stake1-chip { --fb-chip: #ffd21f; }
 #view-football .fb-star-chip .fb-stake1-label { color: #ffd21f; }
 #view-football .fb-stars {
