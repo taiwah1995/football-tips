@@ -1,1 +1,25 @@
-{"bands":[{"decided":93,"hits":49,"label":"53%"},{"decided":139,"hits":65,"label":"54%"},{"decided":42,"hits":27,"label":"56%"},{"decided":26,"hits":15,"label":"57% 或以上"}],"updated_through":"2026-11-24"}
+{
+ "updated_through": "2026-11-25",
+ "bands": [
+  {
+   "label": "53%",
+   "hits": 50,
+   "decided": 96
+  },
+  {
+   "label": "54%",
+   "hits": 68,
+   "decided": 146
+  },
+  {
+   "label": "56%",
+   "hits": 28,
+   "decided": 43
+  },
+  {
+   "label": "57% 或以上",
+   "hits": 15,
+   "decided": 26
+  }
+ ]
+}
