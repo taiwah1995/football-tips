@@ -1049,8 +1049,8 @@
    "item": "①單場推介",
    "kind": "part",
    "stake": 1600,
-   "payout": null,
-   "profit": null,
+   "payout": 1432,
+   "profit": -168,
    "units": 16
   },
   {
@@ -1058,8 +1058,8 @@
    "item": "當日總結（三項加總）",
    "kind": "day-total",
    "stake": 1600,
-   "payout": null,
-   "profit": null,
+   "payout": 1432,
+   "profit": -168,
    "units": 16
   },
   {
@@ -1081,5 +1081,5 @@
    "units": 16
   }
  ],
- "updated_at_hkt": "2026-11-27 08:27"
+ "updated_at_hkt": "2026-11-27 13:20"
 }
